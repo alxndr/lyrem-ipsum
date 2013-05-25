@@ -1,7 +1,7 @@
 class LyricsController < ApplicationController
 
   def for_artist
-    @artist = Artist.new(params[:artist])
+    @artist = Artist.new(params[:artist].gsub('-',' '))
 
     if @artist && @artist.present?
       render 'by_artist'
