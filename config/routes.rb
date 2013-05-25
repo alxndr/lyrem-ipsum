@@ -3,3 +3,4 @@ LyremIpsum::Application.routes.draw do
 
   get '/text-from-lyrics-by/:artist' => 'lyrics#for_artist'
 end
+
