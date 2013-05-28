@@ -9,6 +9,7 @@ TODO
 * * request
 * should Artist model really be a concern of something
 * caching data from lyric wiki
+* * then get all lyrics
 * way of identifying only popular songs?
 * find some Latin
 * get it up on heroku!
