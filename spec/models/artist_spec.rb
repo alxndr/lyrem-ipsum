@@ -4,7 +4,7 @@ describe Artist do
 
   context 'valid artist name' do
     before do
-      Artist.any_instance.should_receive(:get_artist_data).and_return({
+      Artist.any_instance.stub(:get_artist_data, {
         artist: "Lorde",
         albums: [
           {
@@ -14,12 +14,12 @@ describe Artist do
             ]
           }
         ]
-      }.to_json)
-      @artist = Artist.new('lorde')
+      })
     end
 
     describe '#display_name' do
       it 'finds a good name from LyricsWiki' do
+        @artist = Artist.new('lorde')
         @artist.display_name.should == 'Lorde'
       end
     end

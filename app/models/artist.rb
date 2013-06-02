@@ -1,4 +1,5 @@
 class Artist
+  # todo - add db backend to store info for found artists
 
   include LyricsWiki
 
@@ -33,9 +34,7 @@ class Artist
   def get_data
     @artist_data = get_artist_data
     if @artist_data
-      Rails.logger.info "found data for #{display_name}"
       extract_album_data
-      Rails.logger.info "albums: #{@albums.inspect}"
       extract_song_data
       @lyrics = []
       @song_data = @songs.map do |song|
@@ -53,7 +52,6 @@ class Artist
   end
 
   def extract_album_data
-    puts @artist_data.inspect
     @albums ||= @artist_data['albums'].map{ |a| a['album'] }
   end
 
