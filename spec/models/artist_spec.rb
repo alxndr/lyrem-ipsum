@@ -4,14 +4,12 @@ describe Artist do
 
   context 'valid artist name' do
     before do
-      Artist.any_instance.stub(:get_artist_data, {
-        artist: "Lorde",
-        albums: [
+      Artist.any_instance.stub(:get_artist_data).and_return({
+        'artist' => 'Lorde',
+        'albums' => [
           {
-            album: "Other Songs",
-            songs: [
-              "Royals"
-            ]
+            'album' => 'Other Songs',
+            'songs' => [ 'Royals' ]
           }
         ]
       })

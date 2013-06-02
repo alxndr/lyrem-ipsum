@@ -32,23 +32,23 @@ class Artist
   private
 
   def get_data
-    @artist_data = get_artist_data
-    if @artist_data
-      extract_album_data
-      extract_song_data
-      @lyrics = []
-      @song_data = @songs.map do |song|
-        song_data = get_song_data(song)
-        if song_data && song_data['lyrics']
-          @lyrics.push sanitize_lyrics(song_data['lyrics'])
-          song_data
-        else
-          nil
-        end
-      end.flatten.compact
-    else
+    begin
+      @artist_data ||= get_artist_data
+    rescue
       raise 'No good data'
     end
+    extract_album_data
+    extract_song_data
+    @lyrics = []
+    @song_data = @songs.map do |song|
+      song_data = get_song_data(song)
+      if song_data && song_data['lyrics']
+        @lyrics.push sanitize_lyrics(song_data['lyrics'])
+        song_data
+      else
+        nil
+      end
+    end.flatten.compact
   end
 
   def extract_album_data
@@ -62,5 +62,6 @@ class Artist
   def sanitize_lyrics(lyric)
     lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?<[^>]*>},'').split("\n").flatten.compact.reject{ |l| /Instrumental/.match(l) }
   end
+
 end
 
