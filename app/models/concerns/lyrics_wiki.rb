@@ -1,23 +1,26 @@
 module LyricsWiki
   extend ActiveSupport::Concern
 
-  def get_artist_data
-    unless @artist_data
-      artist_data = HTTParty.get("http://lyrics.wikia.com/api.php?func=getArtist&artist=#{LyricsWiki.url_encode(@input)}&fmt=json")
-      @artist_data = if LyricsWiki.valid_response?(artist_data) && artist_data.parsed_response['albums'] && artist_data.parsed_response['albums'].present?
-                       artist_data.parsed_response
-                     else
-                       nil
-                     end
+  def fetch_data_for_artist(name)
+    raise 'no name given' unless name.present?
+    api_response = HTTParty.get("http://lyrics.wikia.com/api.php?func=getArtist&artist=#{LyricsWiki.url_encode(name)}&fmt=realjson")
+    if valid_response?(api_response) && has_album_data?(api_response)
+      api_response.parsed_response
+    else
+      nil
     end
-    @artist_data
   end
 
-  def get_song_data(song_name)
-    song_data = HTTParty.get("http://lyrics.wikia.com/api.php?artist=#{LyricsWiki.url_encode(display_name)}&song=#{LyricsWiki.url_encode(song_name)}&fmt=realjson")
-    if song_data && song_data['lyrics'] # TODO use valid_response?
+  def get_song_data(artist, song_name)
+    raise 'need artist and song name' unless artist.present? && song_name.present?
+    song_data = HTTParty.get("http://lyrics.wikia.com/api.php?artist=#{LyricsWiki.url_encode(artist)}&song=#{LyricsWiki.url_encode(song_name)}&fmt=realjson")
+    if valid_response?(song_data) && song_data['lyrics']
+      print '*'*18
+      puts "song_data: #{song_data}"
       song_data
     else
+      print '*'*18
+      puts 'invalid'
       nil
     end
   end
@@ -28,9 +31,15 @@ module LyricsWiki
     ERB::Util.url_encode(str)
   end
 
-  def self.valid_response?(response)
-    return response && response.code == 200 && response.parsed_response && response.parsed_response.present?
+  def valid_response?(response)
+    response && response.code == 200
   end
 
+  def has_album_data?(response)
+    response &&
+      response.parsed_response &&
+      response.parsed_response.present? &&
+      response.parsed_response['albums'] &&
+      response.parsed_response['albums'].present?
+  end
 end
-
