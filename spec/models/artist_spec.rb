@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Artist do
 
   before do
-    Artist.any_instance.stub(fetch_data_for_artist: {
-      'name' => 'Frank Zappa',
+    Artist.any_instance.stub(fetch_data_for_artist: { # todo stub request? or is that LyricsWiki's job?
+      # httparty responses have string keys
+      'artist' => 'Frank Zappa',
       'albums' => [
         {
           'album' => 'Hot Rats',
@@ -23,7 +24,8 @@ describe Artist do
 
   describe '#lyrics' do
     before do
-      Artist.any_instance.stub(:get_song_data).and_return({
+      Artist.any_instance.stub(:get_song_data).and_return({ # todo stub request?
+        # httparty responses have string keys
         'artist' => 'Frank Zappa',
         'song' => 'Lucille Has Messed My Mind Up',
         'lyrics' => "Lucille\nHas messed my mind up\nBut I still love her\nOh I still love her"
@@ -31,10 +33,10 @@ describe Artist do
     end
 
     it 'returns an array of lyrics' do
-      Artist.new('zappa').lyrics.first.should == 'Lucille'
-      Artist.new('zappa').lyrics.last.should == 'Oh I still love her'
+      a = Artist.new('frank zappa')
+      a.lyrics.first.should == 'Lucille'
+      a.lyrics.last.should == 'Oh I still love her'
     end
   end
 
 end
-

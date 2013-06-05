@@ -5,7 +5,7 @@ class Artist
   def initialize(input)
     raise 'no input' unless input && input.present?
     # todo - add db backend to store lyric data ()for some set of artists?)
-    @artist_data = fetch_data_for_artist(input)
+    @artist_data = fetch_data_for_artist(input) # be nice to use HashWithIndifferentAccess
     raise('artist not found') unless @artist_data
   end
 
@@ -15,9 +15,6 @@ class Artist
 
   def lyrics
     @lyrics ||= songs_data.map { |song_data|
-      #puts '*'*18
-      #puts 'lyrics song_data'
-      #puts song_data.inspect
       sanitize_and_split_lyrics(song_data['lyrics'])
     }.flatten.reject { |lyric|
       lyric.nil? || lyric.empty?
@@ -65,7 +62,6 @@ class Artist
   end
 
   def sanitize_and_split_lyrics(lyrics)
-    puts "lyrics: #{lyrics}"
     return nil if lyrics == 'Instrumental'
     sanitized = lyrics.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?<[^>]*>},'')
     split = sanitized.split("\n")
