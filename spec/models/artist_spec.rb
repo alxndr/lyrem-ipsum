@@ -24,7 +24,7 @@ describe Artist do
 
   describe '#lyrics' do
     before do
-      Artist.any_instance.stub(:get_song_data).and_return({ # todo stub request?
+      Artist.any_instance.stub(:fetch_song_data).and_return({ # todo stub request?
         # httparty responses have string keys
         'artist' => 'Frank Zappa',
         'song' => 'Lucille Has Messed My Mind Up',
@@ -36,6 +36,28 @@ describe Artist do
       a = Artist.new('frank zappa')
       a.lyrics.first.should == 'Lucille'
       a.lyrics.last.should == 'Oh I still love her'
+    end
+  end
+
+  describe '#random_lyric' do
+    describe 'when there are no stored lyrics' do
+      it 'will fetch new song lyrics' do
+        pending
+      end
+
+      it 'returns a lyric' do
+        pending
+      end
+    end
+
+    describe 'when there are some stored lyrics' do
+      it 'sometimes fetches new song lyrics' do
+        pending
+      end
+
+      it 'returns a lyric' do
+        pending
+      end
     end
   end
 
