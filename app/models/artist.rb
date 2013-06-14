@@ -34,6 +34,16 @@ class Artist
     @lyrics.sample
   end
 
+  #def lyrem(opts)
+  #  case opts
+  #    when has_key? :paragraphs
+  #    when has_key? :sentences
+  #    when has_key? :phrases
+  #    else
+  #      raise ArgumentError
+  #  end
+  #end
+
   private
 
   def fetch_new_song_lyrics

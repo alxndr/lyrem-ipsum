@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe LyricsWiki do
+
   include LyricsWiki
 
   describe '#fetch_data_for_artist' do
