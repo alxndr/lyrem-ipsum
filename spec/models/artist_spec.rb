@@ -41,22 +41,39 @@ describe Artist do
 
   describe '#random_lyric' do
     describe 'when there are no stored lyrics' do
+      before do
+        Artist.any_instance.stub(:rand).and_return(0)
+      end
+
       it 'will fetch new song lyrics' do
-        pending
+        Artist.any_instance.should_receive(:fetch_new_song_lyrics)
+        Artist.new('frank zappa').random_lyric
       end
 
       it 'returns a lyric' do
-        pending
+        lyrics = %w(jamming in joe's garage)
+        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
+        lyrics.should include Artist.new('frank zappa').random_lyric
       end
     end
 
     describe 'when there are some stored lyrics' do
+      before do
+        Artist.any_instance.stub(:rand).and_return(0)
+      end
+
       it 'sometimes fetches new song lyrics' do
-        pending
+        Artist.any_instance.should_receive(:fetch_new_song_lyrics)
+        Artist.new('frank zappa').random_lyric
+        Artist.any_instance.stub(:rand).and_return(1)
+        Artist.any_instance.should_not_receive(:fetch_new_song_lyrics)
+        Artist.new('frank zappa').random_lyric
       end
 
       it 'returns a lyric' do
-        pending
+        lyrics = %w(jamming in joe's garage)
+        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
+        lyrics.should include Artist.new('frank zappa').random_lyric
       end
     end
   end

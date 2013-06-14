@@ -4,7 +4,7 @@ class Artist
 
   def initialize(input)
     raise 'no input' unless input && input.present?
-    # todo - add db backend to store lyric data ()for some set of artists?)
+    # todo - add db backend to store lyric data (for some set of artists?)
     @artist_data = fetch_data_for_artist(input) # be nice to use HashWithIndifferentAccess
     raise('artist not found') unless @artist_data
   end
@@ -34,25 +34,13 @@ class Artist
     @lyrics.sample
   end
 
-  #def phrase
-  #  @corpus ||= lyrics + Array.new(lyrics.length){LoremIpsum.phrase}
-  #  @corpus.sample
-  #end
-
-  #def lyrem_ipsum(num_sentences=5)
-  #  Array.new(num_sentences) do
-  #    LoremIpsum.construct(lambda{phrase}, 2, num_sentences, ', ')
-  #  end.map(&:capitalize).join('. ')
-  #end
-
   private
 
   def fetch_new_song_lyrics
-    new_song = get_new_song
-    return nil unless new_song
-    lyrics = sanitize_and_split_lyrics(fetch_lyrics(display_name, new_song))
+    lyrics, new_song = nil, nil
     unless lyrics.present?
       new_song = get_new_song
+      return nil unless new_song
       lyrics = sanitize_and_split_lyrics(fetch_lyrics(display_name, new_song))
     end
     songs_fetched << new_song
