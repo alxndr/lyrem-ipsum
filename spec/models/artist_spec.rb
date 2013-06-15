@@ -78,4 +78,35 @@ describe Artist do
     end
   end
 
+  describe '#lyrem' do
+    let(:fz) { Artist.new('frank zappa') }
+
+    describe 'paragraphs' do
+      it 'returns an array of n strings' do
+        paragraphs = fz.lyrem(:paragraphs => 2)
+        paragraphs.length.should == 2
+        paragraphs.first.split(' ').length.should > 10
+      end
+    end
+
+    describe 'sentences' do
+      pending
+    end
+
+    describe 'phrases' do
+      pending
+    end
+
+    describe 'passed something else' do
+      it 'raises' do
+        expect {
+          fz.lyrem
+        }.to raise_error ArgumentError
+        expect {
+          fz.lyrem foo: :bar
+        }.to raise_error ArgumentError
+      end
+    end
+  end
+
 end

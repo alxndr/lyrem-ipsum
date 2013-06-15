@@ -34,15 +34,18 @@ class Artist
     @lyrics.sample
   end
 
-  #def lyrem(opts)
-  #  case opts
-  #    when has_key? :paragraphs
-  #    when has_key? :sentences
-  #    when has_key? :phrases
-  #    else
-  #      raise ArgumentError
-  #  end
-  #end
+  def lyrem(opts)
+    case opts
+      when hash_has_key?(:paragraphs)
+        'paragraphs'
+      when hash_has_key?(:sentences)
+        'sentences'
+      when hash_has_key?(:phrases)
+        'phrases'
+      else
+        raise ArgumentError
+    end
+  end
 
   private
 
@@ -94,6 +97,10 @@ class Artist
 
   def album_names
     @album_names ||= albums.map{ |a| a['album'] }
+  end
+
+  def hash_has_key?(key)
+    lambda { |hash| hash.has_key? key }
   end
 
 end
