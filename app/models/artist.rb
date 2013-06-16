@@ -49,23 +49,32 @@ class Artist
 
   private
 
+  String.instance_eval do
+    define_method('valid_lyric?') do
+      self &&
+        self.present? &&
+        self =~ /[a-z]/i &&
+        self !~ /(not found|instrumental|transcribed|copyright)/i
+    end
+  end
+
   def fetch_new_song_lyrics
     lyrics, new_song = nil, nil
     unless lyrics.present?
       new_song = get_new_song
       return nil unless new_song
-      lyrics = sanitize_and_split_lyrics(fetch_lyrics(display_name, new_song))
+      lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
     end
     songs_fetched << new_song
     lyrics
   end
 
-  def sanitize_and_split_lyrics(lyrics) # returns Array of Strings, or nil
-    return nil unless lyrics && lyrics.present?
-    return nil if lyrics =~ /(instrumental|not found)/i
-    sanitized = lyrics.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?<[^>]*>},'')
-    split = sanitized.split("\n")
-    split.flatten.keep_if{ |l| l.present? }
+  def process_lyrics(lyrics_str)
+    sanitize_lyrics(lyrics_str.split("\n")).keep_if(&:valid_lyric?)
+  end
+
+  def sanitize_lyrics(lyrics_arr)
+    lyrics_arr.map{ |lyric| lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?<[^>]*>},'') }
   end
 
   def get_new_song
