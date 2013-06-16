@@ -37,7 +37,7 @@ class Artist
       when hash_has_key?(:phrases)
         Array.new(opts[:phrases]) { lyrem_phrase }
       when hash_has_key?(:sentences)
-        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').humanize << '.' }
+        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').sub(/^(.)/){$1.capitalize} << '.' }
       when hash_has_key?(:paragraphs)
         Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join(' ') }
       else
