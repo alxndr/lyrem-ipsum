@@ -15,10 +15,8 @@ class Artist
 
   def lyrics
     @lyrics ||= songs_data.map { |song_data|
-      sanitize_and_split_lyrics(song_data['lyrics'])
-    }.flatten.reject { |lyric|
-      lyric.nil? || lyric.empty?
-    }
+      process_lyrics(song_data['lyrics'])
+    }.flatten
   end
 
   def random_lyric
@@ -36,12 +34,12 @@ class Artist
 
   def lyrem(opts)
     case opts
-      when hash_has_key?(:paragraphs)
-        'paragraphs'
-      when hash_has_key?(:sentences)
-        'sentences'
       when hash_has_key?(:phrases)
-        'phrases'
+        Array.new(opts[:phrases]) { rand(3) == 0 ? LoremIpsum.phrase : random_lyric }
+      when hash_has_key?(:sentences)
+        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join ', ' }
+      when hash_has_key?(:paragraphs)
+        Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join '. ' }
       else
         raise ArgumentError
     end
@@ -54,7 +52,7 @@ class Artist
       self &&
         self.present? &&
         self =~ /[a-z]/i &&
-        self !~ /(not found|instrumental|transcribed|copyright)/i
+        self !~ /(not found|instrumental|transcribed|copyright|chorus)/i
     end
   end
 
@@ -74,7 +72,11 @@ class Artist
   end
 
   def sanitize_lyrics(lyrics_arr)
-    lyrics_arr.map{ |lyric| lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?<[^>]*>},'') }
+    lyrics_arr.map{ |lyric|
+      lyric.gsub(/\[.*\]/, '').
+        gsub(%r{<[^>]*>.*?<[^>]*>}, '').
+        gsub(/<[^>]*>/, '')
+    }
   end
 
   def get_new_song

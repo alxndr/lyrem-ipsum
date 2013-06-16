@@ -81,11 +81,12 @@ describe Artist do
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
 
-    describe 'paragraphs' do
+    describe 'phrases' do
       it 'returns an array of n strings' do
-        paragraphs = fz.lyrem(:paragraphs => 2)
-        paragraphs.length.should == 2
-        paragraphs.first.split(' ').length.should > 10
+        phrases = fz.lyrem(:phrases => 3)
+        phrases.length.should == 3
+        phrases.first.class.should == String
+        # TODO how to check content?
       end
     end
 
@@ -93,8 +94,12 @@ describe Artist do
       pending
     end
 
-    describe 'phrases' do
-      pending
+    describe 'paragraphs' do
+      it 'returns an array of n strings' do
+        paragraphs = fz.lyrem(:paragraphs => 2)
+        paragraphs.length.should == 2
+        paragraphs.first.split(' ').length.should > 10
+      end
     end
 
     describe 'passed something else' do

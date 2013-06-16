@@ -2,9 +2,7 @@
 
 <h1><%= @artist.display_name %> ipsum</h1>
 
-<ul>
-  <% 15.times do -%>
-    <p><%= @artist.random_lyric -%></p>
-  <% end -%>
-</ul>
+<% @artist.lyrem(paragraphs: 5).each do |parag| -%>
+  <p><%= parag %></p>
+<% end -%>
 

@@ -1,7 +1,5 @@
 class LoremIpsum
 
-  #include TextBuilder
-
   CORPUS = %w(
     accumsan accusamus accusantium adipiscing adipisicing aenean alias aliqua aliquam
     aliquet aliquid aliquip amet anim animi aperiam architecto arcu asperiores aspernatur
@@ -42,7 +40,7 @@ class LoremIpsum
   end
 
   def self.phrase(connectors=CONJUNCTIONS) # TODO really need this parameter?
-    words = LoremIpsum.construct(lambda{LoremIpsum.word}, 2, 6)
+    words = TextBuilder.construct(lambda{LoremIpsum.word}, 2, 6)
     if rand(3) > 0
       words.insert(rand(words.count), connectors.sample)
     else
@@ -51,39 +49,13 @@ class LoremIpsum
   end
 
   def self.sentence
-    LoremIpsum.construct(lambda{LoremIpsum.phrase}, 1, 4, ', ') do |sentence|
+    TextBuilder.construct(lambda{LoremIpsum.phrase}, 1, 4, ', ') do |sentence|
       sentence.capitalize
     end
   end
 
   def self.paragraph
-    LoremIpsum.construct(lambda{LoremIpsum.sentence}, 3, 10, '. ')
-  end
-
-#  private
-
-  def self.construct(constituent, min_length, max_length, joiner=nil)
-    raise unless constituent.respond_to? :call
-    list = []
-
-    length = rand(max_length - min_length) + min_length
-    while list.length < length do # more rubyish way to do this?
-      piece = constituent.call
-      list.push(piece) unless piece == list.last # prevent repetition
-      # TODO there's an infinite loop here if all words/phrases are the same...
-    end
-
-    retval = if joiner
-               list.join(joiner)
-             else
-               list
-             end
-
-    if block_given?
-      yield retval
-    else
-      retval
-    end
+    TextBuilder.construct(lambda{LoremIpsum.sentence}, 3, 10, '. ')
   end
 
 end
