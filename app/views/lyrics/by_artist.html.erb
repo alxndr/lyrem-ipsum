@@ -1,4 +1,10 @@
-<h1>Lorem Ipsum text based on lyrics by <%= @artist.display_name -%></h1>
+<% @title = "Lorem Ipsum text based on lyrics by #{@artist.display_name}" %>
 
-<p><%= @artist.random_lyric -%></p>
+<h1><%= @artist.display_name %> ipsum</h1>
+
+<ul>
+  <% 15.times do -%>
+    <p><%= @artist.random_lyric -%></p>
+  <% end -%>
+</ul>
 
