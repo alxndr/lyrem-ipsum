@@ -35,17 +35,21 @@ class Artist
   def lyrem(opts)
     case opts
       when hash_has_key?(:phrases)
-        Array.new(opts[:phrases]) { rand(3) == 0 ? LoremIpsum.phrase : random_lyric }
+        Array.new(opts[:phrases]) { lyrem_phrase }
       when hash_has_key?(:sentences)
-        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join ', ' }
+        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').humanize << '.' }
       when hash_has_key?(:paragraphs)
-        Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join '. ' }
+        Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join(' ') }
       else
         raise ArgumentError
     end
   end
 
   private
+
+  def lyrem_phrase
+    rand(3) == 0 ? LoremIpsum.phrase : random_lyric
+  end
 
   String.instance_eval do
     define_method('valid_lyric?') do
@@ -57,10 +61,11 @@ class Artist
   end
 
   def fetch_new_song_lyrics
-    lyrics, new_song = nil, nil
+    lyrics, new_song = [], nil
     unless lyrics.present?
-      new_song = get_new_song
-      return nil unless new_song
+      unless new_song.present?
+        new_song = get_new_song
+      end
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
     end
     songs_fetched << new_song
@@ -68,14 +73,17 @@ class Artist
   end
 
   def process_lyrics(lyrics_str)
-    sanitize_lyrics(lyrics_str.split("\n")).keep_if(&:valid_lyric?)
+    processed_lyrics = sanitize_lyrics(lyrics_str.split("\n")).keep_if(&:valid_lyric?).uniq
+    if processed_lyrics && processed_lyrics.present?
+      processed_lyrics
+    else
+      nil
+    end
   end
 
   def sanitize_lyrics(lyrics_arr)
     lyrics_arr.map{ |lyric|
-      lyric.gsub(/\[.*\]/, '').
-        gsub(%r{<[^>]*>.*?<[^>]*>}, '').
-        gsub(/<[^>]*>/, '')
+      lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?</[^>]*>}, '').gsub(/<[^>]*>/, '').strip
     }
   end
 
