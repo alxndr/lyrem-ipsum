@@ -4,7 +4,6 @@ gem 'bootstrap-sass'
 gem 'httparty'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
-gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'rails', '4.0.0.rc1'
 gem 'sass-rails', '~> 4.0.0.rc1'
@@ -31,3 +30,4 @@ group :test do
   gem 'webmock'
 end
 
+gem 'newrelic_rpm'
