@@ -90,6 +90,7 @@ GEM
     minitest (4.7.4)
     multi_json (1.7.3)
     multi_xml (0.5.3)
+    newrelic_rpm (3.6.3.111)
     nokogiri (1.5.9)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 1.0.1)
   jquery-rails
+  newrelic_rpm
   nokogiri
   rails (= 4.0.0.rc1)
   rails3_serve_static_assets!
