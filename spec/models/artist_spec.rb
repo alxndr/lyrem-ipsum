@@ -22,7 +22,7 @@ describe Artist do
     end
   end
 
-  describe '#lyrics' do
+  pending '#lyrics' do
     before do
       Artist.any_instance.stub(:fetch_song_data).and_return({ # todo stub request?
         # httparty responses have string keys
@@ -31,7 +31,6 @@ describe Artist do
         'lyrics' => "Lucille\nHas messed my mind up\nBut I still love her\nOh I still love her"
       })
     end
-
     it 'returns an array of lyrics' do
       a = Artist.new('frank zappa')
       a.lyrics.first.should == 'Lucille'
@@ -46,7 +45,7 @@ describe Artist do
       end
 
       it 'will fetch new song lyrics' do
-        Artist.any_instance.should_receive(:fetch_new_song_lyrics)
+        Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
         Artist.new('frank zappa').random_lyric
       end
 
@@ -57,7 +56,7 @@ describe Artist do
       end
     end
 
-    describe 'when there are some stored lyrics' do
+    pending 'when there are some stored lyrics' do
       before do
         Artist.any_instance.stub(:rand).and_return(0)
       end
@@ -81,7 +80,11 @@ describe Artist do
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
 
-    describe 'phrases' do
+    before do
+      fz.stub(:fetch_new_song_lyrics).and_return(('a' .. 'z').to_a.reverse)
+    end
+
+    describe ':phrases' do
       it 'returns an array of n strings' do
         phrases = fz.lyrem(:phrases => 3)
         phrases.length.should == 3
@@ -90,19 +93,24 @@ describe Artist do
       end
     end
 
-    describe 'sentences' do
-      pending
+    describe ':sentences' do
+      it 'returns an array of n strings' do
+        sentences = fz.lyrem(sentences: 5)
+        sentences.length.should == 5
+        sentences.first.class.should == String
+      end
     end
 
-    describe 'paragraphs' do
+    describe ':paragraphs' do
       it 'returns an array of n strings' do
         paragraphs = fz.lyrem(:paragraphs => 2)
         paragraphs.length.should == 2
+        paragraphs.first.class.should == String
         paragraphs.first.split(' ').length.should > 10
       end
     end
 
-    describe 'passed something else' do
+    describe 'passed a non-matching key' do
       it 'raises' do
         expect {
           fz.lyrem
@@ -114,4 +122,9 @@ describe Artist do
     end
   end
 
+  describe '#fetch_new_song_lyrics' do
+    it 'stores songs it has encountered' do
+      pending
+    end
+  end
 end
