@@ -28,26 +28,28 @@ class Artist
         new_lyrics = fetch_new_song_lyrics
       end
       @lyrics += new_lyrics
-      # returning here so we'll always get lyrics from a just-downloaded song
-      return new_lyrics.sample
+      new_lyrics.sample
+    else
+      @lyrics.sample
     end
-    @lyrics.sample
   end
 
   def lyrem(opts)
     phrase_picker = opts[:phrase_picker] || method(:random_lyric)
 
     case opts
+
     when hash_has_key?(:phrases)
       Array.new(opts[:phrases]) do
-        phrase_picker.call
+        phrase_picker.call.tap{|q| puts "phrase_picker returning #{q.inspect}"}
       end
 
     when hash_has_key?(:sentences)
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = phrases.join(', ').sub(/^(.)/) { $1.capitalize }
-        sentence << '.' if /a-zA-Z/.match(sentence[-1])
+        sentence = phrases.join(', ').sub(/^(.)/) { $1.capitalize } # TODO join comma only if !preceeded by ,.!?
+        sentence += '.' if /[a-zA-Z]$/.match(sentence)
+        sentence
       end
 
     when hash_has_key?(:paragraphs)
