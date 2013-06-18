@@ -75,10 +75,21 @@ describe Artist do
 
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
-    let(:vocab) { ('a' .. 'z').to_a.reverse }
+    let(:phrases) { [
+      'Fringe. I mean that, man.',
+      'The way no other lover can.',
+      'Even if I invaded Nicaragua',
+      'And the reason you have not seen her,',
+      "One 'n one is eleven!",
+      "Standin' onna porch of the Lido Hotel",
+      "Meet me onna corner boy'n don't be late,",
+      'or are you seeking entry to engage in criminal or immoral activities?',
+      "How'd he get in the show?",
+      'Replaced by a rash. What?'
+    ] }
 
     before do
-      fz.stub(:fetch_new_song_lyrics).and_return(vocab)
+        fz.stub(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
@@ -87,7 +98,7 @@ describe Artist do
         phrases.length.should == 3
         phrases.first.class.should == String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
-          vocab.should include phrase
+          phrases.should include phrase
         end
       end
 
@@ -109,17 +120,21 @@ describe Artist do
         sentences.length.should == 5
         sentences.each do |sentence|
           sentence.class.should == String
-          sentence.count(', ').should > 0
           sentence.split(' ').length.should >= 2
+          %w(,, ., !, ?, ,. !. ?.).each do |punct_combo|
+            sentence.should_not include punct_combo
+          end
         end
       end
 
       describe 'when given a phrase_picker' do
-        let(:numbers) { Proc.new{ rand(5) } }
+        let(:new_phrases) { phrases.map{ |p| p.upcase } }
+        let(:phrase_picker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(sentences: 10, phrase_picker: numbers).each do |sentence|
-            pending 'how to check content'
+          fz.lyrem(sentences: 10, phrase_picker: phrase_picker).each do |sentence|
+            pending 'tweak this'
+            new_phrases.should include sentence
           end
         end
       end
@@ -132,8 +147,10 @@ describe Artist do
         paragraphs.each do |paragraph|
           paragraph.class.should == String
           paragraph.count('.').should > 0
-          paragraph.count(',').should >= paragraph.count('.')
           paragraph.split(' ').length.should >= 6 # 3 sentences w/ 2 words each
+          paragraph.should_not include ',. '
+          paragraph.should_not include '!. '
+          paragraph.should_not include '?. '
         end
       end
 
