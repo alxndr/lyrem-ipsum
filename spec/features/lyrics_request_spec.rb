@@ -16,7 +16,7 @@ describe 'lyrics' do
 
   describe 'analytics' do
     it 'tracks your every movement' do
-      pending
+      page.body.should have_content 'UA-xxxxx-y'
     end
   end
 
