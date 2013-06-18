@@ -35,24 +35,32 @@ class Artist
   end
 
   def lyrem(opts)
+    phrase_picker = opts[:phrase_picker] || method(:random_lyric)
+
     case opts
-      when hash_has_key?(:phrases)
-        Array.new(opts[:phrases]) { phrase_lyric_or_latin } # TODO pass a block
-      when hash_has_key?(:sentences)
-        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').sub(/^(.)/){$1.capitalize} << '.' } # TODO smarter final punctuation
-      when hash_has_key?(:paragraphs)
-        Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join(' ') }
-      else
-        raise ArgumentError
+    when hash_has_key?(:phrases)
+      Array.new(opts[:phrases]) do
+        phrase_picker.call
+      end
+
+    when hash_has_key?(:sentences)
+      Array.new(opts[:sentences]) do
+        phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
+        sentence = phrases.join(', ').sub(/^(.)/) { $1.capitalize }
+        sentence << '.' if /a-zA-Z/.match(sentence[-1])
+      end
+
+    when hash_has_key?(:paragraphs)
+      Array.new(opts[:paragraphs]) do
+        lyrem({sentences: rand(5)+3, phrase_picker: phrase_picker}).join(' ')
+      end
+
+    else
+      raise ArgumentError
     end
   end
 
   private
-
-  def phrase_lyric_or_latin
-    #rand < 0.66 ? random_lyric : LoremIpsum.phrase
-    random_lyric
-  end
 
   String.instance_eval do
     define_method('valid_lyric?') do
