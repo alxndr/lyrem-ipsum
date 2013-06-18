@@ -24,6 +24,7 @@ end
 
 group :development do
   gem 'awesome_print'
+  gem 'brakeman'
   gem 'debugger'
 end
 
