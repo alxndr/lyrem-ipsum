@@ -24,4 +24,11 @@ describe 'home page' do
       pending
     end
   end
+
+  describe 'analytics' do
+    it 'tracks your every movement' do
+      pending
+    end
+  end
+
 end

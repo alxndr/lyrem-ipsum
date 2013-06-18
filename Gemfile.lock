@@ -73,6 +73,7 @@ GEM
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0.0)
+    google-analytics-rails (0.0.4)
     hike (1.2.2)
     httparty (0.11.0)
       multi_json (~> 1.0)
@@ -172,6 +173,7 @@ DEPENDENCIES
   capybara
   debugger
   fuubar
+  google-analytics-rails
   httparty
   jbuilder (~> 1.0.1)
   jquery-rails
