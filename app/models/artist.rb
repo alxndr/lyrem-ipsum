@@ -41,7 +41,7 @@ class Artist
 
     when hash_has_key?(:phrases)
       Array.new(opts[:phrases]) do
-        phrase_picker.call.tap{|q| puts "phrase_picker returning #{q.inspect}"}
+        phrase_picker.call
       end
 
     when hash_has_key?(:sentences)
