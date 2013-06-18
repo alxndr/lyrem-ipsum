@@ -5,7 +5,7 @@ module ApplicationHelper
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', '#{LyremIpsum::Application.config.google_analytics_tracking_id}', '#{request.host}>');
+      ga('create', '#{LyremIpsum::Application.config.google_analytics_tracking_id}', '#{request.host_with_port.split('.')[-2..-1].join('.')}');
       ga('send', 'pageview');
     </script>} if LyremIpsum::Application.config.google_analytics_tracking_id
   end
