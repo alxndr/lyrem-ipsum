@@ -5,4 +5,5 @@ require File.expand_path('../config/application', __FILE__)
 
 LyremIpsum::Application.load_tasks
 
-task :default => 'brakeman:run'
+desc 'default: rspec and brakeman'
+task :default => %w(spec brakeman:run)

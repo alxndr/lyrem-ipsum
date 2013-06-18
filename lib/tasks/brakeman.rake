@@ -1,6 +1,6 @@
 namespace :brakeman do
 
-  desc 'Run Brakeman'
+  desc 'run Brakeman'
   task :run, :output_files do |_t, args|
     require 'brakeman'
 
