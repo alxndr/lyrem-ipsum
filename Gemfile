@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap-sass'
-gem 'google-analytics-rails'
 gem 'httparty'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
