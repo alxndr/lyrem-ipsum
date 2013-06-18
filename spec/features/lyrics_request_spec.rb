@@ -14,4 +14,10 @@ describe 'lyrics' do
     page.should have_selector 'link[rel=canonical][href=/text-from-lyrics-by/frank-zappa]'
   end
 
+  describe 'analytics' do
+    it 'tracks your every movement' do
+      pending
+    end
+  end
+
 end
