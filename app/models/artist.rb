@@ -13,7 +13,7 @@ class Artist
     @display_name ||= @artist_data['artist']
   end
 
-  def slug # TODO monkeypatch & package w/ valid_lyric?
+  def slug # TODO monkeypatch
     @slug ||= display_name.
       strip.
       downcase.
@@ -49,9 +49,16 @@ class Artist
       end
 
     when hash_has_key?(:sentences)
+      def join_avoiding_dupe_punctuation(array, glue)
+        # TODO monkeypatch
+        array.reduce('') do |memo, obj|
+          "#{memo}#{glue if /[a-z]$/i.match(memo)} #{obj}"
+        end
+      end
+
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = phrases.join(', ').sub(/^(.)/) { $1.capitalize } # TODO join comma only if !preceeded by ,.!?
+        sentence = join_avoiding_dupe_punctuation(phrases,',').sub(/^(.)/) { $1.capitalize }
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
       end
@@ -69,6 +76,7 @@ class Artist
   private
 
   String.instance_eval do
+    # TODO package this & other monkeypatches together
     define_method('valid_lyric?') do
       self &&
         self.present? &&
