@@ -5,10 +5,4 @@
   Getting tired of <span class="fancy">Lorem ipsum dolor blah blah ...</span>
 </p>
 
-<form action="/text-from-lyrics-by">
-  <label for="artist">
-    Jumble me up some lyrics by:
-    <input type="text" id="artist" name="artist" />
-  </label>
-  <button type="submit" class="btn btn-success">do it</button>
-</form>
+<%= render :partial => 'shared/artist_form' %>

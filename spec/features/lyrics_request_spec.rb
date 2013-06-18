@@ -20,4 +20,15 @@ describe 'lyrics' do
     end
   end
 
+  describe 'content' do
+    it 'includes lyrem' do
+      pending 'something up with stubbing'
+    end
+
+    it 'asks you to type in your favorite band' do
+      page.should have_content 'Jumble me up some lyrics by:'
+      page.should have_selector 'input#artist[type=text]'
+    end
+  end
+
 end
