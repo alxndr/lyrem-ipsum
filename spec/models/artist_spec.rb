@@ -79,9 +79,10 @@ describe Artist do
 
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
+    let(:vocab) { ('a' .. 'z').to_a.reverse }
 
     before do
-      fz.stub(:fetch_new_song_lyrics).and_return(('a' .. 'z').to_a.reverse)
+      fz.stub(:fetch_new_song_lyrics).and_return(vocab)
     end
 
     describe ':phrases' do
@@ -89,7 +90,9 @@ describe Artist do
         phrases = fz.lyrem(:phrases => 3)
         phrases.length.should == 3
         phrases.first.class.should == String
-        # TODO how to check content?
+        phrases.each do |phrase|
+          vocab.should include phrase
+        end
       end
     end
 
