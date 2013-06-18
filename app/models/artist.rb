@@ -14,6 +14,7 @@ class Artist
   end
 
   def lyrics
+    raise 'unused?'
     @lyrics ||= songs_data.map { |song_data|
       process_lyrics(song_data['lyrics'])
     }.flatten
@@ -22,12 +23,13 @@ class Artist
   def random_lyric
     @lyrics ||= []
     if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
-      new_lyrics = fetch_new_song_lyrics
-      if new_lyrics
-        @lyrics += new_lyrics
-        # returning here so we'll always get lyrics from a just-downloaded song
-        return new_lyrics.sample
+      new_lyrics = nil
+      until new_lyrics && new_lyrics.present?
+        new_lyrics = fetch_new_song_lyrics
       end
+      @lyrics += new_lyrics
+      # returning here so we'll always get lyrics from a just-downloaded song
+      return new_lyrics.sample
     end
     @lyrics.sample
   end
@@ -35,9 +37,9 @@ class Artist
   def lyrem(opts)
     case opts
       when hash_has_key?(:phrases)
-        Array.new(opts[:phrases]) { lyrem_phrase }
+        Array.new(opts[:phrases]) { phrase_lyric_or_latin } # TODO pass a block
       when hash_has_key?(:sentences)
-        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').sub(/^(.)/){$1.capitalize} << '.' }
+        Array.new(opts[:sentences]) { lyrem(phrases: rand(3)+2).join(', ').sub(/^(.)/){$1.capitalize} << '.' } # TODO smarter final punctuation
       when hash_has_key?(:paragraphs)
         Array.new(opts[:paragraphs]) { lyrem(sentences: rand(5)+3).join(' ') }
       else
@@ -47,8 +49,9 @@ class Artist
 
   private
 
-  def lyrem_phrase
-    rand(3) == 0 ? LoremIpsum.phrase : random_lyric
+  def phrase_lyric_or_latin
+    #rand < 0.66 ? random_lyric : LoremIpsum.phrase
+    random_lyric
   end
 
   String.instance_eval do
@@ -61,19 +64,18 @@ class Artist
   end
 
   def fetch_new_song_lyrics
-    lyrics, new_song = [], nil
-    unless lyrics.present?
-      unless new_song.present?
-        new_song = get_new_song
-      end
+    lyrics, i = [], 0
+    until lyrics.present? || i > 5
+      new_song = pick_new_song
+      songs_fetched << new_song
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
+      i += 1 # TODO better way of covering potential infloop
     end
-    songs_fetched << new_song
     lyrics
   end
 
-  def process_lyrics(lyrics_str)
-    processed_lyrics = sanitize_lyrics(lyrics_str.split("\n")).keep_if(&:valid_lyric?).uniq
+  def process_lyrics(lyrics_arr)
+    processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
     if processed_lyrics && processed_lyrics.present?
       processed_lyrics
     else
@@ -87,8 +89,9 @@ class Artist
     }
   end
 
-  def get_new_song
-    (song_names - songs_fetched).sample #or raise 'no song'
+  def pick_new_song
+    # TODO handle when song lists are the same
+    (song_names - songs_fetched).sample
   end
 
   def songs_fetched # this is a getter and a 'setter'
