@@ -13,11 +13,15 @@ class Artist
     @display_name ||= @artist_data['artist']
   end
 
-  def lyrics
-    raise 'unused?'
-    @lyrics ||= songs_data.map { |song_data|
-      process_lyrics(song_data['lyrics'])
-    }.flatten
+  def slug # TODO monkeypatch & package w/ valid_lyric?
+    @slug ||= display_name.
+      strip.
+      downcase.
+      gsub(/['`]/,'').
+      gsub('&',' and ').
+      gsub(/[^a-z0-9]/,'-').
+      gsub(/-+/,'-').
+      gsub(/^-|-$/,'')
   end
 
   def random_lyric

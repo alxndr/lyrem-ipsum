@@ -22,19 +22,15 @@ describe Artist do
     end
   end
 
-  pending '#lyrics' do
-    before do
-      Artist.any_instance.stub(:fetch_song_data).and_return({ # todo stub request?
-        # httparty responses have string keys
-        'artist' => 'Frank Zappa',
-        'song' => 'Lucille Has Messed My Mind Up',
-        'lyrics' => "Lucille\nHas messed my mind up\nBut I still love her\nOh I still love her"
-      })
+  describe '#slug' do
+    it 'slugifies display_name' do
+      Artist.any_instance.stub(:display_name).and_return('Frank Zappa')
+      Artist.new('fz').slug.should == 'frank-zappa'
     end
-    it 'returns an array of lyrics' do
-      a = Artist.new('frank zappa')
-      a.lyrics.first.should == 'Lucille'
-      a.lyrics.last.should == 'Oh I still love her'
+
+    it 'can speak good human' do
+      Artist.any_instance.stub(:display_name).and_return(" THE Mama's & the papas.")
+      Artist.new('m&p').slug.should == 'the-mamas-and-the-papas'
     end
   end
 

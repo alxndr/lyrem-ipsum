@@ -1,5 +1,14 @@
-<h1>Welcome!</h1>
+<h1>Hey, who's your favorite band?</h1>
 
-<p>Need some filler text? Tired of <span style="font-family:cursive,fantasy">dolor sit amet</span> blah blah blah?</p>
+<p>
+  Need some filler text for a design?
+  Getting tired of <span class="fancy">Lorem ipsum dolor blah blah ...</span>
+</p>
 
-<p>How about some <b><a href="/text-from-lyrics-by/led-zeppelin">lorem ipsum text based on Led Zeppelin lyrics</a></b>?</p>
+<form action="/text-from-lyrics-by">
+  <label for="artist">
+    Jumble me up some lyrics by:
+    <input type="text" id="artist" name="artist" />
+  </label>
+  <button type="submit" class="btn btn-success">do it</button>
+</form>
