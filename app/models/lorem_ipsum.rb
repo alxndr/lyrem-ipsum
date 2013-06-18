@@ -48,15 +48,15 @@ class LoremIpsum
     end.join(' ')
   end
 
-  def self.sentence
-    TextBuilder.construct(lambda{LoremIpsum.phrase}, 1, 4, ', ') do |sentence|
-      sentence.capitalize
-    end
-  end
+  #def self.sentence
+  #  TextBuilder.construct(lambda{LoremIpsum.phrase}, 1, 4, ', ') do |sentence|
+  #    sentence.capitalize
+  #  end
+  #end
 
-  def self.paragraph
-    TextBuilder.construct(lambda{LoremIpsum.sentence}, 3, 10, '. ')
-  end
+  #def self.paragraph
+  #  TextBuilder.construct(lambda{LoremIpsum.sentence}, 3, 10, '. ')
+  #end
 
 end
 
