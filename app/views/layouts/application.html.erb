@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= analytics_init unless GoogleAnalytics.tracker == GoogleAnalytics::PLACEHOLDER_TRACKER %>
     <title><%= @page_title || 'Lyrem Ipsum - generate lorem ipsum from the lyrics of your favorite band' -%></title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
