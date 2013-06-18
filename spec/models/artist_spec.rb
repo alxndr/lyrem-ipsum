@@ -87,11 +87,22 @@ describe Artist do
 
     describe ':phrases' do
       it 'returns an array of n strings' do
-        phrases = fz.lyrem(:phrases => 3)
+        phrases = fz.lyrem(phrases: 3)
         phrases.length.should == 3
-        phrases.first.class.should == String
+        phrases.first.class.should == String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
           vocab.should include phrase
+        end
+      end
+
+      describe 'when given a phrase_picker' do
+        let(:numbers) { Proc.new{ rand(5) } }
+
+        it 'returns results of calling it' do
+          fz.lyrem(phrases: 10, phrase_picker: numbers).each do |number|
+            number.should >= 0
+            number.should <= 5
+          end
         end
       end
     end
@@ -100,20 +111,48 @@ describe Artist do
       it 'returns an array of n strings' do
         sentences = fz.lyrem(sentences: 5)
         sentences.length.should == 5
-        sentences.first.class.should == String
+        sentences.each do |sentence|
+          sentence.class.should == String
+          sentence.count(', ').should > 0
+          sentence.split(' ').length.should >= 2
+        end
+      end
+
+      describe 'when given a phrase_picker' do
+        let(:numbers) { Proc.new{ rand(5) } }
+
+        it 'returns sentency things made of results of calling it' do
+          fz.lyrem(sentences: 10, phrase_picker: numbers).each do |sentence|
+            pending 'how to check content'
+          end
+        end
       end
     end
 
     describe ':paragraphs' do
       it 'returns an array of n strings' do
-        paragraphs = fz.lyrem(:paragraphs => 2)
-        paragraphs.length.should == 2
-        paragraphs.first.class.should == String
-        paragraphs.first.split(' ').length.should > 10
+        paragraphs = fz.lyrem(paragraphs: 10)
+        paragraphs.length.should == 10
+        paragraphs.each do |paragraph|
+          paragraph.class.should == String
+          paragraph.count('.').should > 0
+          paragraph.count(',').should >= paragraph.count('.')
+          paragraph.split(' ').length.should >= 6 # 3 sentences w/ 2 words each
+        end
+      end
+
+      describe 'when given a phrase_picker' do
+        let(:numbers) { Proc.new{ rand(5) } }
+
+        it 'returns paragraphy things made of sentency things made of results of calling it' do
+          fz.lyrem(paragraphs: 10, phrase_picker: numbers).each do |paragraph|
+            pending 'how to check content'
+          end
+        end
       end
     end
 
-    describe 'passed a non-matching key' do
+    describe 'not passing required key' do
       it 'raises' do
         expect {
           fz.lyrem

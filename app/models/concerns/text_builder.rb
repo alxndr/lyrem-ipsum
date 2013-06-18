@@ -4,7 +4,7 @@ module TextBuilder
     raise ArgumentError unless constituent.respond_to?(:call) && min_length >= 0 && min_length <= max_length
     list, attempts = [], 0
 
-    length = rand(max_length - min_length) + min_length
+    length = min_length + rand(max_length - min_length)
     while list.length < length && attempts < 3 do # more rubyish way to do this?
       piece = constituent.call
       list.push(piece) unless piece == list.last # prevent repetition
