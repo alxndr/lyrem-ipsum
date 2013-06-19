@@ -44,7 +44,7 @@ class Artist
     when hash_has_key?(:sentences)
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = phrases.join_avoiding_dupe_punctuation(',').capitalize_first_letter
+        sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
       end
