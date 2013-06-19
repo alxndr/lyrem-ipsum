@@ -13,15 +13,8 @@ class Artist
     @display_name ||= @artist_data['artist']
   end
 
-  def slug # TODO monkeypatch
-    @slug ||= display_name.
-      strip.
-      downcase.
-      gsub(/['`]/,'').
-      gsub('&',' and ').
-      gsub(/[^a-z0-9]/,'-').
-      gsub(/-+/,'-').
-      gsub(/^-|-$/,'')
+  def slug
+    @slug ||= display_name.to_slug
   end
 
   def random_lyric
@@ -49,16 +42,9 @@ class Artist
       end
 
     when hash_has_key?(:sentences)
-      def join_avoiding_dupe_punctuation(array, glue)
-        # TODO monkeypatch
-        array.reduce('') do |memo, obj|
-          "#{memo}#{glue if /[a-z]$/i.match(memo)} #{obj}"
-        end
-      end
-
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = join_avoiding_dupe_punctuation(phrases,',').capitalize_first_letter
+        sentence = phrases.join_avoiding_dupe_punctuation(',').capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
       end
@@ -74,20 +60,6 @@ class Artist
   end
 
   private
-
-  String.instance_eval do
-    # TODO package this & other monkeypatches together
-    define_method('valid_lyric?') do
-      self &&
-        self.present? &&
-        self =~ /[a-z]/i &&
-        self !~ /(not found|instrumental|transcribed|copyright|chorus)/i
-    end
-
-    define_method('capitalize_first_letter') do
-      self.sub(/^[^a-z]*([a-z])/) { $1.capitalize }
-    end
-  end
 
   def fetch_new_song_lyrics
     lyrics, i = [], 0
@@ -149,6 +121,14 @@ class Artist
 
   def hash_has_key?(key)
     lambda { |hash| hash.has_key? key }
+  end
+
+  String.instance_eval do
+    include CustomString
+  end
+
+  Array.instance_eval do
+    include CustomArray
   end
 
 end
