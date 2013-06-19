@@ -76,16 +76,16 @@ describe Artist do
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
     let(:phrases) { [
-      'Fringe. I mean that, man.',
-      'The way no other lover can.',
-      'Even if I invaded Nicaragua',
-      'And the reason you have not seen her,',
-      "One 'n one is eleven!",
-      "Standin' onna porch of the Lido Hotel",
-      "Meet me onna corner boy'n don't be late,",
+      'fringe. I mean that, man.',
+      'the way no other lover can.',
+      'even if I invaded Nicaragua',
+      'and the reason you have not seen her,',
+      "one 'n one is eleven!",
+      "standin' onna porch of the Lido Hotel",
+      "meet me onna corner boy'n don't be late,",
       'or are you seeking entry to engage in criminal or immoral activities?',
-      "How'd he get in the show?",
-      'Replaced by a rash. What?'
+      "how'd he get in the show?",
+      'replaced by a rash. What?'
     ] }
 
     before do
@@ -125,6 +125,10 @@ describe Artist do
             sentence.should_not include punct_combo
           end
         end
+      end
+
+      it 'capitalizes the first letter' do
+        /[a-z]/i.match(fz.lyrem(sentences: 1).first)[0].should match /[A-Z]/
       end
 
       describe 'when given a phrase_picker' do

@@ -58,7 +58,7 @@ class Artist
 
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = join_avoiding_dupe_punctuation(phrases,',').sub(/^(.)/) { $1.capitalize }
+        sentence = join_avoiding_dupe_punctuation(phrases,',').capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
       end
@@ -82,6 +82,10 @@ class Artist
         self.present? &&
         self =~ /[a-z]/i &&
         self !~ /(not found|instrumental|transcribed|copyright|chorus)/i
+    end
+
+    define_method('capitalize_first_letter') do
+      self.sub(/^[^a-z]*([a-z])/) { $1.capitalize }
     end
   end
 
