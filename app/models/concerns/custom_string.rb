@@ -15,7 +15,7 @@ module CustomString
   end
 
   def capitalize_first_letter
-    sub(/([a-z])/) { $1.capitalize }
+    sub(/([a-z])/i) { $1.capitalize }
   end
 
 end
