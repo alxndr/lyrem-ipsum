@@ -74,6 +74,10 @@ describe CustomString do
       TestCustomString.new('foo').capitalize_first_letter.should == 'Foo'
       TestCustomString.new('!!! bar').capitalize_first_letter.should == '!!! Bar'
     end
+
+    it 'does not double-capitalize' do
+      TestCustomString.new('Baz').capitalize_first_letter.should == 'Baz'
+    end
   end
 
 end
