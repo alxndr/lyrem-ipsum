@@ -3,8 +3,9 @@ class LyricsController < ApplicationController
   class ArtistNotFoundError < StandardError; end
 
   def for_artist
+
     if request.query_parameters[:artist]
-      redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist]}" and return
+      redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist].to_slug}" and return
     end
 
     unless params[:artist]
@@ -20,5 +21,8 @@ class LyricsController < ApplicationController
     end
   end
 
-end
+  String.instance_eval do
+    include CustomString
+  end
 
+end

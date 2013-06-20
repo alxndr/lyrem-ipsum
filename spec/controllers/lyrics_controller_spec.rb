@@ -42,6 +42,7 @@ describe LyricsController do
         it 'redirects' do
           pending 'how to set request.query_parameters and not request.parameters?'
           get :for_artist, artist: 'frank zappa'
+          response.should_not redirect_to '/text-from-lyrics-by/frank zappa'
           response.should redirect_to '/text-from-lyrics-by/frank-zappa'
         end
       end
