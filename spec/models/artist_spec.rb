@@ -150,7 +150,7 @@ describe Artist do
         paragraphs.length.should == 10
         paragraphs.each do |paragraph|
           paragraph.class.should == String
-          paragraph.count('.').should > 0
+          paragraph.scan(/[.!?]/).count.should > 0
           paragraph.split(' ').length.should >= 6 # 3 sentences w/ 2 words each
           paragraph.should_not include ',. '
           paragraph.should_not include '!. '
