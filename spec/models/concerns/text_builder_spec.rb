@@ -3,6 +3,7 @@ require 'spec_helper'
 describe TextBuilder do
 
   describe '.construct' do
+
     it 'raises unless it has something to call' do
       expect {
         TextBuilder.construct
@@ -21,6 +22,14 @@ describe TextBuilder do
       }.to raise_error ArgumentError
 
     end
+
+    it 'calls the first parameter at least {min} and at most {max} times, and returns results' do
+      i = 0
+      proc = Proc.new { i += 1 }
+      proc.should_receive(:call).at_least(10).at_most(20).times.and_call_original
+      TextBuilder.construct(proc, 1, 13)
+    end
+
   end
 
 end
