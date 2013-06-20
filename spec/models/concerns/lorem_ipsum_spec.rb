@@ -13,7 +13,12 @@ describe LoremIpsum do
 
   describe '.phrase' do
     it 'returns a string of 2 >= n >= 6 corpus words' do
-      test_corpus = %w(amazing beautiful creatures dancing)
+      test_corpus = %w(
+        amazing beautiful creatures dancing excites the forest glade
+        in my heart how I do jump like the kudu listening to the music so nice the organ plays
+        quietly rests the sleepy tiger under the vine tree at the water's side, and
+        x marks the place 'neath the yellow moon where the Zulu chief and I did hide
+      )
       test_conjunctions = %w(and)
       stub_const 'LoremIpsum::CORPUS', test_corpus
       stub_const 'LoremIpsum::CONJUNCTIONS', test_conjunctions
