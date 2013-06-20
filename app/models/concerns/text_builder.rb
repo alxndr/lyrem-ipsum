@@ -7,8 +7,11 @@ module TextBuilder
     length = min_length + rand(max_length - min_length)
     while list.length < length && attempts < 3 do # more rubyish way to do this?
       piece = constituent.call
-      list.push(piece) unless piece == list.last # prevent repetition
-      attempts += 1 # TODO there's an infinite loop here if all words/phrases are the same...
+      if piece == list.last # prevent repetition
+        attempts += 1 # TODO there's an infinite loop here if all words/phrases are the same...
+      else
+        list.push(piece)
+      end
     end
 
     retval = if joiner
