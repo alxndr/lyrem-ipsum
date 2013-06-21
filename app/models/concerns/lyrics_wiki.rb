@@ -14,7 +14,7 @@ module LyricsWiki
   end
 
   def fetch_song_data(artist, song_name)
-    Rails.logger.debug "LyricsWiki#fetch_song_data(#{artist.inspect}, #{song_name.inspect}"
+    Rails.logger.debug "LyricsWiki#fetch_song_data(#{artist.inspect}, #{song_name.inspect})"
     raise 'need artist and song name' unless artist.present? && song_name.present?
     song_data = HTTParty.get("http://lyrics.wikia.com/api.php?artist=#{LyricsWiki.url_encode(artist)}&song=#{LyricsWiki.url_encode(song_name)}&fmt=realjson")
     if valid_response?(song_data)
