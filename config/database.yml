@@ -1,0 +1,20 @@
+#production:
+#  adapter: postgresql
+#  database: lyrem-ipsum-prd
+#  pool: 5
+#  timeout: 5000
+#staging:
+#  adapter: postgresql
+#  database: lyrem-ipsum-stg
+#  pool: 5
+#  timeout: 5000
+development:
+  adapter: postgresql
+  database: lyrem-ipsum-dev
+  pool: 5
+  timeout: 5000
+test:
+  adapter: postgresql
+  database: lyrem-ipsum-tst
+  pool: 5
+  timeout: 5000

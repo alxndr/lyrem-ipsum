@@ -1,12 +1,13 @@
-class Artist
+class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  def initialize(input)
-    raise 'no input' unless input && input.present?
-    # todo - add db backend to store lyric data (for some set of artists?)
-    @artist_data = fetch_data_for_artist(input) # be nice to use HashWithIndifferentAccess
-    raise('artist not found') unless @artist_data
+  has_many :albums
+
+  def fetch_data
+    raise 'no input' unless name && name.present?
+    @artist_data = fetch_data_for_artist(name) or raise('artist not found')
+    self
   end
 
   def display_name

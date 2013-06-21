@@ -18,19 +18,19 @@ describe Artist do
 
   describe '#display_name' do
     it 'finds a good name from LyricsWiki' do
-      Artist.new('frank zappa').display_name.should == 'Frank Zappa'
+      Artist.new(name: 'frank zappa').fetch_data.display_name.should == 'Frank Zappa'
     end
   end
 
   describe '#slug' do
     it 'slugifies display_name' do
       Artist.any_instance.stub(:display_name).and_return('Frank Zappa')
-      Artist.new('fz').slug.should == 'frank-zappa'
+      Artist.new(name: 'fz').fetch_data.slug.should == 'frank-zappa'
     end
 
     it 'can speak good human' do
       Artist.any_instance.stub(:display_name).and_return(" THE Mama's & the papas.")
-      Artist.new('m&p').slug.should == 'the-mamas-and-the-papas'
+      Artist.new(name: 'm&p').fetch_data.slug.should == 'the-mamas-and-the-papas'
     end
   end
 
@@ -42,13 +42,13 @@ describe Artist do
 
       it 'will fetch new song lyrics' do
         Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
-        Artist.new('frank zappa').random_lyric
+        Artist.new(name: 'frank zappa').fetch_data.random_lyric
       end
 
       it 'returns a lyric' do
         lyrics = %w(jamming in joe's garage)
         Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new('frank zappa').random_lyric
+        lyrics.should include Artist.new(name: 'frank zappa').fetch_data.random_lyric
       end
     end
 
@@ -59,22 +59,22 @@ describe Artist do
 
       it 'sometimes fetches new song lyrics' do
         Artist.any_instance.should_receive(:fetch_new_song_lyrics)
-        Artist.new('frank zappa').random_lyric
+        Artist.new(name: 'frank zappa').fetch_data.random_lyric
         Artist.any_instance.stub(:rand).and_return(1)
         Artist.any_instance.should_not_receive(:fetch_new_song_lyrics)
-        Artist.new('frank zappa').random_lyric
+        Artist.new(name: 'frank zappa').fetch_data.random_lyric
       end
 
       it 'returns a lyric' do
         lyrics = %w(jamming in joe's garage)
         Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new('frank zappa').random_lyric
+        lyrics.should include Artist.new(name: 'frank zappa').fetch_data.random_lyric
       end
     end
   end
 
   describe '#lyrem' do
-    let(:fz) { Artist.new('frank zappa') }
+    let(:fz) { Artist.new(name: 'frank zappa').fetch_data }
     let(:phrases) { [
       'fringe. I mean that, man.',
       'the way no other lover can.',

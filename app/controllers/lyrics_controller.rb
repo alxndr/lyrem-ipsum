@@ -12,9 +12,10 @@ class LyricsController < ApplicationController
       raise ArgumentError
     end
 
-    @artist = Artist.new(params[:artist].gsub('-',' '))
+    @artist = Artist.new(name: params[:artist].gsub('-',' '))
 
     if @artist && @artist.present?
+      @artist.fetch_data
       render 'by_artist'
     else
       raise ArtistNotFoundError.new('artist not found')
