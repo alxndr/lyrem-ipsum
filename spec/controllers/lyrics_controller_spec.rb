@@ -5,7 +5,7 @@ describe LyricsController do
   describe '#by_artist' do
 
     before do
-      Artist.stub(:new).and_return(mock('Artist'))
+      Artist.stub(:new).and_return(double('Artist', fetch_data: true))
     end
 
     describe 'missing artist' do

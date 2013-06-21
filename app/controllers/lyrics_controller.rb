@@ -12,7 +12,7 @@ class LyricsController < ApplicationController
       raise ArgumentError
     end
 
-    @artist = Artist.new(name: params[:artist].gsub('-',' '))
+    @artist = Artist.new(name: params[:artist].gsub('-',' ')) # TODO better sanitization?
 
     if @artist && @artist.present?
       @artist.fetch_data
