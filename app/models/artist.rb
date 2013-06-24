@@ -109,15 +109,15 @@ class Artist < ActiveRecord::Base
   end
 
   def song_names
-    @song_names ||= albums.map{ |a| a['songs'] }.flatten.sort.uniq
+    @song_names ||= albums_method.map{ |a| a['songs'] }.flatten.sort.uniq
   end
 
-  def albums
+  def albums_method
     @albums ||= @artist_data['albums']
   end
 
   def album_names
-    @album_names ||= albums.map{ |a| a['album'] }
+    @album_names ||= albums_method.map{ |a| a['album'] }
   end
 
   def hash_has_key?(key)
