@@ -65,7 +65,7 @@ class Artist < ActiveRecord::Base
   def fetch_new_song_lyrics
     lyrics, i = [], 0
     until lyrics.present? || i > 5
-      new_song = pick_new_song
+      new_song = pick_new_song_name
       songs_fetched << new_song
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
       i += 1 # TODO better way of covering potential infloop
@@ -88,7 +88,7 @@ class Artist < ActiveRecord::Base
     }
   end
 
-  def pick_new_song
+  def pick_new_song_name
     # TODO handle when song lists are the same
     (song_names - songs_fetched).sample
   end
