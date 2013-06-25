@@ -8,7 +8,7 @@ module LyricsWiki
     if valid_response?(api_response) && has_album_data?(api_response)
       api_response.parsed_response # n.b. parsed_response is something HTTParty gives us ... is that true?
     else
-      Rails.logger.warn "LyricsWiki#fetch_data_for_artist returning nil"
+      Rails.logger.warn 'LyricsWiki#fetch_data_for_artist returning nil'
       nil
     end
   end
@@ -20,7 +20,7 @@ module LyricsWiki
     if valid_response?(song_data)
       song_data
     else
-      Rails.logger.warn "LyricsWiki#fetch_song_data returning nil"
+      Rails.logger.warn 'LyricsWiki#fetch_song_data returning nil'
       nil
     end
   end
@@ -30,10 +30,9 @@ module LyricsWiki
     # no quality checking
     song_data = fetch_song_data(artist, song_name)
     if song_data && song_data['url']
-      ng_doc = Nokogiri::HTML(HTTParty.get(song_data['url']))
-      ng_doc.css('div.lyricbox/text()').map(&:text)
+      Nokogiri::HTML(HTTParty.get(song_data['url'])).css('div.lyricbox/text()').map(&:text)
     else
-      Rails.logger.warn "LyricsWiki#fetch_lyrics returning nil"
+      Rails.logger.warn 'LyricsWiki#fetch_lyrics returning nil'
       nil
     end
   end
