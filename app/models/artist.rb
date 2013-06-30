@@ -2,7 +2,7 @@ class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  has_many :albums
+  has_many :songs
 
   def fetch_data
     raise 'no input' unless name && name.present?
@@ -22,7 +22,7 @@ class Artist < ActiveRecord::Base
     @lyrics ||= []
     if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
       new_lyrics = nil
-      until new_lyrics && new_lyrics.present?
+      until new_lyrics.present?
         new_lyrics = fetch_new_song_lyrics
       end
       @lyrics += new_lyrics
@@ -65,8 +65,9 @@ class Artist < ActiveRecord::Base
   def fetch_new_song_lyrics
     lyrics, i = [], 0
     until lyrics.present? || i > 5
-      new_song = pick_new_song_name
+      new_song = Song.new(name: pick_new_song_name)
       songs_fetched << new_song
+      self.songs << new_song
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
       i += 1 # TODO better way of covering potential infloop
     end
