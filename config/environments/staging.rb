@@ -1,7 +1,7 @@
 LyremIpsum::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.google_analytics_tracking_id = 'UA-41819090-1'
+  config.google_analytics_tracking_id = 'UA-xxxxx-y'
 
   # Code is not reloaded between requests.
   config.cache_classes = true
