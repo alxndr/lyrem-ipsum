@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20130624024221) do
   add_index "albums", ["artist_id"], name: "index_albums_on_artist_id", using: :btree
 
   create_table "artists", force: true do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "songs", force: true do |t|
