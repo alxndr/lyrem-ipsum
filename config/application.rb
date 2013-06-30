@@ -14,13 +14,13 @@ Bundler.require(:default, Rails.env)
 module LyremIpsum
   class Application < Rails::Application
 
-    if Rails.env.development?
-      # Update version file from latest git tag
-      File.open('config/version', 'w') do |file|
-        file.write `git describe --tags --always`
-      end
-    end
-    config.version = File.read('config/version')
+    #if Rails.env.development?
+    #  # Update version file from latest git tag
+    #  File.open('config/version', 'w') do |file|
+    #    file.write `git describe --tags --always`
+    #  end
+    #end
+    #config.version = File.read('config/version')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
