@@ -5,6 +5,8 @@ class Artist < ActiveRecord::Base
   has_many :songs
 
   def fetch_data
+    Rails.logger.info '*'*18
+    Rails.logger.info "fetch_data, #{self.inspect}"
     raise 'no input' unless name && name.present?
     @artist_data = fetch_data_for_artist(name) or raise('artist not found')
     self
@@ -65,9 +67,8 @@ class Artist < ActiveRecord::Base
   def fetch_new_song_lyrics
     lyrics, i = [], 0
     until lyrics.present? || i > 5
-      new_song = Song.new(name: pick_new_song_name)
+      new_song = Song.new(name: pick_new_song_name, artist: self)
       songs_fetched << new_song
-      self.songs << new_song
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
       i += 1 # TODO better way of covering potential infloop
     end
