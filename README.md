@@ -1,4 +1,4 @@
-[Lyrem Ipsum](http://lyrem-ipsum.herokuapp.com)
+[Lyrem Ipsum](http://lyrem-ipsum.com)
 ===========
 
 [![Build Status](https://travis-ci.org/alxndr/lyrem-ipsum.png?branch=master)](https://travis-ci.org/alxndr/lyrem-ipsum) [![Coverage Status](https://coveralls.io/repos/alxndr/lyrem-ipsum/badge.png)](https://coveralls.io/r/alxndr/lyrem-ipsum)
