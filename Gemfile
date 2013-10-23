@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'airbrake'
 gem 'bootstrap-sass'
 gem 'httparty'
 gem 'jbuilder', '~> 1.0.1'
