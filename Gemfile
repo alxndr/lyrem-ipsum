@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'airbrake'
 gem 'bootstrap-sass'
-gem 'httparty'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'nokogiri'
@@ -25,6 +24,9 @@ end
 
 group :development do
   gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller' # dependency of better_errors
+  gem 'colorize'
   gem 'debugger'
 end
 
