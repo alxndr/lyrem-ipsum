@@ -1,8 +1,6 @@
 module LyricsWiki
   extend ActiveSupport::Concern
-  include Skylight::Helpers
 
-  instrument_method
   def fetch_data_for_artist(name)
     Rails.logger.debug "LyricsWiki#fetch_data_for_artist(#{name.inspect})"
     raise 'no name given' unless name.present?
@@ -15,7 +13,6 @@ module LyricsWiki
     end
   end
 
-  instrument_method
   def fetch_song_data(artist, song_name)
     Rails.logger.debug "LyricsWiki#fetch_song_data(#{artist.inspect}, #{song_name.inspect})"
     raise 'need artist and song name' unless artist.present? && song_name.present?
@@ -28,7 +25,6 @@ module LyricsWiki
     end
   end
 
-  instrument_method
   def fetch_lyrics(artist, song_name) # returns array of strings, or nil
     Rails.logger.debug "LyricsWiki#fetch_lyrics(#{artist.inspect}, #{song_name.inspect})"
     # no quality checking
