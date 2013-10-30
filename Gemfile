@@ -16,6 +16,7 @@ gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
 gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 
 group :development, :test do
+  gem 'brakeman', require: false
   gem 'capybara'
   gem 'fuubar'
   gem 'rspec-rails'
@@ -26,7 +27,6 @@ group :development do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller' # dependency of better_errors
-  gem 'brakeman', require: false
   gem 'colorize'
   gem 'debugger'
 end
