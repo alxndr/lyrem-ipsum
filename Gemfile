@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'airbrake'
 gem 'bootstrap-sass'
-gem 'httparty'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
@@ -24,11 +24,15 @@ end
 
 group :development do
   gem 'awesome_print'
-  gem 'brakeman'
+  gem 'better_errors'
+  gem 'binding_of_caller' # dependency of better_errors
+  gem 'brakeman', require: false
+  gem 'colorize'
   gem 'debugger'
 end
 
 group :test do
+  gem 'coveralls', require: false
   gem 'webmock'
 end
 

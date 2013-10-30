@@ -1,0 +1,27 @@
+<form action="/text-from-lyrics-by">
+  <p>
+    <label for="artist">
+      Jumble me up some lyrics by:
+      <input type="text" id="artist" name="artist">
+    </label>
+    <button type="submit" class="btn btn-success">do it</button>
+  </p>
+  <div>
+    <label>
+      How much text are you looking for?
+      <input type="text" name="text-length" value="5">
+    </label>
+    <ul class="text-length-units">
+      <li>
+        <label for="text-length-unit-paragraphs">
+          <input type="radio" name="text-length-unit" id="text-length-unit-paragraphs" value="paragraphs" checked="checked"> paragraphs
+        </label>
+      </li>
+      <li>
+        <label for="text-length-unit-sentences">
+          <input type="radio" name="text-length-unit" id="text-length-unit-sentences" value="sentences"> sentences
+        </label>
+      </li>
+    </ul>
+  </div>
+</form>

@@ -22,19 +22,15 @@ describe Artist do
     end
   end
 
-  pending '#lyrics' do
-    before do
-      Artist.any_instance.stub(:fetch_song_data).and_return({ # todo stub request?
-        # httparty responses have string keys
-        'artist' => 'Frank Zappa',
-        'song' => 'Lucille Has Messed My Mind Up',
-        'lyrics' => "Lucille\nHas messed my mind up\nBut I still love her\nOh I still love her"
-      })
+  describe '#slug' do
+    it 'slugifies display_name' do
+      Artist.any_instance.stub(:display_name).and_return('Frank Zappa')
+      Artist.new('fz').slug.should == 'frank-zappa'
     end
-    it 'returns an array of lyrics' do
-      a = Artist.new('frank zappa')
-      a.lyrics.first.should == 'Lucille'
-      a.lyrics.last.should == 'Oh I still love her'
+
+    it 'can speak good human' do
+      Artist.any_instance.stub(:display_name).and_return(" THE Mama's & the papas.")
+      Artist.new('m&p').slug.should == 'the-mamas-and-the-papas'
     end
   end
 
@@ -79,10 +75,21 @@ describe Artist do
 
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
-    let(:vocab) { ('a' .. 'z').to_a.reverse }
+    let(:phrases) { [
+      'fringe. I mean that, man.',
+      'the way no other lover can.',
+      'even if I invaded Nicaragua',
+      'and the reason you have not seen her,',
+      "one 'n one is eleven!",
+      "standin' onna porch of the Lido Hotel",
+      "meet me onna corner boy'n don't be late,",
+      'or are you seeking entry to engage in criminal or immoral activities?',
+      "how'd he get in the show?",
+      'replaced by a rash. What?'
+    ] }
 
     before do
-      fz.stub(:fetch_new_song_lyrics).and_return(vocab)
+        fz.stub(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
@@ -91,7 +98,7 @@ describe Artist do
         phrases.length.should == 3
         phrases.first.class.should == String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
-          vocab.should include phrase
+          phrases.should include phrase
         end
       end
 
@@ -113,17 +120,25 @@ describe Artist do
         sentences.length.should == 5
         sentences.each do |sentence|
           sentence.class.should == String
-          sentence.count(', ').should > 0
           sentence.split(' ').length.should >= 2
+          %w(,, ., !, ?, ,. !. ?.).each do |punct_combo|
+            sentence.should_not include punct_combo
+          end
         end
       end
 
+      it 'capitalizes the first letter' do
+        /[a-z]/i.match(fz.lyrem(sentences: 1).first)[0].should match /[A-Z]/
+      end
+
       describe 'when given a phrase_picker' do
-        let(:numbers) { Proc.new{ rand(5) } }
+        let(:new_phrases) { phrases.map{ |p| p.upcase } }
+        let(:phrase_picker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(sentences: 10, phrase_picker: numbers).each do |sentence|
-            pending 'how to check content'
+          fz.lyrem(sentences: 10, phrase_picker: phrase_picker).each do |sentence|
+            pending 'tweak this'
+            new_phrases.should include sentence
           end
         end
       end
@@ -135,9 +150,11 @@ describe Artist do
         paragraphs.length.should == 10
         paragraphs.each do |paragraph|
           paragraph.class.should == String
-          paragraph.count('.').should > 0
-          paragraph.count(',').should >= paragraph.count('.')
+          paragraph.scan(/[.!?]/).count.should > 0
           paragraph.split(' ').length.should >= 6 # 3 sentences w/ 2 words each
+          paragraph.should_not include ',. '
+          paragraph.should_not include '!. '
+          paragraph.should_not include '?. '
         end
       end
 

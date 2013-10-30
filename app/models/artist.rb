@@ -13,11 +13,8 @@ class Artist
     @display_name ||= @artist_data['artist']
   end
 
-  def lyrics
-    raise 'unused?'
-    @lyrics ||= songs_data.map { |song_data|
-      process_lyrics(song_data['lyrics'])
-    }.flatten
+  def slug
+    @slug ||= display_name.to_slug
   end
 
   def random_lyric
@@ -47,7 +44,7 @@ class Artist
     when hash_has_key?(:sentences)
       Array.new(opts[:sentences]) do
         phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = phrases.join(', ').sub(/^(.)/) { $1.capitalize } # TODO join comma only if !preceeded by ,.!?
+        sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
       end
@@ -63,15 +60,6 @@ class Artist
   end
 
   private
-
-  String.instance_eval do
-    define_method('valid_lyric?') do
-      self &&
-        self.present? &&
-        self =~ /[a-z]/i &&
-        self !~ /(not found|instrumental|transcribed|copyright|chorus)/i
-    end
-  end
 
   def fetch_new_song_lyrics
     lyrics, i = [], 0
@@ -133,6 +121,14 @@ class Artist
 
   def hash_has_key?(key)
     lambda { |hash| hash.has_key? key }
+  end
+
+  String.instance_eval do
+    include CustomString
+  end
+
+  Array.instance_eval do
+    include CustomArray
   end
 
 end
