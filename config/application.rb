@@ -26,8 +26,5 @@ module LyremIpsum
     # need to add the following line to your application.rb:"
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
-    # hook in to Skylight.io on staging as well as prod
-    config.skylight.environments << 'staging'
-
   end
 end

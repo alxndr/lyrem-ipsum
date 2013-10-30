@@ -9,4 +9,15 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-LyremIpsum::Application.config.secret_key_base = 'e6c9157b0b463fbc86a698596a92489ed23a3cc797e7715265228e9eb3f32fdad92f3d8139f7fd7390032bbc391f70f13e9df8dfcb76bb199bc6ddd8d97b71f1'
+
+# Uses a file called secret.token which holds the token
+# We utilize a rake task - generate_secret_token - to generate this file if it doesn't exist
+# from https://github.com/jasonshen/RewardBox/pull/3/files
+if Rails.env.production?
+  abort 'No secret token found. Run export REWARDBOX_TOKEN=`rake secret` before starting server. Aborting' unless ENV['REWARDBOX_TOKEN']
+  LyremIpsum::Application.config.secret_token = ENV['REWARDBOX_TOKEN']
+else
+  token_file = Rails.root.join('config/secret.token')
+  abort 'No config/secret.token file found. Please run "rake dev:generate_token". Aborting' unless token_file.exist?
+  LyremIpsum::Application.config.secret_token = token_file.read
+end

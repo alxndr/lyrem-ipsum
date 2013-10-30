@@ -6,6 +6,6 @@
 
 <h1><%= @artist.display_name %> ipsum</h1>
 
-<% @artist.lyrem(@what.to_sym => @how_many.to_i).each do |text| -%>
+<% @artist.lyrem(@what => @how_many.to_i).each do |text| -%>
   <p><%= text %></p>
 <% end -%>
