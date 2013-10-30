@@ -129,7 +129,7 @@ describe Artist do
 
         it 'returns sentency things made of results of calling it' do
           fz.lyrem(sentences: 10, phrase_picker: loud_phrase_picker).each do |sentence|
-            loud_phrases.should include sentence
+            loud_phrases.any?{|loud_phrase| sentence.include? loud_phrase}.should be_true
           end
         end
       end
