@@ -19,7 +19,7 @@ class Artist
 
   def random_lyric
     @lyrics ||= []
-    if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
+    if should_fetch_new_lyrics?
       new_lyrics = nil
       until new_lyrics && new_lyrics.present?
         new_lyrics = fetch_new_song_lyrics
@@ -29,6 +29,13 @@ class Artist
     else
       @lyrics.sample
     end
+  end
+
+  def should_fetch_new_lyrics?
+    percentage_of_songs_fetched.percent_of_the_time do
+      return false
+    end
+    true
   end
 
   def lyrem(opts)
@@ -90,6 +97,10 @@ class Artist
   def pick_new_song
     # TODO handle when song lists are the same
     (song_names - songs_fetched).sample
+  end
+
+  def percentage_of_songs_fetched
+    @songs_fetched.length.to_f / @song_names.length.to_f
   end
 
   def songs_fetched # this is a getter and a 'setter'
