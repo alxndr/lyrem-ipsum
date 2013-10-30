@@ -8,6 +8,7 @@ gem 'nokogiri'
 gem 'rails', '4.0.0.rc1'
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'skylight'
+gem 'sometimes'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 

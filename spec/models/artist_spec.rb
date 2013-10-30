@@ -35,47 +35,46 @@ describe Artist do
   end
 
   describe '#random_lyric' do
-    describe 'when there are no stored lyrics' do
+    subject { Artist.new('frank zappa') }
+
+    before do
+      subject.instance_variable_set(:@lyrics, %w(mmmm moldy garbage truck))
+    end
+
+    describe 'when we should fetch' do
       before do
-        Artist.any_instance.stub(:rand).and_return(0)
+        Artist.any_instance.stub(:should_fetch_new_lyrics?).and_return true
+        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return %w(jamming in joe's garage)
       end
 
-      it 'will fetch new song lyrics' do
-        Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
-        Artist.new('frank zappa').random_lyric
-      end
-
-      it 'returns a lyric' do
-        lyrics = %w(jamming in joe's garage)
-        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new('frank zappa').random_lyric
+      it 'should return something from new lyrics' do
+        expect(%w(jamming in joe's garage)).to include(subject.random_lyric)
       end
     end
 
-    pending 'when there are some stored lyrics' do
+    describe 'when we should not fetch' do
       before do
-        Artist.any_instance.stub(:rand).and_return(0)
+        Artist.any_instance.stub(:should_fetch_new_lyrics?).and_return false
       end
 
-      it 'sometimes fetches new song lyrics' do
-        Artist.any_instance.should_receive(:fetch_new_song_lyrics)
-        Artist.new('frank zappa').random_lyric
-        Artist.any_instance.stub(:rand).and_return(1)
-        Artist.any_instance.should_not_receive(:fetch_new_song_lyrics)
-        Artist.new('frank zappa').random_lyric
+      it 'should sample from existing lyrics' do
+        expect(%w(mmmm moldy garbage truck)).to include(subject.random_lyric)
       end
+    end
 
-      it 'returns a lyric' do
-        lyrics = %w(jamming in joe's garage)
-        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new('frank zappa').random_lyric
-      end
+  end
+
+  describe '#should_fetch_new_lyrics?' do
+    subject { Artist.new('frank zappa') }
+
+    it 'fetches according to % of songs fetched' do
+      pending 'test probability?'
     end
   end
 
   describe '#lyrem' do
     let(:fz) { Artist.new('frank zappa') }
-    let(:phrases) { [
+    let(:list_of_lyrics) { [
       'fringe. I mean that, man.',
       'the way no other lover can.',
       'even if I invaded Nicaragua',
@@ -89,42 +88,35 @@ describe Artist do
     ] }
 
     before do
-        fz.stub(:fetch_new_song_lyrics).and_return(phrases)
+      fz.stub(:random_lyric) { list_of_lyrics.sample }
     end
 
     describe ':phrases' do
-      it 'returns an array of n strings' do
-        phrases = fz.lyrem(phrases: 3)
-        phrases.length.should == 3
-        phrases.first.class.should == String # fetch_new_song_lyrics.class
-        phrases.each do |phrase|
-          phrases.should include phrase
-        end
+      it 'returns n random_lyrics' do
+        expect(fz.lyrem(phrases: 3).any?{|phrase| !list_of_lyrics.include? phrase}).to be_false
       end
 
       describe 'when given a phrase_picker' do
-        let(:numbers) { Proc.new{ rand(5) } }
+        let(:random_number_picker) { Proc.new{ rand(5) } }
 
         it 'returns results of calling it' do
-          fz.lyrem(phrases: 10, phrase_picker: numbers).each do |number|
-            number.should >= 0
-            number.should <= 5
-          end
+          numbers = fz.lyrem(phrases: 10, phrase_picker: random_number_picker)
+
+          expect(numbers.length).to equal 10
+
+          numbers.any?{|number| number < 0 || number > 5 }.should be_false
         end
       end
     end
 
     describe ':sentences' do
-      it 'returns an array of n strings' do
-        sentences = fz.lyrem(sentences: 5)
-        sentences.length.should == 5
-        sentences.each do |sentence|
-          sentence.class.should == String
-          sentence.split(' ').length.should >= 2
-          %w(,, ., !, ?, ,. !. ?.).each do |punct_combo|
-            sentence.should_not include punct_combo
-          end
-        end
+      it 'returns n results of phrase_picker' do
+        #expect(fz.lyrem(phrases: 3).any?{|phrase| !list_of_lyrics.include? phrase}).to be_false
+
+        pending 'refactoring lyrem creation'
+        sentences = fz.lyrem(sentences: 3)
+        puts "sentences: #{sentences.inspect}"
+        expect(sentences).to eql lyrics
       end
 
       it 'capitalizes the first letter' do
@@ -132,13 +124,12 @@ describe Artist do
       end
 
       describe 'when given a phrase_picker' do
-        let(:new_phrases) { phrases.map{ |p| p.upcase } }
-        let(:phrase_picker) { Proc.new { new_phrases.sample } }
+        let(:loud_phrases) { list_of_lyrics.map{ |p| p.upcase } }
+        let(:loud_phrase_picker) { Proc.new { loud_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(sentences: 10, phrase_picker: phrase_picker).each do |sentence|
-            pending 'tweak this'
-            new_phrases.should include sentence
+          fz.lyrem(sentences: 10, phrase_picker: loud_phrase_picker).each do |sentence|
+            loud_phrases.any?{|loud_phrase| sentence.include? loud_phrase}.should be_true
           end
         end
       end

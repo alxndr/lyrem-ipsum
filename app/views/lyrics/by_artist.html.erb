@@ -6,6 +6,18 @@
 
 <h1><%= @artist.display_name %> ipsum</h1>
 
-<% @artist.lyrem(@what.to_sym => @how_many.to_i).each do |text| -%>
-  <p><%= text %></p>
-<% end -%>
+
+<blockquote>
+  <% @artist.lyrem(@what.to_sym => @how_many.to_i).each do |text| -%>
+    <p><%= text %></p>
+  <% end -%>
+</blockquote>
+
+<%
+   songs_fetched = @artist.instance_variable_get(:@songs_fetched)
+-%>
+
+<p>
+  This filler text was curated just for you from the jumbles of <%= songs_fetched.count %> songs:
+  <%= songs_fetched.map{|song_name| %Q{"#{song_name}"} }.join ', ' -%>
+</p>

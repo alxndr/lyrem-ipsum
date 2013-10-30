@@ -19,7 +19,7 @@ class Artist
 
   def random_lyric
     @lyrics ||= []
-    if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
+    if should_fetch_new_lyrics?
       new_lyrics = nil
       until new_lyrics && new_lyrics.present?
         new_lyrics = fetch_new_song_lyrics
@@ -31,10 +31,26 @@ class Artist
     end
   end
 
-  def lyrem(opts)
-    phrase_picker = opts[:phrase_picker] || method(:random_lyric)
+  def should_fetch_new_lyrics?
+    return true if @lyrics.length == 0
 
-    case opts
+    if @lyrics.length < 100
+      @lyrics.length / 3
+    elsif @lyrics.length < 150
+      @lyrics.length / 2
+    else
+      90
+    end.percent_of_the_time do
+      return false
+    end
+
+    true
+  end
+
+  def lyrem(opts) # todo - rethink ... separate concern called TextBuilder or something
+    phrase_picker = opts[:phrase_picker] || method(:random_lyric) # should be in initialization of separate object
+
+    case opts # these become separate methods
 
     when hash_has_key?(:phrases)
       Array.new(opts[:phrases]) do
@@ -43,7 +59,7 @@ class Artist
 
     when hash_has_key?(:sentences)
       Array.new(opts[:sentences]) do
-        phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
+        phrases = lyrem(phrases: (rand(3)+2), phrase_picker: phrase_picker)
         sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
@@ -74,6 +90,7 @@ class Artist
 
   def process_lyrics(lyrics_arr)
     processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
+    # todo - uniq against @lyrics
     if processed_lyrics && processed_lyrics.present?
       processed_lyrics
     else
