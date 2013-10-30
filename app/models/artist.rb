@@ -28,29 +28,38 @@ class Artist
       new_lyrics.sample
     else
       @lyrics.sample
-    end
+    end.tap{|rv| "random_lyric returning: #{rv.inspect}".colorize :green}
   end
 
   def should_fetch_new_lyrics?
-    percentage_of_songs_fetched.percent_of_the_time do
+    return true if @lyrics.length == 0
+
+    if @lyrics.length < 100
+      @lyrics.length / 3
+    elsif @lyrics.length < 150
+      @lyrics.length / 2
+    else
+      90
+    end.percent_of_the_time do
       return false
     end
+
     true
   end
 
-  def lyrem(opts)
-    phrase_picker = opts[:phrase_picker] || method(:random_lyric)
+  def lyrem(opts) # todo - rethink ... separate concern called TextBuilder or something
+    phrase_picker = opts[:phrase_picker] || method(:random_lyric) # should be in initialization of separate object
 
-    case opts
+    case opts # these become separate methods
 
     when hash_has_key?(:phrases)
       Array.new(opts[:phrases]) do
-        phrase_picker.call
+        phrase_picker.call.tap{|c| puts "phrase called: #{c.inspect}"}
       end
 
     when hash_has_key?(:sentences)
       Array.new(opts[:sentences]) do
-        phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
+        phrases = lyrem(phrases: (rand(3)+2).tap{|np| puts "sentence gonna be made of #{np} phrases"}, phrase_picker: phrase_picker)
         sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter
         sentence += '.' if /[a-zA-Z]$/.match(sentence)
         sentence
@@ -71,16 +80,17 @@ class Artist
   def fetch_new_song_lyrics
     lyrics, i = [], 0
     until lyrics.present? || i > 5
-      new_song = pick_new_song
+      new_song = pick_new_song.tap{|sn| puts "looking at lyrics for #{sn.inspect}"}
       songs_fetched << new_song
       lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
       i += 1 # TODO better way of covering potential infloop
     end
-    lyrics
+    lyrics.tap{|l| puts "fetch_new_song_lyrics returning #{l.length} lines"}
   end
 
   def process_lyrics(lyrics_arr)
     processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
+    # todo - uniq against @lyrics
     if processed_lyrics && processed_lyrics.present?
       processed_lyrics
     else
@@ -100,7 +110,7 @@ class Artist
   end
 
   def percentage_of_songs_fetched
-    @songs_fetched.length.to_f / @song_names.length.to_f
+    (songs_fetched.length.to_f / song_names.length.to_f).tap{|pct| puts "% songs fetched: #{pct.round(1)} (#{songs_fetched.length}/#{song_names.length})"}
   end
 
   def songs_fetched # this is a getter and a 'setter'

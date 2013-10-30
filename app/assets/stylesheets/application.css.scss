@@ -4,6 +4,7 @@ body { margin: 2em; }
 
 h1 { font-size: 2em; }
 form { font-size: 1.5em; }
+blockquote p { margin-bottom: 1em; font-size: 1em; font-weight: normal; } /* todo - look foundation or inuit or something else besides bootstrap */
 
 .fancy { font-family: cursive, fantasy; font-size: 1.2em; }
 label { display: inline-block; }
