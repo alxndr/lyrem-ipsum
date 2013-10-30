@@ -73,6 +73,8 @@ describe CustomString do
     it 'capitalizes the first letter' do
       TestCustomString.new('þrettán').capitalize_first_letter.should == 'Þrettán'
       TestCustomString.new('!!!1 bar').capitalize_first_letter.should == '!!!1 Bar'
+      TestCustomString.new('qux QUUX').capitalize_first_letter.should == 'Qux QUUX'
+      TestCustomString.new('QUX Quux').capitalize_first_letter.should == 'QUX Quux'
     end
 
     it 'does not double-capitalize' do

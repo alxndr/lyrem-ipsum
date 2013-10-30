@@ -15,7 +15,7 @@ module CustomString
   end
 
   def capitalize_first_letter
-    sub(/([^\s\d[:punct:]]+)/i) { $1.mb_chars.capitalize.to_s }
+    sub(/([^\s\d[:punct:]])/i) { $1.mb_chars.capitalize.to_s }
   end
 
 end
