@@ -2,11 +2,23 @@ class Artist
 
   include LyricsWiki
 
+  REGEX_ALLMUSIC_ARTIST_URL = %r{artist/([a-z\d-]+)-}
+
+  def self.find_canonical_name(name)
+    Google::Search::Web.new(query: "#{name} site:allmusic.com/artist/").first.uri.match(REGEX_ALLMUSIC_ARTIST_URL).captures.first
+  end
+
   def initialize(input)
     raise 'no input' unless input && input.present?
-    # todo - add db backend to store lyric data (for some set of artists?)
-    @artist_data = fetch_data_for_artist(input) # be nice to use HashWithIndifferentAccess
-    raise('artist not found') unless @artist_data
+
+    @artist_name = self.class.find_canonical_name(input)
+
+    raise 'unable to find canonical name' unless @artist_name
+
+    @artist_data = fetch_data_for_artist(@artist_name) # parsed json from wiki
+
+    raise 'artist not found' unless @artist_data
+    raise 'albums not found' unless @artist_data['albums'].try(:present?)
   end
 
   def display_name

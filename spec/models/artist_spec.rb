@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Artist do
 
   before do
+    Artist.stub(:find_canonical_name).and_return 'fz'
+
     Artist.any_instance.stub(fetch_data_for_artist: { # todo stub request? or is that LyricsWiki's job?
       # httparty responses have string keys
       'artist' => 'Frank Zappa',
@@ -14,6 +16,13 @@ describe Artist do
         }
       ]
     })
+  end
+
+  describe '#initialize' do
+    it 'should ask for canonical name' do
+      frank = Artist.new('frank zappa')
+      frank.instance_variable_get(:@artist_name).should == 'fz'
+    end
   end
 
   describe '#display_name' do
@@ -177,4 +186,5 @@ describe Artist do
       pending
     end
   end
+
 end

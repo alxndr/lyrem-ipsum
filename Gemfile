@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'airbrake'
 gem 'bootstrap-sass'
+gem 'google-search'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'nokogiri'

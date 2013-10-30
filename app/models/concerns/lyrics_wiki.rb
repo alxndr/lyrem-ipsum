@@ -5,7 +5,7 @@ module LyricsWiki
     Rails.logger.debug "LyricsWiki#fetch_data_for_artist(#{name.inspect})"
     raise 'no name given' unless name.present?
 
-    api_response = Net::HTTP.get(URI("http://lyrics.wikia.com/api.php?func=getArtist&artist=#{LyricsWiki.url_encode(name)}&fmt=realjson"))
+    api_response = Net::HTTP.get(URI("http://lyrics.wikia.com/api.php?func=getArtist&artist=#{name}&fmt=realjson"))
 
     raise 'invalid response' unless valid_response?(api_response)
     raise 'no albums found' unless has_album_data?(api_response)
