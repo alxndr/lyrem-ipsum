@@ -1,33 +1,31 @@
-String.prototype.for_url = function() {
-  return encodeURIComponent(this).replace('%20','-');
-};
 var Q = require('q');
-var request = Q.denodeify(require('request'));
-var $ = require('cheerio');
+var Qrequest = Q.denodeify(require('request'));
+var cheerio = require('cheerio');
+
+var parse_json_in_body = function() {
+  return JSON.parse(arguments[0][0].body);
+};
+var request_url_then_resolve_deferred = function(config) {
+  Qrequest(config.url).then(
+    function() { config.deferred.resolve(config.callback.apply(null, arguments)); },
+    function() { config.deferred.reject(config.error, arguments); }
+  );
+};
 
 var fetch_artist_data = function(name) {
   // returns promise
   var deferred = Q.defer();
-  var url = 'http://lyrics.wikia.com/api.php?func=getArtist&artist=' + name.for_url() + '&fmt=realjson';
-
-  if (!name || !name.length) {
+  if (!name) {
     deferred.reject('missing name');
     return deferred.promise;
   }
 
-  request(url).then(
-    function() { deferred.resolve(JSON.parse(arguments[0][0].body)); },
-    function() { deferred.reject('error getting artist data', arguments); }
-  );
-
-  /*
-  request_url_and_resolve_deferred({
-    url: url
-    ,return_value: function() { JSON.parse(arguments[0].toJSON().body); }
+  request_url_then_resolve_deferred({
+    url: 'http://lyrics.wikia.com/api.php?func=getArtist&artist=' + name + '&fmt=realjson'
+    ,callback: parse_json_in_body
+    ,error_message: 'error getting artist data'
     ,deferred: deferred
-    ,error_msg: 'error getting artist data'
   });
-  */
 
   return deferred.promise;
 };
@@ -35,11 +33,17 @@ var fetch_artist_data = function(name) {
 var fetch_song_data = function(artist_name, song_name) {
   // returns promise
   var deferred = Q.defer();
+  if (!artist_name || !artist_name.length || !song_name || !song_name.length) {
+    deferred.reject('missing artist name or song name');
+    return deferred.promise;
+  }
 
-  request('http://lyrics.wikia.com/api.php?artist=' + artist_name.for_url() + '&song=' + song_name.for_url() + '&fmt=realjson').then(
-    function() { deferred.resolve(JSON.parse(arguments[0][0].body)); },
-    function() { deferred.reject('error getting song data', arguments); }
-  );
+  request_url_then_resolve_deferred({
+    url: 'http://lyrics.wikia.com/api.php?artist=' + artist_name + '&song=' + song_name + '&fmt=realjson'
+    ,callback: parse_json_in_body
+    ,error_message: 'error getting song data'
+    ,deferred: deferred
+  });
 
   return deferred.promise;
 };
@@ -47,22 +51,31 @@ var fetch_song_data = function(artist_name, song_name) {
 var fetch_lyrics_data = function(lyrics_url) {
   // returns promise
   var deferred = Q.defer();
+  console.log('fetch lyrics data');
 
   if (!lyrics_url) {
     deferred.reject('missing song lyrics url',lyrics_url);
-    return deferred.promise();
+    return deferred.promise;
   }
 
-  console.log('requesting',lyrics_url);
-  request(lyrics_url).then(
-    function() {
-      console.log('accepting',JSON.parse(arguments[0][0].body));
-      deferred.resolve(JSON.parse(arguments[0][0].body));
-    },
-    function() {
-      console.log('error',arguments);
-      deferred.reject('error getting lyrics', arguments); }
-  );
+  request_url_then_resolve_deferred({
+    url: lyrics_url
+    ,callback: function() {
+      var $ = cheerio.load(arguments[0][0].body);
+      var $lyrics = $('div.lyricbox');
+      var $text_nodes = $lyrics.contents().filter(function() {
+        return this['0'].type == 'text';
+      });
+      console.log('got %d nodes', $text_nodes.length);
+      console.log('...',$text_nodes.map(function(_i, node) {
+          console.log(node.text()); // not quite yet...
+        }));
+
+      return {foo:'bar'};
+    }
+    ,error_message: 'error getting lyrics data'
+    ,deferred: deferred
+  },true);
 
   return deferred.promise;
 };
