@@ -1,6 +1,9 @@
 Array.prototype.random = function() {
   return this[ Math.floor(Math.random() * this.length) ];
 };
+Array.prototype.times_do = function(callback) {
+  return Array.apply(null, Array(this[0])).map(callback); // todo - add i param to callback
+};
 var lyrics_wiki = require('./lyrics_fetcher_promise');
 
 // todo - proper objecty things
@@ -14,19 +17,37 @@ function artist_name(artist) {
   return artist.artist;
 }
 
-lyrics_wiki.fetch_artist_data('phish').then(function(artist) {
+var pick_random_song = function(artist) {
   console.log(artist_name(artist));
-  var random_song_names = [1, 2, 3, 4, 5].map(function() { return random_song(artist); });
-  return lyrics_wiki.fetch_song_data(artist_name(artist), random_song_names[0]);
-}).then(function(song) {
+  return lyrics_wiki.fetch_song_data(artist_name(artist), random_song(artist_name(artist)));
+};
+var pick_n_random_songs = function(artist, n) {
+  return [n].times_do(function() { return random_song(artist); });
+};
+var get_lyrics = function(song) {
   console.log('"%s"', song_name(song));
   console.log();
   if (song.lyrics.match(/^(Not found|Instrumental)$/)) {
     throw '...no lyrics found';
   }
   return lyrics_wiki.fetch_lyrics(song.url);
-}).then(function(lyrics) {
-  console.log(lyrics);
-}, function(err) {
-  console.log('error!', err);
-});
+};
+
+lyrics_wiki.fetch_artist_data('phish')
+  .then(function(artist) { return pick_n_random_songs(artist, 10); })
+  .then(function(songs) {
+    console.log(songs);
+  }, function(err) {
+    console.log('error!', err);
+  });
+
+/*
+lyrics_wiki.fetch_artist_data('phish')
+  .then(pick_random_song)
+  .then(get_lyrics)
+  .then(function(lyrics) {
+    console.log(lyrics);
+  }, function(err) {
+    console.log('error!', err);
+  });
+*/
