@@ -10,9 +10,7 @@ var Q = require('q');
 var Qrequest = Q.denodeify(require('request'));
 var cheerio = require('cheerio');
 
-var parse_json_in_body = function(response) {
-  return JSON.parse(response[0].body);
-};
+var parse_json_in_body = function(response) { return JSON.parse(response[0].body); };
 var request_url_then_resolve_deferred = function(config) {
   Qrequest(config.url).then(
     function() { config.deferred.resolve(config.callback.apply(null, arguments)); },
@@ -75,15 +73,14 @@ var fetch_lyrics = function(lyrics_url) {
   return deferred.promise;
 };
 
+var is_text_node = function($node) { return $node.type == 'text'; };
+var get_text = function($node) { return $node.text(); };
 var extract_lyrics = function(response) {
-  var $ = cheerio.load(response[0].body);
-  var $lyrics = $('div.lyricbox');
-  var $text_nodes = $lyrics.contents().filter(function() { return this['0'].type == 'text'; });
-  return sanitize_lyrics($text_nodes.map(function() { return $(this).text(); }));
+  return sanitize_lyrics(cheerio.load(response[0].body)('div.lyricbox').contents().filter(is_text_node).map(get_text));
 };
 
-var trim = function(s) { return s.trim(); };
-var is_present = function(s) { return s.length > 0; };
+var trim = function(str) { return str.trim(); };
+var is_present = function(str) { return str.length > 0; };
 var sanitize_lyrics = function(dirty_lyrics) {
   return dirty_lyrics.map(trim).unique().filter(is_present);
 };
