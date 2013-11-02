@@ -1,9 +1,17 @@
+Array.prototype.unique = function() {
+  return this.reduce(function(prev_val, current_val) {
+    if (prev_val.indexOf(current_val) < 0) {
+      prev_val.push(current_val);
+    }
+    return prev_val;
+  }, []);
+};
 var Q = require('q');
 var Qrequest = Q.denodeify(require('request'));
 var cheerio = require('cheerio');
 
-var parse_json_in_body = function() {
-  return JSON.parse(arguments[0][0].body);
+var parse_json_in_body = function(response) {
+  return JSON.parse(response[0].body);
 };
 var request_url_then_resolve_deferred = function(config) {
   Qrequest(config.url).then(
@@ -48,10 +56,9 @@ var fetch_song_data = function(artist_name, song_name) {
   return deferred.promise;
 };
 
-var fetch_lyrics_data = function(lyrics_url) {
+var fetch_lyrics = function(lyrics_url) {
   // returns promise
   var deferred = Q.defer();
-  console.log('fetch lyrics data');
 
   if (!lyrics_url) {
     deferred.reject('missing song lyrics url',lyrics_url);
@@ -60,19 +67,7 @@ var fetch_lyrics_data = function(lyrics_url) {
 
   request_url_then_resolve_deferred({
     url: lyrics_url
-    ,callback: function() {
-      var $ = cheerio.load(arguments[0][0].body);
-      var $lyrics = $('div.lyricbox');
-      var $text_nodes = $lyrics.contents().filter(function() {
-        return this['0'].type == 'text';
-      });
-      console.log('got %d nodes', $text_nodes.length);
-      console.log('...',$text_nodes.map(function(_i, node) {
-          console.log(node.text()); // not quite yet...
-        }));
-
-      return {foo:'bar'};
-    }
+    ,callback: extract_lyrics
     ,error_message: 'error getting lyrics data'
     ,deferred: deferred
   },true);
@@ -80,14 +75,22 @@ var fetch_lyrics_data = function(lyrics_url) {
   return deferred.promise;
 };
 
-var extract_lyrics = function(song_something) {
-  console.log('extract_lyrics',song_something);
-  $.load(song_something); // .css('div.lyricbox/text()').map(&:text)
+var extract_lyrics = function(response) {
+  var $ = cheerio.load(response[0].body);
+  var $lyrics = $('div.lyricbox');
+  var $text_nodes = $lyrics.contents().filter(function() { return this['0'].type == 'text'; });
+  return sanitize_lyrics($text_nodes.map(function() { return $(this).text(); }));
+};
+
+var trim = function(s) { return s.trim(); };
+var is_present = function(s) { return s.length > 0; };
+var sanitize_lyrics = function(dirty_lyrics) {
+  return dirty_lyrics.map(trim).unique().filter(is_present);
 };
 
 if (exports) {
   exports.fetch_artist_data = fetch_artist_data;
   exports.fetch_song_data = fetch_song_data;
-  exports.fetch_lyrics_data = fetch_lyrics_data;
+  exports.fetch_lyrics = fetch_lyrics;
   exports.extract_lyrics = extract_lyrics;
 }
