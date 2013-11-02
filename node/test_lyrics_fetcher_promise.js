@@ -26,10 +26,7 @@ function get_song(artist_name, song_name, callback) {
   });
 }
 function get_lyrics(lyrics_url, callback) {
-  console.log('get_lyrics');
-  console.log(lyrics_url);
-  lyrics_wiki.fetch_lyrics_data(lyrics_url).then(function(response) {
-    console.log('get_lyrics callback');
+  lyrics_wiki.fetch_lyrics(lyrics_url).then(function(response) {
     callback(response);
   });
 }
@@ -37,25 +34,18 @@ function get_lyrics(lyrics_url, callback) {
 get_artist('phish', function(artist) {
   console.log(artist_name(artist));
   var random_song_names = [1,2,3,4,5].map(function() { return random_song(artist); });
-  //console.log('random songs',random_song_names[0]);
   get_song(
     artist_name(artist),
     random_song_names[0],
     function(song) {
       console.log('"%s"', song_name(song));
       console.log();
-      console.log('song:',song);
       if (song.lyrics.match(/^(Not found|Instrumental)$/)) {
         console.log('...no lyrics found');
         return;
       }
-      console.log();
-      console.log(song.lyrics);
       get_lyrics(song.url, function(lyrics) {
-        console.log('got_lyrics:',typeof lyrics);
-        if (typeof lyrics == 'object') {
-          console.log(Object.keys(lyrics));
-        }
+        console.log(lyrics);
       })
     }
   );
