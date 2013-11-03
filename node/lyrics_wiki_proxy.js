@@ -73,10 +73,14 @@ var fetch_lyrics = function(lyrics_url) {
   return deferred.promise;
 };
 
-var is_text_node = function($node) { return $node.type == 'text'; };
-var get_text = function($node) { return $node.text(); };
+var is_text_node = function(_i,$node) { return $node.type == 'text'; };
+var get_text = function() { return this.text(); };
 var extract_lyrics = function(response) {
-  return sanitize_lyrics(cheerio.load(response[0].body)('div.lyricbox').contents().filter(is_text_node).map(get_text));
+  var $ = cheerio.load(response[0].body);
+  var $contents = $('div.lyricbox').contents();
+  var $text_nodes = $contents.filter(is_text_node);
+  var dirty_lyrics = $text_nodes.map(get_text);
+  return sanitize_lyrics(dirty_lyrics);
 };
 
 var trim = function(str) { return str.trim(); };
