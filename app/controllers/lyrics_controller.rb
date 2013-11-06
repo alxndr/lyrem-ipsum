@@ -37,9 +37,9 @@ class LyricsController < ApplicationController
 
   def redirect_query_parameters
     if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
-      redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist].to_slug}/#{request.query_parameters[:'text-length']}/#{request.query_parameters[:'text-length-unit']}"
+      redirect_to artist_lyrem_path(artist: request.query_parameters[:artist].to_slug, length: request.query_parameters[:'text-length'], what: request.query_parameters[:'text-length-unit'])
     else
-      redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist].to_slug}"
+      redirect_to artist_lyrem_path(artist: request.query_parameters[:artist].to_slug)
     end
   end
 
