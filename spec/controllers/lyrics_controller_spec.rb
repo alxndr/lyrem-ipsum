@@ -5,7 +5,9 @@ describe LyricsController do
   describe '#by_artist' do
 
     before do
-      Artist.stub(:new).and_return(mock('Artist'))
+      mock_artist = mock('Artist')
+      mock_artist.stub(:lyrem)
+      Artist.stub(:new).and_return(mock_artist)
     end
 
     describe 'missing artist' do
@@ -20,6 +22,11 @@ describe LyricsController do
       describe 'via url' do
 
         describe 'found artist' do
+          it 'gets lyrem' do
+            Artist.new.should_receive :lyrem # yuck
+            get :for_artist, artist: 'frank-zappa'
+          end
+
           it 'renders' do
             get :for_artist, artist: 'frank-zappa'
             response.should render_template 'by_artist'

@@ -1,7 +1,9 @@
 [Lyrem Ipsum](http://lyrem-ipsum.com)
 ===========
 
-[![Build Status](https://travis-ci.org/alxndr/lyrem-ipsum.png?branch=master)](https://travis-ci.org/alxndr/lyrem-ipsum) [![Coverage Status](https://coveralls.io/repos/alxndr/lyrem-ipsum/badge.png)](https://coveralls.io/r/alxndr/lyrem-ipsum)
+[![Build Status](https://travis-ci.org/alxndr/lyrem-ipsum.png?branch=master)](https://travis-ci.org/alxndr/lyrem-ipsum)
+[![Code Climate](https://codeclimate.com/github/alxndr/lyrem-ipsum.png)](https://codeclimate.com/github/alxndr/lyrem-ipsum)
+[![Coverage Status](https://coveralls.io/repos/alxndr/lyrem-ipsum/badge.png)](https://coveralls.io/r/alxndr/lyrem-ipsum)
 
 Generate filler text based on the lyrics of your favorite band's songs. A [lorem ipsum](http://en.wikipedia.org/wiki/Lorem_ipsum "Wikipedia: 'lorem ipsum'") generator you could (try to) sing along to.
 

@@ -1,34 +1,52 @@
 class LyricsController < ApplicationController
 
-  class ArtistNotFoundError < StandardError; end
-
   def for_artist
 
     if request.query_parameters[:artist]
-      if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
-        redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist].to_slug}/#{request.query_parameters[:'text-length']}/#{request.query_parameters[:'text-length-unit']}" and return
-      else
-        redirect_to "/text-from-lyrics-by/#{request.query_parameters[:artist].to_slug}" and return
-      end
+      redirect_query_parameters and return
     end
 
     unless params[:artist]
       raise ArgumentError
     end
 
-    @artist = Artist.new(params[:artist].gsub('-',' '))
-    @how_many = params[:length] || 5
-    @what = params[:what] || 'paragraphs'
+    @artist = Artist.new(params[:artist]) or raise ArtistNotFoundError.new('artist not found')
 
-    if @artist && @artist.present?
-      render 'by_artist'
+    what = case params[:what]
+             when 'phrases'
+             when 'phrase'
+               :phrases
+             when 'sentences'
+             when 'sentence'
+               :sentences
+             else
+               :paragraphs
+           end
+    how_many = if params[:length].to_i > 0
+                 params[:length].to_i
+               else
+                 5
+               end
+
+    lyrem = @artist.lyrem(what => how_many)
+
+    render 'by_artist', locals: {artist: @artist, lyrem: lyrem}
+  end
+
+  private
+
+  def redirect_query_parameters
+    if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
+      redirect_to artist_lyrem_path(artist: request.query_parameters[:artist].to_slug, length: request.query_parameters[:'text-length'], what: request.query_parameters[:'text-length-unit'])
     else
-      raise ArtistNotFoundError.new('artist not found')
+      redirect_to artist_lyrem_path(artist: request.query_parameters[:artist].to_slug)
     end
   end
 
   String.instance_eval do
     include CustomString
   end
+
+  class ArtistNotFoundError < StandardError; end
 
 end
