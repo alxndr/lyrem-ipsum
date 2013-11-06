@@ -91,7 +91,8 @@ class Artist
   end
 
   def pick_new_song
-    # TODO handle when song lists are the same
+    raise 'no remaining songs (or none fetched)' unless (song_names - songs_fetched).present?
+
     (song_names - songs_fetched).sample
   end
 
