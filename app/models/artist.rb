@@ -3,9 +3,12 @@ class Artist
   include LyricsWiki
 
   def initialize(input)
+    input.gsub! '-', ' '
+    input.strip!
     raise 'no input' unless input && input.present?
-    # todo - add db backend to store lyric data (for some set of artists?)
-    @artist_data = fetch_data_for_artist(input) # be nice to use HashWithIndifferentAccess
+
+    @artist_data = fetch_data_for_artist(input)
+
     raise('artist not found') unless @artist_data
   end
 
