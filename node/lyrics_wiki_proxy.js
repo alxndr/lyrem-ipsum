@@ -1,5 +1,6 @@
 require('./toolkit');
 var Q = require('q');
+Q.longStackSupport = true;
 var Qrequest = Q.denodeify(require('request'));
 var cheerio = require('cheerio');
 
@@ -102,9 +103,7 @@ var fetch_lyrics = function(lyrics_url) {
 };
 
 var get_lyrics = function(song) {
-  console.log('get_lyrics', song);
-  console.log('"%s"', get_song_name(song));
-  console.log();
+  //console.log('"%s"', get_song_name(song));
   if (!song.lyrics || song.lyrics.match(/^(Not found|Instrumental)$/)) {
     return [''];
   }
@@ -112,7 +111,7 @@ var get_lyrics = function(song) {
 };
 
 var get_lyrics_of_songs = function(songs) {
-  console.log('getting lyrics of songs:', songs);
+  //console.log('getting lyrics of songs:', songs);
 
   return Q.all(songs.map(function(song_name) {
     var deferred = Q.defer();
