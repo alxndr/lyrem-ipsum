@@ -34,31 +34,31 @@ class Artist
     end
   end
 
-  def lyrem(opts)
-    phrase_picker = opts[:phrase_picker] || method(:random_lyric)
+  def lyrem(config)
+    phrase_picker = config[:phrase_picker] || method(:random_lyric)
 
-    case opts
+    case true
 
-    when hash_has_key?(:phrases)
-      Array.new(opts[:phrases]) do
+    when config.has_key?(:phrases)
+      Array.new(config[:phrases]) do
         phrase_picker.call
       end
 
-    when hash_has_key?(:sentences)
-      Array.new(opts[:sentences]) do
-        phrases = lyrem({phrases: rand(3)+2, phrase_picker: phrase_picker})
-        sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter
-        sentence += '.' if /[a-zA-Z]$/.match(sentence)
+    when config.has_key?(:sentences)
+      Array.new(config[:sentences]) do
+        phrases = lyrem phrases: rand(3)+2, phrase_picker: phrase_picker
+        sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
+        sentence += '.' if /[a-z]$/i.match(sentence)
         sentence
       end
 
-    when hash_has_key?(:paragraphs)
-      Array.new(opts[:paragraphs]) do
+    when config.has_key?(:paragraphs)
+      Array.new(config[:paragraphs]) do
         lyrem({sentences: rand(5)+3, phrase_picker: phrase_picker}).join(' ')
       end
 
     else
-      raise ArgumentError
+      raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
     end
   end
 
@@ -121,10 +121,6 @@ class Artist
 
   def album_names
     @album_names ||= albums.map{ |a| a['album'] }
-  end
-
-  def hash_has_key?(key)
-    lambda { |hash| hash.has_key? key }
   end
 
   String.instance_eval do

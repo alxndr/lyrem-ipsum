@@ -11,11 +11,29 @@ class LyricsController < ApplicationController
     end
 
     @artist = Artist.new(params[:artist]) or raise ArtistNotFoundError.new('artist not found')
-    @how_many = params[:length] || 5
-    @what = params[:what] || 'paragraphs'
 
-    render 'by_artist'
+    what = case params[:what]
+             when 'phrases'
+             when 'phrase'
+               :phrases
+             when 'sentences'
+             when 'sentence'
+               :sentences
+             else
+               :paragraphs
+           end
+    how_many = if params[:length].to_i > 0
+                 params[:length].to_i
+               else
+                 5
+               end
+
+    lyrem = @artist.lyrem(what => how_many)
+
+    render 'by_artist', locals: {artist: @artist, lyrem: lyrem}
   end
+
+  private
 
   def redirect_query_parameters
     if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
