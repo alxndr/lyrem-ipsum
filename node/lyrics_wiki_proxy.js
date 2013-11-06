@@ -3,6 +3,17 @@ var Q = require('q');
 var Qrequest = Q.denodeify(require('request'));
 var cheerio = require('cheerio');
 
+var generic_resolve = function(deferred) {
+  return function() {
+    deferred.resolve.apply(null,arguments);
+  }
+};
+var generic_reject = function(deferred) {
+  return function(error) {
+    deferred.reject('error', error);
+  }
+};
+
 function random_song_name_from_artist(artist) {
   return artist.albums.random().songs.random();
 }
@@ -13,7 +24,6 @@ function artist_name(artist) {
   return artist.artist;
 }
 var pick_random_song_name = function(artist) {
-  console.log(artist_name(artist));
   return fetch_song_data(artist_name(artist), random_song_name_from_artist(artist));
 };
 var pick_n_random_song_names = function(artist, n) {
@@ -108,11 +118,7 @@ var get_lyrics_of_songs = function(songs) {
     var deferred = Q.defer();
     fetch_song_data('phish', song_name) // todo - how to get artist there
       .then(get_lyrics)
-      .then(function(lyrics) {
-        deferred.resolve(lyrics)
-      }, function(error) {
-        deferred.reject('error', error);
-      });
+      .then(generic_resolve(deferred), generic_reject(deferred));
     return deferred.promise;
   }));
 };
