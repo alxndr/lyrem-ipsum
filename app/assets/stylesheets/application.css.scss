@@ -1,9 +1,10 @@
-@import "bootstrap";
+@import "bourbon";
+@import "neat";
+@import "bitters/bitters";
 
 body { margin: 2em; }
 
 h1 { font-size: 2em; }
-form { font-size: 1.5em; }
 
 .fancy { font-family: cursive, fantasy; font-size: 1.2em; }
 label { display: inline-block; }

@@ -49,8 +49,13 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.1.2)
-      sass (~> 3.2)
+    bitters (0.9.1)
+      bourbon (>= 3.1)
+      sass (>= 3.2)
+      thor
+    bourbon (3.1.8)
+      sass (>= 3.2.0)
+      thor
     brakeman (2.2.0)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -119,6 +124,9 @@ GEM
     mime-types (1.23)
     minitest (4.7.4)
     multi_json (1.8.2)
+    neat (1.4.0)
+      bourbon (>= 2.1)
+      sass (>= 3.2)
     newrelic_rpm (3.6.3.111)
     nokogiri (1.5.9)
     polyglot (0.3.3)
@@ -217,7 +225,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bootstrap-sass
+  bitters
   brakeman
   capybara
   colorize
@@ -226,6 +234,7 @@ DEPENDENCIES
   fuubar
   jbuilder (~> 1.0.1)
   jquery-rails
+  neat
   newrelic_rpm
   nokogiri
   rails (= 4.0.0.rc1)
