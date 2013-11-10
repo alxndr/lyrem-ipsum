@@ -2,7 +2,7 @@
   <link rel="canonical" href="/text-from-lyrics-by/<%= artist.slug %>" />
 <% end -%>
 
-<% @title = "Lorem Ipsum text based on lyrics by #{@artist.display_name}" -%>
+<% content_for :title, "Lorem Ipsum meets #{@artist.display_name}" -%>
 
 <h1><%= artist.display_name %> ipsum</h1>
 
