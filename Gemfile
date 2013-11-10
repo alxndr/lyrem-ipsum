@@ -1,3 +1,5 @@
+ruby '2.0.0'
+
 source 'https://rubygems.org'
 
 gem 'airbrake'
@@ -12,9 +14,12 @@ gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
-# for heroku
-gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+group :production, :staging do
+  # for heroku
+  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
+  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'brakeman', require: false
