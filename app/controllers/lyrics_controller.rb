@@ -13,11 +13,9 @@ class LyricsController < ApplicationController
     @artist = Artist.new(params[:artist]) or raise ArtistNotFoundError.new('artist not found')
 
     what = case params[:what]
-             when 'phrases'
-             when 'phrase'
+             when 'phrase', 'phrases'
                :phrases
-             when 'sentences'
-             when 'sentence'
+             when 'sentence', 'sentences'
                :sentences
              else
                :paragraphs
