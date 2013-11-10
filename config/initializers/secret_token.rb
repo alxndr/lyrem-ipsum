@@ -14,8 +14,8 @@
 # We utilize a rake task - generate_secret_token - to generate this file if it doesn't exist
 # from https://github.com/jasonshen/RewardBox/pull/3/files
 if Rails.env.production?
-  abort 'No secret token found. Run export REWARDBOX_TOKEN=`rake secret` before starting server. Aborting' unless ENV['REWARDBOX_TOKEN']
-  LyremIpsum::Application.config.secret_token = ENV['REWARDBOX_TOKEN']
+  abort 'No secret token found. Run export SECRET_TOKEN=$(rake secret) before starting server. Aborting' unless ENV['SECRET_TOKEN']
+  LyremIpsum::Application.config.secret_token = ENV['SECRET_TOKEN']
 else
   token_file = Rails.root.join('config/secret.token')
   abort 'No config/secret.token file found. Please run "rake dev:generate_token". Aborting' unless token_file.exist?
