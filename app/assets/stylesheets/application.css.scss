@@ -1,6 +1,7 @@
 @import "bourbon";
 @import "neat";
 @import "bitters/bitters";
+@import "bitters_overrides";
 
 body { margin: 2em; }
 
@@ -9,7 +10,7 @@ h1 { font-size: 2em; }
 .fancy { font-family: cursive, fantasy; font-size: 1.2em; }
 label { display: inline-block; }
 
-input[name=text-length] { width: 2em; }
+input[name=text-length] { }
 .text-length-units {
   display: inline-block;
   margin-left: 0.5em;
