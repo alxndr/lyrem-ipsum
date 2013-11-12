@@ -5,11 +5,14 @@ class Artist
   def initialize(input)
     input.gsub! '-', ' '
     input.strip!
-    raise 'no input' unless input && input.present?
 
-    @artist_data = fetch_data_for_artist(input)
+    artist_name = Artist.find_artist_name(input)
 
-    raise('artist not found') unless @artist_data
+    raise 'no artist_name' unless artist_name && artist_name.present?
+
+    @artist_data = fetch_data_for_artist(artist_name)
+
+    raise 'artist not found' unless @artist_data
   end
 
   def display_name
@@ -60,6 +63,12 @@ class Artist
     else
       raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
     end
+  end
+
+  def self.find_artist_name(input)
+    result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
+    return '' unless result && result.title
+    result.title.chomp(' - Wikipedia, the free encyclopedia')
   end
 
   private

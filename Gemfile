@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'airbrake'
 gem 'bitters'
+gem 'google-search'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'neat'
@@ -25,6 +26,8 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'capybara'
   gem 'fuubar'
+  gem 'guard'
+  gem 'guard-rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end

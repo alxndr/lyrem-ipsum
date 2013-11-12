@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Artist do
 
   before do
-    Artist.any_instance.stub(fetch_data_for_artist: { # todo stub request? or is that LyricsWiki's job?
-      # httparty responses have string keys
+    Artist.stub(:find_artist_name) { 'frank zappa' }
+    Artist.any_instance.stub(fetch_data_for_artist: {
       'artist' => 'Frank Zappa',
       'albums' => [
         {
@@ -186,4 +186,12 @@ describe Artist do
       pending
     end
   end
+
+  describe '.find_artist_name' do
+    it 'seaches' do
+      Google::Search::Web.should_receive(:new).and_return([13])
+      Artist.find_artist_name 'fz'
+    end
+  end
+
 end
