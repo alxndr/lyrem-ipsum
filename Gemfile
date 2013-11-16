@@ -28,6 +28,7 @@ group :development, :test do
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rails'
+  gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end

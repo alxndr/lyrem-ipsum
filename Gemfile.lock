@@ -121,6 +121,9 @@ GEM
       thor (>= 0.18.1)
     guard-rails (0.4.7)
       guard (>= 0.2.2)
+    guard-rspec (3.1.0)
+      guard (>= 1.8)
+      rspec (~> 2.13)
     haml (4.0.3)
       tilt
     highline (1.6.20)
@@ -269,6 +272,7 @@ DEPENDENCIES
   google-search
   guard
   guard-rails
+  guard-rspec
   jbuilder (~> 1.0.1)
   jquery-rails
   neat
