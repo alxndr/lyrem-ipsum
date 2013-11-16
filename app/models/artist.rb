@@ -6,17 +6,17 @@ class Artist
     input.gsub! '-', ' '
     input.strip!
 
-    artist_name = Artist.find_artist_name(input)
+    @artist_name = Artist.find_artist_name(input)
 
-    raise 'no artist_name' unless artist_name && artist_name.present?
+    raise 'no artist_name' unless @artist_name && @artist_name.present?
 
-    @artist_data = fetch_data_for_artist(artist_name)
+    @artist_data = fetch_data_for_artist(@artist_name)
 
     raise 'artist not found' unless @artist_data
   end
 
   def display_name
-    @display_name ||= @artist_data['artist']
+    @artist_name
   end
 
   def slug
@@ -67,11 +67,15 @@ class Artist
 
   def self.find_artist_name(input)
     result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
-    return '' unless result && result.title
+    unless result && result.title
+      raise 'artist name not found'
+    end
     result.title.chomp(' - Wikipedia, the free encyclopedia')
   end
 
+
   private
+
 
   def fetch_new_song_lyrics
     lyrics, i = [], 0

@@ -2,27 +2,21 @@ require 'spec_helper'
 
 describe Artist do
 
-  before do
-    Artist.stub(:find_artist_name) { 'frank zappa' }
-    Artist.any_instance.stub(fetch_data_for_artist: {
-      'artist' => 'Frank Zappa',
-      'albums' => [
-        {
-          'album' => 'Hot Rats',
-          'year' => '1969',
-          'songs' => ['Peaches en Regalia', 'Willie the Pimp']
-        }
-      ]
-    })
-  end
-
   describe '#display_name' do
-    it 'finds a good name from LyricsWiki' do
+    before do
+      Artist.stub(:find_artist_name) { 'Frank Zappa' }
+      Artist.any_instance.stub(fetch_data_for_artist: { })
+    end
+    it 'finds a good name' do
       Artist.new('frank zappa').display_name.should == 'Frank Zappa'
     end
   end
 
   describe '#slug' do
+    before do
+      Artist.stub(:find_artist_name) { 'Frank Zappa' }
+      Artist.any_instance.stub(fetch_data_for_artist: { })
+    end
     it 'slugifies display_name' do
       Artist.any_instance.stub(:display_name).and_return('Frank Zappa')
       Artist.new('fz').slug.should == 'frank-zappa'
@@ -35,6 +29,10 @@ describe Artist do
   end
 
   describe '#random_lyric' do
+    before do
+      Artist.stub(:find_artist_name) { 'Frank Zappa' }
+      Artist.any_instance.stub(fetch_data_for_artist: { })
+    end
     describe 'when there are no stored lyrics' do
       before do
         Artist.any_instance.stub(:rand).and_return(0)
@@ -74,6 +72,10 @@ describe Artist do
   end
 
   describe '#lyrem' do
+    before do
+      Artist.stub(:find_artist_name) { 'Frank Zappa' }
+      Artist.any_instance.stub(fetch_data_for_artist: { })
+    end
     let(:fz) { Artist.new('frank zappa') }
     let(:phrases) { [
       'fringe. I mean that, man.',
@@ -89,7 +91,7 @@ describe Artist do
     ] }
 
     before do
-        fz.stub(:fetch_new_song_lyrics).and_return(phrases)
+      fz.stub(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
@@ -188,9 +190,11 @@ describe Artist do
   end
 
   describe '.find_artist_name' do
-    it 'seaches' do
-      Google::Search::Web.should_receive(:new).and_return([13])
-      Artist.find_artist_name 'fz'
+    it 'seaches wikipedia' do
+      fake_result = OpenStruct.new
+      fake_result.title = 'Frank Zappa - Wikipedia, the free encyclopedia'
+      Google::Search::Web.stub(:new).and_return([fake_result])
+      Artist.find_artist_name('fz').should == 'Frank Zappa'
     end
   end
 
