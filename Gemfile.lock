@@ -152,6 +152,7 @@ GEM
       sass (>= 3.2)
     newrelic_rpm (3.6.3.111)
     nokogiri (1.5.9)
+    pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.3)
       coderay (~> 1.0)
@@ -259,6 +260,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  arel
   awesome_print
   better_errors
   binding_of_caller
@@ -278,6 +280,7 @@ DEPENDENCIES
   neat
   newrelic_rpm
   nokogiri
+  pg
   rails (= 4.0.0.rc1)
   rails3_serve_static_assets!
   rails_12factor

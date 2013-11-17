@@ -1,27 +1,8 @@
-class Artist
+class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  def initialize(input)
-    input.gsub! '-', ' '
-    input.strip!
-
-    @artist_name = Artist.find_artist_name(input)
-
-    raise 'no artist_name' unless @artist_name && @artist_name.present?
-
-    @artist_data = fetch_data_for_artist(@artist_name)
-
-    raise 'artist not found' unless @artist_data
-  end
-
-  def display_name
-    @artist_name
-  end
-
-  def slug
-    @slug ||= display_name.to_slug
-  end
+  after_initialize :get_data
 
   def random_lyric
     @lyrics ||= []
@@ -65,24 +46,21 @@ class Artist
     end
   end
 
-  def self.find_artist_name(input)
-    result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
-    unless result && result.title
-      raise 'artist name not found'
-    end
-    result.title.chomp(' - Wikipedia, the free encyclopedia')
-  end
-
-
   private
 
+  def get_data
+    raise 'no name' unless name && name.present?
+
+    self.slug = name.to_slug
+    self.data = fetch_data_for_artist(name) or raise 'artist data not found'
+  end
 
   def fetch_new_song_lyrics
     lyrics, i = [], 0
     until lyrics.present? || i > 5
       new_song = pick_new_song
       songs_fetched << new_song
-      lyrics = process_lyrics(fetch_lyrics(display_name, new_song))
+      lyrics = process_lyrics(fetch_lyrics(name, new_song))
       i += 1 # TODO better way of covering potential infloop
     end
     lyrics
@@ -115,7 +93,7 @@ class Artist
 
   def songs_data
     @songs_data ||= song_names.map do |song|
-      song_data = fetch_song_data(display_name, song)
+      song_data = fetch_song_data(name, song)
       if song_data && song_data['lyrics']
         song_data
       else
@@ -129,7 +107,7 @@ class Artist
   end
 
   def albums
-    @albums ||= @artist_data['albums']
+    @albums ||= data['albums']
   end
 
   def album_names
