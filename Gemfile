@@ -4,8 +4,11 @@ source 'https://rubygems.org'
 
 gem 'airbrake'
 gem 'bitters'
+gem 'backbone-on-rails'
+gem 'coffee-rails'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
+gem 'marionette-rails'
 gem 'neat'
 gem 'newrelic_rpm'
 gem 'nokogiri'
@@ -16,15 +19,16 @@ gem 'uglifier', '>= 1.3.0'
 
 group :production, :staging do
   # for heroku
+  gem 'rails_12factor'
   gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
   gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
-  gem 'rails_12factor'
 end
 
 group :development, :test do
   gem 'brakeman', require: false
   gem 'capybara'
   gem 'fuubar'
+  gem 'jasmine-rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
