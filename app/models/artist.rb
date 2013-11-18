@@ -52,7 +52,7 @@ class Artist < ActiveRecord::Base
     raise 'no name' unless name && name.present?
 
     self.slug = name.to_slug
-    self.data = fetch_data_for_artist(name) or raise 'artist data not found'
+    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found'
   end
 
   def fetch_new_song_lyrics
@@ -107,7 +107,7 @@ class Artist < ActiveRecord::Base
   end
 
   def albums
-    @albums ||= data['albums']
+    @albums ||= JSON.parse(data)['albums']
   end
 
   def album_names

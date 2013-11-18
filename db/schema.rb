@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20131116235234) do
   create_table "artists", force: true do |t|
     t.string   "name"
     t.string   "slug"
-    t.json     "data"
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

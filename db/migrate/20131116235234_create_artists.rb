@@ -3,7 +3,7 @@ class CreateArtists < ActiveRecord::Migration
     create_table :artists do |t|
       t.string :name
       t.string :slug
-      t.json :data
+      t.text :data
       t.timestamps
     end
 
