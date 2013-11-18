@@ -5,7 +5,7 @@ describe LyricsController do
   describe '#by_artist' do
 
     before do
-      Artist.stub(:new) { mock_model(Artist, get_data: true, lyrem: true) }
+      Artist.stub(:new) { mock_model(Artist, save: true, lyrem: true) }
     end
 
     describe 'missing artist' do
@@ -20,10 +20,17 @@ describe LyricsController do
       describe 'via url' do
 
         describe 'found artist' do
-          it 'renders' do
+          before do
             LyricsController.stub(:find_name) { 'FZ' }
             get :for_artist, artist: 'frank-zappa'
+          end
+
+          it 'renders' do
             response.should render_template 'by_artist'
+          end
+
+          it 'saves artist' do
+            pending 'better mock'
           end
         end
 

@@ -13,6 +13,7 @@ class LyricsController < ApplicationController
     artist_name = LyricsController.find_name(params[:artist])
 
     @artist = Artist.find_by_slug(artist_name.to_slug) || Artist.new(name: artist_name)
+    @artist.save
 
     what = case params[:what]
              when 'phrase', 'phrases'
