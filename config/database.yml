@@ -3,12 +3,12 @@ development:
   encoding: unicode
   database: lyrem_ipsum_dev
   pool: 5
-  username: postgres
+  #username: postgres
   password:
 test:
   adapter: postgresql
   encoding: unicode
   database: lyrem_ipsum_test
   pool: 5
-  username: postgres
+  #username: postgres
   password:
