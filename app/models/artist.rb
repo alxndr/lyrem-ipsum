@@ -9,6 +9,7 @@ class Artist < ActiveRecord::Base
     if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
       new_lyrics = nil
       until new_lyrics && new_lyrics.present?
+        # TODO don't die if we can't get more lyrics
         new_lyrics = fetch_new_song_lyrics
       end
       @lyrics += new_lyrics
@@ -83,6 +84,7 @@ class Artist < ActiveRecord::Base
   end
 
   def pick_new_song
+    # TODO - return nil
     raise 'no remaining songs (or none fetched)' unless (song_names - songs_fetched).present?
 
     (song_names - songs_fetched).sample

@@ -27,6 +27,7 @@ end
 group :development, :test do
   gem 'brakeman', require: false
   gem 'capybara'
+  gem 'colorize'
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rails'
@@ -39,13 +40,13 @@ group :development do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller' # dependency of better_errors
-  gem 'colorize'
   gem 'debugger'
   gem 'guard'
 end
 
 group :test do
   gem 'coveralls', require: false
+  gem 'vcr'
   gem 'webmock'
 end
 
