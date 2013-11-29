@@ -2,6 +2,191 @@
 http_interactions:
 - request:
     method: get
+    uri: http://www.google.com/uds/GwebSearch?filter=1&hl=en&key=notsupplied&q=blind%20faith%20musician%20site:en.wikipedia.org&rsz=large&start=0&v=1.0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Date:
+      - Fri, 29 Nov 2013 15:48:55 GMT
+      Content-Type:
+      - text/javascript; charset=utf-8
+      X-Embedded-Status:
+      - '200'
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJyZXNwb25zZURhdGEiOiB7InJlc3VsdHMiOlt7IkdzZWFyY2hSZXN1bHRD
+        bGFzcyI6Ikd3ZWJTZWFyY2giLCJ1bmVzY2FwZWRVcmwiOiJodHRwOi8vZW4u
+        d2lraXBlZGlhLm9yZy93aWtpL0JsaW5kX0ZhaXRoIiwidXJsIjoiaHR0cDov
+        L2VuLndpa2lwZWRpYS5vcmcvd2lraS9CbGluZF9GYWl0aCIsInZpc2libGVV
+        cmwiOiJlbi53aWtpcGVkaWEub3JnIiwiY2FjaGVVcmwiOiJodHRwOi8vd3d3
+        Lmdvb2dsZS5jb20vc2VhcmNoP3FcdTAwM2RjYWNoZTpWNmdacU45WTZnSUo6
+        ZW4ud2lraXBlZGlhLm9yZyIsInRpdGxlIjoiXHUwMDNjYlx1MDAzZUJsaW5k
+        IEZhaXRoXHUwMDNjL2JcdTAwM2UgLSBXaWtpcGVkaWEsIHRoZSBmcmVlIGVu
+        Y3ljbG9wZWRpYSIsInRpdGxlTm9Gb3JtYXR0aW5nIjoiQmxpbmQgRmFpdGgg
+        LSBXaWtpcGVkaWEsIHRoZSBmcmVlIGVuY3ljbG9wZWRpYSIsImNvbnRlbnQi
+        OiJcdTAwM2NiXHUwMDNlQmxpbmQgRmFpdGhcdTAwM2MvYlx1MDAzZSB3YXMg
+        YW4gRW5nbGlzaCBibHVlcyByb2NrIFx1MDAzY2JcdTAwM2ViYW5kXHUwMDNj
+        L2JcdTAwM2UgdGhhdCBjb21wcmlzZWQgRXJpYyBDbGFwdG9uLCBHaW5nZXIg
+        XG5CYWtlciwgU3RldmUgV2lud29vZCwgYW5kIFJpYyBHcmVjaC4gVGhlIFx1
+        MDAzY2JcdTAwM2ViYW5kXHUwMDNjL2JcdTAwM2UsIHdoaWNoIHdhcyBvbmUg
+        b2YgdGhlIGZpcnN0wqBcdTAwM2NiXHUwMDNlLi4uXHUwMDNjL2JcdTAwM2Ui
+        fSx7IkdzZWFyY2hSZXN1bHRDbGFzcyI6Ikd3ZWJTZWFyY2giLCJ1bmVzY2Fw
+        ZWRVcmwiOiJodHRwOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0JsaW5kX0Zh
+        aXRoXyhCbGluZF9GYWl0aF9hbGJ1bSkiLCJ1cmwiOiJodHRwOi8vZW4ud2lr
+        aXBlZGlhLm9yZy93aWtpL0JsaW5kX0ZhaXRoXyhCbGluZF9GYWl0aF9hbGJ1
+        bSkiLCJ2aXNpYmxlVXJsIjoiZW4ud2lraXBlZGlhLm9yZyIsImNhY2hlVXJs
+        IjoiaHR0cDovL3d3dy5nb29nbGUuY29tL3NlYXJjaD9xXHUwMDNkY2FjaGU6
+        MWIwQU04WFgwTUVKOmVuLndpa2lwZWRpYS5vcmciLCJ0aXRsZSI6Ilx1MDAz
+        Y2JcdTAwM2VCbGluZCBGYWl0aFx1MDAzYy9iXHUwMDNlIChcdTAwM2NiXHUw
+        MDNlQmxpbmQgRmFpdGhcdTAwM2MvYlx1MDAzZSBhbGJ1bSkgLSBXaWtpcGVk
+        aWEsIHRoZSBmcmVlIGVuY3ljbG9wZWRpYSIsInRpdGxlTm9Gb3JtYXR0aW5n
+        IjoiQmxpbmQgRmFpdGggKEJsaW5kIEZhaXRoIGFsYnVtKSAtIFdpa2lwZWRp
+        YSwgdGhlIGZyZWUgZW5jeWNsb3BlZGlhIiwiY29udGVudCI6IlRoZXJlIHdh
+        cyBhbiBpbnRlbnNlIGJ1enogYWJvdXQgdGhlIFx1MDAzY2JcdTAwM2ViYW5k
+        XHUwMDNjL2JcdTAwM2UgYW5kIGl0cyBkZWJ1dCBhbGJ1bSBcdTAwM2NiXHUw
+        MDNlQmxpbmQgRmFpdGhcdTAwM2MvYlx1MDAzZSwgd2hpY2ggXG5vbiByZWxl
+        YXNlIHRvcHBlZCBCaWxsYm9hcmRcdTAwMjYjMzk7cyBQb3AgQWxidW1zIGNo
+        YXJ0IGluIEFtZXJpY2EgKGFzIGl0IGRpZCB0aGUgVUvCoFx1MDAzY2JcdTAw
+        M2UuLi5cdTAwM2MvYlx1MDAzZSJ9LHsiR3NlYXJjaFJlc3VsdENsYXNzIjoi
+        R3dlYlNlYXJjaCIsInVuZXNjYXBlZFVybCI6Imh0dHA6Ly9lbi53aWtpcGVk
+        aWEub3JnL3dpa2kvU3RldmVfV2lud29vZCIsInVybCI6Imh0dHA6Ly9lbi53
+        aWtpcGVkaWEub3JnL3dpa2kvU3RldmVfV2lud29vZCIsInZpc2libGVVcmwi
+        OiJlbi53aWtpcGVkaWEub3JnIiwiY2FjaGVVcmwiOiJodHRwOi8vd3d3Lmdv
+        b2dsZS5jb20vc2VhcmNoP3FcdTAwM2RjYWNoZTp6VmF6TkppcGFQWUo6ZW4u
+        d2lraXBlZGlhLm9yZyIsInRpdGxlIjoiU3RldmUgV2lud29vZCAtIFdpa2lw
+        ZWRpYSwgdGhlIGZyZWUgZW5jeWNsb3BlZGlhIiwidGl0bGVOb0Zvcm1hdHRp
+        bmciOiJTdGV2ZSBXaW53b29kIC0gV2lraXBlZGlhLCB0aGUgZnJlZSBlbmN5
+        Y2xvcGVkaWEiLCJjb250ZW50IjoiV2lud29vZCBmb3JtZWQgdGhlIHN1cGVy
+        Z3JvdXAgXHUwMDNjYlx1MDAzZUJsaW5kIEZhaXRoXHUwMDNjL2JcdTAwM2Ug
+        aW4gMTk2OSB3aXRoIEVyaWMgQ2xhcHRvbiwgR2luZ2VyIFxuQmFrZXIgYW5k
+        IFJpYyBHcmVjaC4gVGhlIFx1MDAzY2JcdTAwM2ViYW5kXHUwMDNjL2JcdTAw
+        M2Ugd2FzIHNob3J0LWxpdmVkIG93aW5nIHRvIENsYXB0b25cdTAwMjYjMzk7
+        cyBncmVhdGVyIFxuaW50ZXJlc3TCoFx1MDAzY2JcdTAwM2UuLi5cdTAwM2Mv
+        Ylx1MDAzZSJ9LHsiR3NlYXJjaFJlc3VsdENsYXNzIjoiR3dlYlNlYXJjaCIs
+        InVuZXNjYXBlZFVybCI6Imh0dHA6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kv
+        QmxpbmRfRmFpdGhfKExlZ2VuZF9TZXZlbl9hbGJ1bSkiLCJ1cmwiOiJodHRw
+        Oi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0JsaW5kX0ZhaXRoXyhMZWdlbmRf
+        U2V2ZW5fYWxidW0pIiwidmlzaWJsZVVybCI6ImVuLndpa2lwZWRpYS5vcmci
+        LCJjYWNoZVVybCI6Imh0dHA6Ly93d3cuZ29vZ2xlLmNvbS9zZWFyY2g/cVx1
+        MDAzZGNhY2hlOmdpQ1dfLVh6OTdvSjplbi53aWtpcGVkaWEub3JnIiwidGl0
+        bGUiOiJcdTAwM2NiXHUwMDNlQmxpbmQgRmFpdGhcdTAwM2MvYlx1MDAzZSAo
+        TGVnZW5kIFNldmVuIGFsYnVtKSAtIFdpa2lwZWRpYSwgdGhlIGZyZWUgZW5j
+        eWNsb3BlZGlhIiwidGl0bGVOb0Zvcm1hdHRpbmciOiJCbGluZCBGYWl0aCAo
+        TGVnZW5kIFNldmVuIGFsYnVtKSAtIFdpa2lwZWRpYSwgdGhlIGZyZWUgZW5j
+        eWNsb3BlZGlhIiwiY29udGVudCI6IltlZGl0XS4gVG9tbXkgR3JlZXIgLSBr
+        ZXlib2FyZHMsIHN5bnRoZXNpemVyIGFuZCBwZXJjdXNzaW9uIHByb2dyYW1t
+        aW5nOyBKb2huIFxuQ2F0Y2hpbmdzIC0gY2VsbG8gc29sbyBvbiBcdTAwMjZx
+        dW90O0NhbGwgT24gTWVcdTAwMjZxdW90O8KgXHUwMDNjYlx1MDAzZS4uLlx1
+        MDAzYy9iXHUwMDNlIn0seyJHc2VhcmNoUmVzdWx0Q2xhc3MiOiJHd2ViU2Vh
+        cmNoIiwidW5lc2NhcGVkVXJsIjoiaHR0cDovL2VuLndpa2lwZWRpYS5vcmcv
+        d2lraS9GaWxlOkJsaW5kRmFpdGhCbGluZEZhaXRoLmpwZyIsInVybCI6Imh0
+        dHA6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRmlsZTpCbGluZEZhaXRoQmxp
+        bmRGYWl0aC5qcGciLCJ2aXNpYmxlVXJsIjoiZW4ud2lraXBlZGlhLm9yZyIs
+        ImNhY2hlVXJsIjoiaHR0cDovL3d3dy5nb29nbGUuY29tL3NlYXJjaD9xXHUw
+        MDNkY2FjaGU6Mjd2STc5ampGR1FKOmVuLndpa2lwZWRpYS5vcmciLCJ0aXRs
+        ZSI6IkZpbGU6XHUwMDNjYlx1MDAzZUJsaW5kRmFpdGhCbGluZEZhaXRoXHUw
+        MDNjL2JcdTAwM2UuanBnIC0gV2lraXBlZGlhLCB0aGUgZnJlZSBlbmN5Y2xv
+        cGVkaWEiLCJ0aXRsZU5vRm9ybWF0dGluZyI6IkZpbGU6QmxpbmRGYWl0aEJs
+        aW5kRmFpdGguanBnIC0gV2lraXBlZGlhLCB0aGUgZnJlZSBlbmN5Y2xvcGVk
+        aWEiLCJjb250ZW50IjoiVGhpcyBpcyB0aGUgY292ZXIgYXJ0IGZvciB0aGUg
+        YWxidW0gXHUwMDNjYlx1MDAzZUJsaW5kIEZhaXRoXHUwMDNjL2JcdTAwM2Ug
+        YnkgdGhlIFx1MDAzY2JcdTAwM2VhcnRpc3QgQmxpbmQgRmFpdGhcdTAwM2Mv
+        Ylx1MDAzZS4gVGhlIGNvdmVyIFxuYXJ0IGNvcHlyaWdodCBpcyBiZWxpZXZl
+        ZCB0byBiZWxvbmcgdG8gdGhlIGxhYmVsLCBQb2x5ZG9yIFUuSy4vQ2FuYWRh
+        LCBBdGNvIFUuUy4swqBcdTAwM2NiXHUwMDNlLi4uXHUwMDNjL2JcdTAwM2Ui
+        fSx7IkdzZWFyY2hSZXN1bHRDbGFzcyI6Ikd3ZWJTZWFyY2giLCJ1bmVzY2Fw
+        ZWRVcmwiOiJodHRwOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL1JpY19HcmVj
+        aCIsInVybCI6Imh0dHA6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUmljX0dy
+        ZWNoIiwidmlzaWJsZVVybCI6ImVuLndpa2lwZWRpYS5vcmciLCJjYWNoZVVy
+        bCI6Imh0dHA6Ly93d3cuZ29vZ2xlLmNvbS9zZWFyY2g/cVx1MDAzZGNhY2hl
+        OndYajlDRk9SeHZNSjplbi53aWtpcGVkaWEub3JnIiwidGl0bGUiOiJSaWMg
+        R3JlY2ggLSBXaWtpcGVkaWEsIHRoZSBmcmVlIGVuY3ljbG9wZWRpYSIsInRp
+        dGxlTm9Gb3JtYXR0aW5nIjoiUmljIEdyZWNoIC0gV2lraXBlZGlhLCB0aGUg
+        ZnJlZSBlbmN5Y2xvcGVkaWEiLCJjb250ZW50IjoiSW4gdGhlIHNwcmluZyBv
+        ZiAxOTY5LCBmb3JtZXIgQ3JlYW0gXHUwMDNjYlx1MDAzZWd1aXRhcmlzdFx1
+        MDAzYy9iXHUwMDNlIEVyaWMgQ2xhcHRvbiBhbmQgZm9ybWVyIFRyYWZmaWMg
+        XG5mcm9udG1hbiBTdGV2ZSBXaW53b29kIGZvcm1lZCB0aGUgc3VwZXJncm91
+        cCBcdTAwM2NiXHUwMDNlQmxpbmQgRmFpdGhcdTAwM2MvYlx1MDAzZTsgaW4g
+        bmVlZCBvZiBhIGJhc3Npc3QsXG7CoFx1MDAzY2JcdTAwM2UuLi5cdTAwM2Mv
+        Ylx1MDAzZSJ9LHsiR3NlYXJjaFJlc3VsdENsYXNzIjoiR3dlYlNlYXJjaCIs
+        InVuZXNjYXBlZFVybCI6Imh0dHA6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kv
+        R2luZ2VyX0Jha2VyIiwidXJsIjoiaHR0cDovL2VuLndpa2lwZWRpYS5vcmcv
+        d2lraS9HaW5nZXJfQmFrZXIiLCJ2aXNpYmxlVXJsIjoiZW4ud2lraXBlZGlh
+        Lm9yZyIsImNhY2hlVXJsIjoiaHR0cDovL3d3dy5nb29nbGUuY29tL3NlYXJj
+        aD9xXHUwMDNkY2FjaGU6dndxd3dpa2FtVTRKOmVuLndpa2lwZWRpYS5vcmci
+        LCJ0aXRsZSI6IkdpbmdlciBCYWtlciAtIFdpa2lwZWRpYSwgdGhlIGZyZWUg
+        ZW5jeWNsb3BlZGlhIiwidGl0bGVOb0Zvcm1hdHRpbmciOiJHaW5nZXIgQmFr
+        ZXIgLSBXaWtpcGVkaWEsIHRoZSBmcmVlIGVuY3ljbG9wZWRpYSIsImNvbnRl
+        bnQiOiJQZXRlciBFZHdhcmQgXHUwMDI2cXVvdDtHaW5nZXJcdTAwMjZxdW90
+        OyBCYWtlciAoYm9ybiAxOSBBdWd1c3QgMTkzOSBpbiBMZXdpc2hhbSwgU291
+        dGggTG9uZG9uKSBcbmlzIGFuIEVuZ2xpc2ggXHUwMDNjYlx1MDAzZWRydW1t
+        ZXJcdTAwM2MvYlx1MDAzZSB3aG8gcGxheWVkIHdpdGggQ3JlYW0gYW5kIFx1
+        MDAzY2JcdTAwM2VCbGluZCBGYWl0aFx1MDAzYy9iXHUwMDNlLiBIZSBpcyBh
+        bHNvwqBcdTAwM2NiXHUwMDNlLi4uXHUwMDNjL2JcdTAwM2UifSx7IkdzZWFy
+        Y2hSZXN1bHRDbGFzcyI6Ikd3ZWJTZWFyY2giLCJ1bmVzY2FwZWRVcmwiOiJo
+        dHRwOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0NoYXNlX1x1MDAyNl9TdGF0
+        dXMiLCJ1cmwiOiJodHRwOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0NoYXNl
+        XyUyNl9TdGF0dXMiLCJ2aXNpYmxlVXJsIjoiZW4ud2lraXBlZGlhLm9yZyIs
+        ImNhY2hlVXJsIjoiaHR0cDovL3d3dy5nb29nbGUuY29tL3NlYXJjaD9xXHUw
+        MDNkY2FjaGU6eGpkLTJUdnM0ZmtKOmVuLndpa2lwZWRpYS5vcmciLCJ0aXRs
+        ZSI6IkNoYXNlIFx1MDAyNmFtcDsgU3RhdHVzIC0gV2lraXBlZGlhLCB0aGUg
+        ZnJlZSBlbmN5Y2xvcGVkaWEiLCJ0aXRsZU5vRm9ybWF0dGluZyI6IkNoYXNl
+        IFx1MDAyNmFtcDsgU3RhdHVzIC0gV2lraXBlZGlhLCB0aGUgZnJlZSBlbmN5
+        Y2xvcGVkaWEiLCJjb250ZW50IjoiVGhlIGZvdXJ0aCBzaW5nbGUgZnJvbSB0
+        aGUgYWxidW0gaXMgXHUwMDI2cXVvdDtcdTAwM2NiXHUwMDNlQmxpbmQgRmFp
+        dGhcdTAwM2MvYlx1MDAzZVx1MDAyNnF1b3Q7LCB3aGljaCBmZWF0dXJlcyBz
+        b3VsIFx1MDAzY2JcdTAwM2VzaW5nZXJcdTAwM2MvYlx1MDAzZS9cbnNvbmd3
+        cml0ZXIgTGlhbSBCYWlsZXkgYW5kIHdhcyByZWxlYXNlZCBpbiBKYW51YXJ5
+        IDIwMTEuIE90aGVyIHNpbmdsZXMgaW5jbHVkZVxuwqBcdTAwM2NiXHUwMDNl
+        Li4uXHUwMDNjL2JcdTAwM2UifV0sImN1cnNvciI6eyJyZXN1bHRDb3VudCI6
+        IjIsNTAwIiwicGFnZXMiOlt7InN0YXJ0IjoiMCIsImxhYmVsIjoxfSx7InN0
+        YXJ0IjoiOCIsImxhYmVsIjoyfSx7InN0YXJ0IjoiMTYiLCJsYWJlbCI6M30s
+        eyJzdGFydCI6IjI0IiwibGFiZWwiOjR9LHsic3RhcnQiOiIzMiIsImxhYmVs
+        Ijo1fSx7InN0YXJ0IjoiNDAiLCJsYWJlbCI6Nn0seyJzdGFydCI6IjQ4Iiwi
+        bGFiZWwiOjd9LHsic3RhcnQiOiI1NiIsImxhYmVsIjo4fV0sImVzdGltYXRl
+        ZFJlc3VsdENvdW50IjoiMjUwMCIsImN1cnJlbnRQYWdlSW5kZXgiOjAsIm1v
+        cmVSZXN1bHRzVXJsIjoiaHR0cDovL3d3dy5nb29nbGUuY29tL3NlYXJjaD9v
+        ZVx1MDAzZHV0ZjhcdTAwMjZpZVx1MDAzZHV0ZjhcdTAwMjZzb3VyY2VcdTAw
+        M2R1ZHNcdTAwMjZzdGFydFx1MDAzZDBcdTAwMjZmaWx0ZXJcdTAwM2QxXHUw
+        MDI2aGxcdTAwM2Rlblx1MDAyNnFcdTAwM2RibGluZC1mYWl0aCttdXNpY2lh
+        bitzaXRlOmVuLndpa2lwZWRpYS5vcmciLCJzZWFyY2hSZXN1bHRUaW1lIjoi
+        MC4wOCJ9fSwgInJlc3BvbnNlRGV0YWlscyI6IG51bGwsICJyZXNwb25zZVN0
+        YXR1cyI6IDIwMH0=
+    http_version: 
+  recorded_at: Fri, 29 Nov 2013 15:48:56 GMT
+- request:
+    method: get
     uri: http://www.google.com/uds/GwebSearch?filter=1&hl=en&key=notsupplied&q=blind-faith%20musician%20site:en.wikipedia.org&rsz=large&start=0&v=1.0
     body:
       encoding: US-ASCII
@@ -183,6 +368,72 @@ http_interactions:
         bitzaXRlOmVuLndpa2lwZWRpYS5vcmciLCJzZWFyY2hSZXN1bHRUaW1lIjoi
         MC4wOCJ9fSwgInJlc3BvbnNlRGV0YWlscyI6IG51bGwsICJyZXNwb25zZVN0
         YXR1cyI6IDIwMH0=
+    http_version: 
+  recorded_at: Fri, 29 Nov 2013 15:48:56 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?artist=blind%20faith&fmt=realjson&func=getArtist
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=3600, s-maxage=3600, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Content-Length:
+      - '424'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 29 Nov 2013 15:48:56 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-s24-SJC, cache-sv60-SJC3
+      X-Cache:
+      - MISS, HIT
+      X-Cache-Hits:
+      - 0, 1
+      X-Timer:
+      - S1385738901.296426296,VS0,VS4,VE102,VE1234800
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22city%22:%22FIXME%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=FOMoYZN8LR; domain=.wikia.com; path=/; expires=Wed, 28 May
+        2014 15:48:56 GMT;
+      X-Age:
+      - '1235'
+    body:
+      encoding: UTF-8
+      string: '{"artist":"Blind Faith","albums":[{"album":"Blind Faith","year":"1969","amazonLink":"http:\/\/www.amazon.com\/exec\/obidos\/redirect?link_code=ur2&tag=wikia-20&camp=1789&creative=9325&path=external-search%3Fsearch-type=ss%26index=music%26keyword=Blind%20Faith%20Blind%20Faith","songs":["Had
+        To Cry Today","Can''t Find My Way Home","Well...All Right","Presence Of The
+        Lord","Sea Of Joy","Do What You Like","Do What You Like","Sleeping In The
+        Ground","Can''t Find My Way Home","Acoustic Jam","Time Winds","Sleeping In
+        The Ground","Jam No. 1 \"Very Long & Good Jam\"","Jam No. 2 \"Slow Jam No.1\"","Jam
+        No. 3 \"Change Of Address Jam\"","Jam No. 4 \"Slow Jam No.2\"","Exchange And
+        Mart"]}]}'
     http_version: 
   recorded_at: Fri, 29 Nov 2013 15:48:56 GMT
 - request:

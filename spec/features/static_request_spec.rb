@@ -14,20 +14,20 @@ describe 'home page' do
   end
 
   describe 'submitting band name' do
-    before do
-      fill_in 'artist', with: 'frank zappa'
-      pending 'check just url to be sent to, not send response'
-      click_button 'do it'
-    end
-
     it 'sends you to a new page' do
-      pending
+      VCR.use_cassette 'artist_api_responses', record: :once do
+        fill_in 'artist', with: 'blind faith'
+        fill_in 'How much text are you looking for?', with: '2'
+        choose 'sentences'
+        click_button 'do it'
+        page.should have_content 'Blind Faith ipsum'
+      end
     end
   end
 
   describe 'analytics' do
     it 'tracks your every movement' do
-      page.body.should have_content 'UA-xxxxx-y'
+      page.source.should have_content 'UA-xxxxx-y'
     end
   end
 
