@@ -3,28 +3,40 @@ require 'spec_helper'
 describe Artist do
 
   describe '#random_lyric' do
+
     before do
       Artist.stub(find_artist_name: 'Frank Zappa')
       Artist.any_instance.stub(fetch_data_for_artist: {})
     end
 
-    it 'will fetch new song lyrics' do
-      Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
-      Artist.new(name: 'frank zappa').random_lyric
+    describe 'when lyrics available' do
+      it 'returns a lyric' do
+        lyrics = %w(jamming in joe's garage)
+        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
+        lyrics.should include Artist.new(name: 'frank zappa').random_lyric
+      end
     end
 
-    it 'returns a lyric' do
-      lyrics = %w(jamming in joe's garage)
-      Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-      lyrics.should include Artist.new(name: 'frank zappa').random_lyric
+    describe 'when no new lyrics available' do
+      before do
+        Artist.any_instance.stub(fetch_new_song_lyrics: nil)
+      end
+      it 'samples known lyrics' do
+        fz = Artist.new name: 'f zappa'
+        fz.send(:instance_variable_set, :@lyrics, ['was it round and did it have a motor'])
+        fz.random_lyric.should == 'was it round and did it have a motor'
+      end
     end
+
   end
 
   describe '#lyrem' do
+
     before do
       Artist.stub(find_artist_name: 'Frank Zappa')
       Artist.any_instance.stub(fetch_data_for_artist: {})
     end
+
     let(:fz) { Artist.new(name: 'frank zappa') }
     let(:phrases) { [
       'fringe. I mean that, man.',

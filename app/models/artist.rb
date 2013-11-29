@@ -7,11 +7,7 @@ class Artist < ActiveRecord::Base
   def random_lyric
     @lyrics ||= []
     if rand((@lyrics.length / 20) + 1).to_i == 0 # TODO make this more clear
-      new_lyrics = nil
-      until new_lyrics && new_lyrics.present?
-        # TODO don't die if we can't get more lyrics
-        new_lyrics = fetch_new_song_lyrics
-      end
+      new_lyrics = fetch_new_song_lyrics or return @lyrics.sample
       @lyrics += new_lyrics
       new_lyrics.sample
     else
@@ -58,12 +54,12 @@ class Artist < ActiveRecord::Base
   end
 
   def fetch_new_song_lyrics
-    lyrics, i = [], 0
-    until lyrics.present? || i > 5
-      new_song = pick_new_song
+    # returns nil if no songs left
+    lyrics = []
+    until lyrics.present?
+      new_song = pick_new_song or return nil
       songs_fetched << new_song
       lyrics = process_lyrics(fetch_lyrics(name, new_song))
-      i += 1 # TODO better way of covering potential infloop
     end
     lyrics
   end
@@ -84,10 +80,11 @@ class Artist < ActiveRecord::Base
   end
 
   def pick_new_song
-    # TODO - return nil
-    raise 'no remaining songs (or none fetched)' unless (song_names - songs_fetched).present?
+    remaining_songs.sample # nil when no remaining songs
+  end
 
-    (song_names - songs_fetched).sample
+  def remaining_songs
+    song_names - songs_fetched
   end
 
   def songs_fetched # this is a getter and a 'setter'
