@@ -12,27 +12,38 @@ class LyricsController < ApplicationController
 
     artist_name = MusicianNameFinder.look_up(params[:artist])
 
-    @artist = Artist.find_by_slug(artist_name.to_slug) || Artist.new(name: artist_name)
-    @artist.save
+    @artist = Artist.find_by_slug(artist_name.to_slug)
+    unless @artist
+      @artist = Artist.new(name: artist_name)
+      @artist.save
+    end
 
-    what = case params[:what]
-             when 'phrase', 'phrases'
-               :phrases
-             when 'sentence', 'sentences'
-               :sentences
-             else
-               :paragraphs
-           end
-    how_many = if params[:length].to_i > 0
-                 params[:length].to_i
-               else
-                 5
-               end
+    what = interpret_what params[:what]
+    how_many = interpret_how_many params[:length]
 
     render 'by_artist', locals: {artist: @artist, lyrem: @artist.lyrem(what => how_many)}
   end
 
   private
+
+  def interpret_what(input)
+    case input
+    when 'phrase', 'phrases'
+      :phrases
+    when 'sentence', 'sentences'
+      :sentences
+    else
+      :paragraphs
+    end
+  end
+
+  def interpret_how_many(input)
+    if params[:length].to_i > 0
+      params[:length].to_i
+    else
+      5
+    end
+  end
 
   def redirect_query_parameters
     @artist = Artist.new(name: params[:artist]) or raise ArtistNotFoundError.new('artist not found')
