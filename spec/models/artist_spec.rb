@@ -57,7 +57,7 @@ describe Artist do
 
     describe ':phrases' do
       it 'returns an array of n strings' do
-        phrases = fz.lyrem(phrases: 3)
+        phrases = fz.lyrem(what: :phrases, how_many: 3)
         phrases.length.should == 3
         phrases.first.class.should == String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
@@ -69,7 +69,7 @@ describe Artist do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns results of calling it' do
-          fz.lyrem(phrases: 10, phrase_picker: numbers).each do |number|
+          fz.lyrem(what: :phrases, how_many: 10, phrase_picker: numbers).each do |number|
             number.should >= 0
             number.should <= 5
           end
@@ -79,7 +79,7 @@ describe Artist do
 
     describe ':sentences' do
       it 'returns an array of n strings' do
-        sentences = fz.lyrem(sentences: 5)
+        sentences = fz.lyrem(what: :sentences, how_many: 5)
         sentences.length.should == 5
         sentences.each do |sentence|
           sentence.class.should == String
@@ -91,7 +91,7 @@ describe Artist do
       end
 
       it 'capitalizes the first letter' do
-        /[a-z]/i.match(fz.lyrem(sentences: 1).first)[0].should match /[A-Z]/
+        /[a-z]/i.match(fz.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
       end
 
       describe 'when given a phrase_picker' do
@@ -99,7 +99,7 @@ describe Artist do
         let(:phrase_picker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(sentences: 10, phrase_picker: phrase_picker).each do |sentence|
+          fz.lyrem(what: :sentences, how_many: 10, phrase_picker: phrase_picker).each do |sentence|
             new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
           end
         end
@@ -108,7 +108,7 @@ describe Artist do
 
     describe ':paragraphs' do
       it 'returns an array of n strings' do
-        paragraphs = fz.lyrem(paragraphs: 10)
+        paragraphs = fz.lyrem(what: :paragraphs, how_many: 10)
         paragraphs.length.should == 10
         paragraphs.each do |paragraph|
           paragraph.class.should == String
@@ -124,7 +124,7 @@ describe Artist do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns paragraphy things made of sentency things made of results of calling it' do
-          fz.lyrem(paragraphs: 10, phrase_picker: numbers).each do |paragraph|
+          fz.lyrem(what: :paragraphs, how_many: 10, phrase_picker: numbers).each do |paragraph|
             paragraph.length.should > 10
             paragraph.split(' ').each do |number|
               number.to_i.should < 5
@@ -137,7 +137,8 @@ describe Artist do
     describe 'not passing required key' do
       it 'raises' do
         expect { fz.lyrem }.to raise_error ArgumentError
-        expect { fz.lyrem foo: :bar }.to raise_error ArgumentError
+        expect { fz.lyrem what: :foo }.to raise_error ArgumentError
+        expect { fz.lyrem how_many: 13 }.to raise_error ArgumentError
       end
     end
   end

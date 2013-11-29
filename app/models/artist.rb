@@ -16,30 +16,26 @@ class Artist < ActiveRecord::Base
   end
 
   def lyrem(config)
+    raise ArgumentError unless config[:how_many] && config[:what]
     phrase_picker = config[:phrase_picker] || method(:random_lyric)
 
-    case true
-
-    when config.has_key?(:phrases)
-      Array.new(config[:phrases]) do
+    Array.new(config[:how_many]) do
+      case config[:what]
+      when :phrases
         phrase_picker.call
-      end
 
-    when config.has_key?(:sentences)
-      Array.new(config[:sentences]) do
-        phrases = lyrem phrases: rand(3)+2, phrase_picker: phrase_picker
+      when :sentences
+        phrases = lyrem what: :phrases, how_many: rand(2..5), phrase_picker: phrase_picker
         sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
         sentence += '.' if /[a-z]$/i.match(sentence)
         sentence
-      end
 
-    when config.has_key?(:paragraphs)
-      Array.new(config[:paragraphs]) do
-        lyrem({sentences: rand(5)+3, phrase_picker: phrase_picker}).join(' ')
-      end
+      when :paragraphs
+        lyrem( what: :sentences, how_many: rand(3..7), phrase_picker: phrase_picker ).join(' ')
 
-    else
-      raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
+      else
+        raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
+      end
     end
   end
 

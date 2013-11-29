@@ -21,7 +21,7 @@ class LyricsController < ApplicationController
     what = interpret_what params[:what]
     how_many = interpret_how_many params[:length]
 
-    render 'by_artist', locals: {artist: @artist, lyrem: @artist.lyrem(what => how_many)}
+    render 'by_artist', locals: {artist: @artist, lyrem: @artist.lyrem(what: what, how_many: how_many)}
   end
 
   private
