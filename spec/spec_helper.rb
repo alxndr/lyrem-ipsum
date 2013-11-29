@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'webmock/rspec'
 require 'capybara/rspec'
+require Rails.root.join 'spec', 'support', 'vcr_setup.rb'
 
 WebMock.disable_net_connect!(allow_localhost: true)
 

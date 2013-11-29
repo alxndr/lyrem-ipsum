@@ -3,15 +3,13 @@ require 'spec_helper'
 describe 'lyrics' do
 
   before do
-    stub_request(:get, 'http://lyrics.wikia.com/api.php?artist=fz&fmt=realjson&func=getArtist').
-      to_return(status: 200, body: "{artist: 'Frank Zappa'}", headers: {})
-
-    pending 'something up with stubbing'
-    visit '/text-from-lyrics-by/fz'
+    VCR.use_cassette 'artist_api_responses', record: :once do
+      visit '/text-from-lyrics-by/blind-faith/2/sentences'
+    end
   end
 
   it 'has a rel=canonical link' do
-    page.should have_selector 'link[rel=canonical][href=/text-from-lyrics-by/frank-zappa]'
+    page.source.should include '<link rel="canonical" href="/text-from-lyrics-by/blind-faith" />'
   end
 
   describe 'analytics' do
@@ -22,7 +20,7 @@ describe 'lyrics' do
 
   describe 'content' do
     it 'includes lyrem' do
-      pending 'something up with stubbing'
+      pending 'how to verify random jumble against lyrics w/o touching db'
     end
 
     it 'asks you to type in your favorite band' do
