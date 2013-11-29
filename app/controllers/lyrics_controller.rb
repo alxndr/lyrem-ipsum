@@ -37,11 +37,10 @@ class LyricsController < ApplicationController
   def redirect_query_parameters
     @artist = Artist.new(name: params[:artist]) or raise ArtistNotFoundError.new('artist not found')
 
-    if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
-      redirect_to artist_lyrem_path(artist: @artist.slug, length: request.query_parameters[:'text-length'], what: request.query_parameters[:'text-length-unit'])
-    else
-      redirect_to artist_lyrem_path(artist: @artist.slug)
-    end
+    path_options = { artist: @artist.slug }
+    path_options.merge(length: request.query_parameters[:'text-length'], what: request.query_parameters[:'text-length-unit']) if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
+
+    redirect_to artist_lyrem_path(path_options)
   end
 
   String.instance_eval do
