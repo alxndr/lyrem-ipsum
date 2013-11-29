@@ -1,7 +1,9 @@
 class StaticController < ApplicationController
 
   def index
-    render 'index'
+  end
+
+  def health
   end
 
 end

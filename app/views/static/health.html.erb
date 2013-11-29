@@ -1,0 +1,9 @@
+<h1>health check</h1>
+
+<% count = Artist.count -%>
+<% if count > 0 -%>
+  <h4>healthy!</h4>
+  <p><%= pluralize(count, 'Artist model') %>, most recent: <%= Artist.last.name %></p>
+<% else -%>
+  <p class="error">error!</p>
+<% end -%>
