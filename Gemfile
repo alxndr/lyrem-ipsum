@@ -41,6 +41,7 @@ group :development do
   gem 'binding_of_caller' # dependency of better_errors
   gem 'colorize'
   gem 'debugger'
+  gem 'guard'
 end
 
 group :test do
