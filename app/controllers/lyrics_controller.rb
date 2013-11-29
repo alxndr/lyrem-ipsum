@@ -10,7 +10,7 @@ class LyricsController < ApplicationController
       raise ArgumentError
     end
 
-    artist_name = LyricsController.find_name(params[:artist])
+    artist_name = MusicianNameFinder.look_up(params[:artist])
 
     @artist = Artist.find_by_slug(artist_name.to_slug) || Artist.new(name: artist_name)
     @artist.save
@@ -42,15 +42,6 @@ class LyricsController < ApplicationController
     else
       redirect_to artist_lyrem_path(artist: @artist.slug)
     end
-  end
-
-  # TODO this does not belong here
-  def self.find_name(input)
-    result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
-    unless result && result.title
-      raise 'artist name not found'
-    end
-    result.title.chomp(' - Wikipedia, the free encyclopedia')
   end
 
   String.instance_eval do

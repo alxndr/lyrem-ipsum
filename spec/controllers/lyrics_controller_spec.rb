@@ -21,7 +21,7 @@ describe LyricsController do
 
         describe 'with correct name' do
           before do
-            LyricsController.stub(find_name: 'FZ') # TODO whose responsibility
+            MusicianNameFinder.stub(look_up: 'FZ')
           end
 
           describe 'when "local" artist' do
