@@ -44,6 +44,7 @@ class LyricsController < ApplicationController
     end
   end
 
+  # TODO this does not belong here
   def self.find_name(input)
     result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
     unless result && result.title

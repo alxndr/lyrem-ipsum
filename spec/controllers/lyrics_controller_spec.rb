@@ -19,18 +19,45 @@ describe LyricsController do
 
       describe 'via url' do
 
-        describe 'found artist' do
+        describe 'with correct name' do
           before do
-            LyricsController.stub(:find_name) { 'FZ' }
-            get :for_artist, artist: 'frank-zappa'
+            LyricsController.stub(find_name: 'FZ') # TODO whose responsibility
           end
 
-          it 'renders' do
-            response.should render_template 'by_artist'
+          describe 'when "local" artist' do
+            before do
+              Artist.stub(find_by_slug: Artist.new)
+            end
+
+            it 'assigns @artist' do # behaves_like
+              get :for_artist, artist: 'frank-zappa'
+
+              assigns(:artist).should be_true
+            end
+
+            it 'renders' do # behaves_like
+              get :for_artist, artist: 'frank-zappa'
+
+              response.should render_template 'by_artist'
+            end
           end
 
-          it 'saves artist' do
-            pending 'better mock'
+          describe 'when not "local" artist' do
+            before do
+              Artist.stub(find_by_slug: nil)
+            end
+
+            it 'assigns @artist' do # behaves_like
+              get :for_artist, artist: 'frank-zappa'
+
+              assigns(:artist).should be_true
+            end
+
+            it 'renders' do # behaves_like
+              get :for_artist, artist: 'frank-zappa'
+
+              response.should render_template 'by_artist'
+            end
           end
         end
 
