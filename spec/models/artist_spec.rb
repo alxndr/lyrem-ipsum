@@ -4,51 +4,26 @@ describe Artist do
 
   describe '#random_lyric' do
     before do
-      Artist.stub(:find_artist_name) { 'Frank Zappa' }
-      Artist.any_instance.stub(fetch_data_for_artist: { })
-    end
-    describe 'when there are no stored lyrics' do
-      before do
-        Artist.any_instance.stub(:rand).and_return(0)
-      end
-
-      it 'will fetch new song lyrics' do
-        Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
-        Artist.new(name: 'frank zappa').random_lyric
-      end
-
-      it 'returns a lyric' do
-        lyrics = %w(jamming in joe's garage)
-        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new(name: 'frank zappa').random_lyric
-      end
+      Artist.stub(find_artist_name: 'Frank Zappa')
+      Artist.any_instance.stub(fetch_data_for_artist: {})
     end
 
-    pending 'when there are some stored lyrics' do
-      before do
-        Artist.any_instance.stub(:rand).and_return(0)
-      end
+    it 'will fetch new song lyrics' do
+      Artist.any_instance.should_receive(:fetch_new_song_lyrics).and_return([:lyrics])
+      Artist.new(name: 'frank zappa').random_lyric
+    end
 
-      it 'sometimes fetches new song lyrics' do
-        Artist.any_instance.should_receive(:fetch_new_song_lyrics)
-        Artist.new(name: 'frank zappa').random_lyric
-        Artist.any_instance.stub(:rand).and_return(1)
-        Artist.any_instance.should_not_receive(:fetch_new_song_lyrics)
-        Artist.new(name: 'frank zappa').random_lyric
-      end
-
-      it 'returns a lyric' do
-        lyrics = %w(jamming in joe's garage)
-        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new(name: 'frank zappa').random_lyric
-      end
+    it 'returns a lyric' do
+      lyrics = %w(jamming in joe's garage)
+      Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
+      lyrics.should include Artist.new(name: 'frank zappa').random_lyric
     end
   end
 
   describe '#lyrem' do
     before do
-      Artist.stub(:find_artist_name) { 'Frank Zappa' }
-      Artist.any_instance.stub(fetch_data_for_artist: { })
+      Artist.stub(find_artist_name: 'Frank Zappa')
+      Artist.any_instance.stub(fetch_data_for_artist: {})
     end
     let(:fz) { Artist.new(name: 'frank zappa') }
     let(:phrases) { [
@@ -79,7 +54,7 @@ describe Artist do
       end
 
       describe 'when given a phrase_picker' do
-        let(:numbers) { Proc.new{ rand(5) } }
+        let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns results of calling it' do
           fz.lyrem(phrases: 10, phrase_picker: numbers).each do |number|
@@ -108,13 +83,12 @@ describe Artist do
       end
 
       describe 'when given a phrase_picker' do
-        let(:new_phrases) { phrases.map{ |p| p.upcase } }
+        let(:new_phrases) { phrases.map { |p| p.upcase } }
         let(:phrase_picker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
           fz.lyrem(sentences: 10, phrase_picker: phrase_picker).each do |sentence|
-            pending 'tweak this'
-            new_phrases.should include sentence
+            new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
           end
         end
       end
@@ -135,11 +109,14 @@ describe Artist do
       end
 
       describe 'when given a phrase_picker' do
-        let(:numbers) { Proc.new{ rand(5) } }
+        let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns paragraphy things made of sentency things made of results of calling it' do
           fz.lyrem(paragraphs: 10, phrase_picker: numbers).each do |paragraph|
-            pending 'how to check content'
+            paragraph.length.should > 10
+            paragraph.split(' ').each do |number|
+              number.to_i.should < 5
+            end
           end
         end
       end
@@ -147,19 +124,9 @@ describe Artist do
 
     describe 'not passing required key' do
       it 'raises' do
-        expect {
-          fz.lyrem
-        }.to raise_error ArgumentError
-        expect {
-          fz.lyrem foo: :bar
-        }.to raise_error ArgumentError
+        expect { fz.lyrem }.to raise_error ArgumentError
+        expect { fz.lyrem foo: :bar }.to raise_error ArgumentError
       end
-    end
-  end
-
-  describe '#fetch_new_song_lyrics' do
-    it 'stores songs it has encountered' do
-      pending
     end
   end
 
