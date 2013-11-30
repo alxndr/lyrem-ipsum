@@ -27,6 +27,7 @@ class Artist < ActiveRecord::Base
       when :sentences
         phrases = lyrem what: :phrases, how_many: rand(2..5), phrase_picker: phrase_picker
         sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
+        sentence.gsub!(/[,;:'"-]$/, '')
         sentence += '.' if /[a-z]$/i.match(sentence)
         sentence
 
