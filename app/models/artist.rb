@@ -17,30 +17,34 @@ class Artist < ActiveRecord::Base
 
   def lyrem(config)
     raise ArgumentError unless config[:how_many] && config[:what]
-    phrase_picker = config[:phrase_picker] || method(:random_lyric)
+    phrase_maker = config[:phrase_maker] || method(:random_lyric)
 
     Array.new(config[:how_many]) do
-      case config[:what]
-      when :phrases
-        phrase_picker.call
-
-      when :sentences
-        phrases = lyrem what: :phrases, how_many: rand(2..5), phrase_picker: phrase_picker
-        sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
-        sentence.gsub!(/[,;:'"-]$/, '')
-        sentence += '.' if /[a-z]$/i.match(sentence)
-        sentence
-
-      when :paragraphs
-        lyrem( what: :sentences, how_many: rand(3..7), phrase_picker: phrase_picker ).join(' ')
-
-      else
-        raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
-      end
+      content_generation_strategy(config[:what], phrase_maker)
     end
   end
 
   private
+
+  def content_generation_strategy(what, phrase_maker)
+    case what
+    when :phrases
+      phrase_maker.call
+
+    when :sentences
+      phrases = lyrem what: :phrases, how_many: rand(2..5), phrase_maker: phrase_maker
+      sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
+      sentence.gsub!(/[,;:'"-]$/, '')
+      sentence += '.' if /[a-z]$/i.match(sentence)
+      sentence
+
+    when :paragraphs
+      lyrem( what: :sentences, how_many: rand(3..7), phrase_maker: phrase_maker ).join(' ')
+
+    else
+      raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
+    end
+  end
 
   def get_data
     raise 'no name' unless name && name.present?

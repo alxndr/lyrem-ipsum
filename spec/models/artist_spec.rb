@@ -65,11 +65,11 @@ describe Artist do
         end
       end
 
-      describe 'when given a phrase_picker' do
+      describe 'when given a phrase_maker' do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns results of calling it' do
-          fz.lyrem(what: :phrases, how_many: 10, phrase_picker: numbers).each do |number|
+          fz.lyrem(what: :phrases, how_many: 10, phrase_maker: numbers).each do |number|
             number.should >= 0
             number.should <= 5
           end
@@ -94,12 +94,12 @@ describe Artist do
         /[a-z]/i.match(fz.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
       end
 
-      describe 'when given a phrase_picker' do
+      describe 'when given a phrase_maker' do
         let(:new_phrases) { phrases.map { |p| p.upcase } }
-        let(:phrase_picker) { Proc.new { new_phrases.sample } }
+        let(:phrase_maker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(what: :sentences, how_many: 10, phrase_picker: phrase_picker).each do |sentence|
+          fz.lyrem(what: :sentences, how_many: 10, phrase_maker: phrase_maker).each do |sentence|
             new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
           end
         end
@@ -120,11 +120,11 @@ describe Artist do
         end
       end
 
-      describe 'when given a phrase_picker' do
+      describe 'when given a phrase_maker' do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns paragraphy things made of sentency things made of results of calling it' do
-          fz.lyrem(what: :paragraphs, how_many: 10, phrase_picker: numbers).each do |paragraph|
+          fz.lyrem(what: :paragraphs, how_many: 10, phrase_maker: numbers).each do |paragraph|
             paragraph.length.should > 10
             paragraph.split(' ').each do |number|
               number.to_i.should < 5
