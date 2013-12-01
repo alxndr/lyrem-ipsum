@@ -47,6 +47,10 @@ describe LyricsController do
               Artist.stub(find_by_slug: nil)
             end
 
+            before do
+              Artist.stub(:new) { mock_model(Artist, get_data: true, save: true, lyrem: true) }
+            end
+
             it 'assigns @artist' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 

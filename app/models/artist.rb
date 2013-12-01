@@ -2,7 +2,7 @@ class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  after_initialize :get_data
+  after_initialize :load_data
 
   def random_lyric
     @lyrics ||= []
@@ -22,6 +22,13 @@ class Artist < ActiveRecord::Base
     Array.new(config[:how_many]) do
       content_generation_strategy(config[:what], phrase_maker)
     end
+  end
+
+  def get_data(name)
+    self.name = name
+    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found'
+    self.slug = name.to_slug
+    save
   end
 
   private
@@ -46,12 +53,8 @@ class Artist < ActiveRecord::Base
     end
   end
 
-  def get_data
-    raise 'no name' unless name && name.present?
-
-    @data = fetch_data_for_artist(name) or raise 'artist data not found'
-    self.data = @data.to_json
-    self.slug = name.to_slug
+  def load_data
+    @data = JSON.parse(data) if data # nil on creation
   end
 
   def fetch_new_song_lyrics

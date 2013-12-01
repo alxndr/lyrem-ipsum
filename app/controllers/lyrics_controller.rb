@@ -12,11 +12,7 @@ class LyricsController < ApplicationController
 
     artist_name = MusicianNameFinder.look_up(params[:artist])
 
-    @artist = Artist.find_by_slug(artist_name.to_slug)
-    unless @artist
-      @artist = Artist.new(name: artist_name)
-      @artist.save
-    end
+    @artist = find_or_create_artist(artist_name)
 
     what = interpret_what params[:what]
     how_many = interpret_how_many params[:length]
@@ -25,6 +21,16 @@ class LyricsController < ApplicationController
   end
 
   private
+
+  def find_or_create_artist(name)
+    artist = Artist.find_by_slug(name.to_slug)
+    unless artist
+      artist = Artist.new
+      artist.get_data(name)
+      artist.save
+    end
+    artist
+  end
 
   def interpret_what(input)
     case input
@@ -46,10 +52,10 @@ class LyricsController < ApplicationController
   end
 
   def redirect_query_parameters
-    @artist = Artist.new(name: params[:artist]) or raise ArtistNotFoundError.new('artist not found')
+    @artist = find_or_create_artist(params[:artist]) or raise ArtistNotFoundError.new('artist not found')
 
     path_options = { artist: @artist.slug }
-    path_options.merge(length: request.query_parameters[:'text-length'], what: request.query_parameters[:'text-length-unit']) if request.query_parameters[:'text-length'] && request.query_parameters[:'text-length-unit']
+    path_options.merge!(length: params[:'text-length'], what: params[:'text-length-unit']) if params[:'text-length'] && params[:'text-length-unit']
 
     redirect_to artist_lyrem_path(path_options)
   end

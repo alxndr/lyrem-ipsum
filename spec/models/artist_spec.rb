@@ -2,42 +2,18 @@ require 'spec_helper'
 
 describe Artist do
 
+  subject { FactoryGirl.create :artist }
+
   describe '#random_lyric' do
-
-    before do
-      Artist.stub(find_artist_name: 'Frank Zappa')
-      Artist.any_instance.stub(fetch_data_for_artist: {})
+    it 'returns something from @lyrics' do
+      subject.send :load_data
+      subject.instance_variable_set(:@lyrics, %w(foo bar baz))
+      %w(foo bar baz).should include subject.random_lyric
     end
-
-    describe 'when lyrics available' do
-      it 'returns a lyric' do
-        lyrics = %w(jamming in joe's garage)
-        Artist.any_instance.stub(:fetch_new_song_lyrics).and_return(lyrics)
-        lyrics.should include Artist.new(name: 'frank zappa').random_lyric
-      end
-    end
-
-    describe 'when no new lyrics available' do
-      before do
-        Artist.any_instance.stub(fetch_new_song_lyrics: nil)
-      end
-      it 'samples known lyrics' do
-        fz = Artist.new name: 'f zappa'
-        fz.send(:instance_variable_set, :@lyrics, ['was it round and did it have a motor'])
-        fz.random_lyric.should == 'was it round and did it have a motor'
-      end
-    end
-
   end
 
   describe '#lyrem' do
 
-    before do
-      Artist.stub(find_artist_name: 'Frank Zappa')
-      Artist.any_instance.stub(fetch_data_for_artist: {})
-    end
-
-    let(:fz) { Artist.new(name: 'frank zappa') }
     let(:phrases) { [
       'fringe. I mean that, man.',
       'the way no other lover can.',
@@ -52,12 +28,12 @@ describe Artist do
     ] }
 
     before do
-      fz.stub(:fetch_new_song_lyrics).and_return(phrases)
+      subject.stub(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
       it 'returns an array of n strings' do
-        phrases = fz.lyrem(what: :phrases, how_many: 3)
+        phrases = subject.lyrem(what: :phrases, how_many: 3)
         phrases.length.should == 3
         phrases.first.class.should == String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
@@ -69,7 +45,7 @@ describe Artist do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns results of calling it' do
-          fz.lyrem(what: :phrases, how_many: 10, phrase_maker: numbers).each do |number|
+          subject.lyrem(what: :phrases, how_many: 10, phrase_maker: numbers).each do |number|
             number.should >= 0
             number.should <= 5
           end
@@ -79,7 +55,7 @@ describe Artist do
 
     describe ':sentences' do
       it 'returns an array of n strings' do
-        sentences = fz.lyrem(what: :sentences, how_many: 5)
+        sentences = subject.lyrem(what: :sentences, how_many: 5)
         sentences.length.should == 5
         sentences.each do |sentence|
           sentence.class.should == String
@@ -91,7 +67,7 @@ describe Artist do
       end
 
       it 'capitalizes the first letter' do
-        /[a-z]/i.match(fz.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
+        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
       end
 
       describe 'when given a phrase_maker' do
@@ -99,7 +75,7 @@ describe Artist do
         let(:phrase_maker) { Proc.new { new_phrases.sample } }
 
         it 'returns sentency things made of results of calling it' do
-          fz.lyrem(what: :sentences, how_many: 10, phrase_maker: phrase_maker).each do |sentence|
+          subject.lyrem(what: :sentences, how_many: 10, phrase_maker: phrase_maker).each do |sentence|
             new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
           end
         end
@@ -108,7 +84,7 @@ describe Artist do
 
     describe ':paragraphs' do
       it 'returns an array of n strings' do
-        paragraphs = fz.lyrem(what: :paragraphs, how_many: 10)
+        paragraphs = subject.lyrem(what: :paragraphs, how_many: 10)
         paragraphs.length.should == 10
         paragraphs.each do |paragraph|
           paragraph.class.should == String
@@ -124,7 +100,7 @@ describe Artist do
         let(:numbers) { Proc.new { rand(5) } }
 
         it 'returns paragraphy things made of sentency things made of results of calling it' do
-          fz.lyrem(what: :paragraphs, how_many: 10, phrase_maker: numbers).each do |paragraph|
+          subject.lyrem(what: :paragraphs, how_many: 10, phrase_maker: numbers).each do |paragraph|
             paragraph.length.should > 10
             paragraph.split(' ').each do |number|
               number.to_i.should < 5
@@ -136,9 +112,9 @@ describe Artist do
 
     describe 'not passing required key' do
       it 'raises' do
-        expect { fz.lyrem }.to raise_error ArgumentError
-        expect { fz.lyrem what: :foo }.to raise_error ArgumentError
-        expect { fz.lyrem how_many: 13 }.to raise_error ArgumentError
+        expect { subject.lyrem }.to raise_error ArgumentError
+        expect { subject.lyrem what: :foo }.to raise_error ArgumentError
+        expect { subject.lyrem how_many: 13 }.to raise_error ArgumentError
       end
     end
   end

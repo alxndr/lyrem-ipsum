@@ -28,6 +28,8 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'capybara'
   gem 'colorize'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'fuubar'
   gem 'guard'
   gem 'guard-rails'
