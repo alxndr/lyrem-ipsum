@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 class MusicianNameFinder
 
   def self.look_up(input)
@@ -7,7 +9,7 @@ class MusicianNameFinder
 
     raise 'artist name not found' unless result && result.title
 
-    result.title.chomp(' - Wikipedia, the free encyclopedia')
+    HTMLEntities.new.decode result.title.chomp(' - Wikipedia, the free encyclopedia')
   end
 
 end
