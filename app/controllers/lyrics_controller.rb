@@ -52,7 +52,9 @@ class LyricsController < ApplicationController
   end
 
   def redirect_query_parameters
-    @artist = find_or_create_artist(params[:artist]) or raise ArtistNotFoundError.new('artist not found')
+    artist_name = MusicianNameFinder.look_up(params[:artist])
+
+    @artist = find_or_create_artist(artist_name) or raise ArtistNotFoundError.new('artist not found')
 
     path_options = { artist: @artist.slug }
     path_options.merge!(length: params[:'text-length'], what: params[:'text-length-unit']) if params[:'text-length'] && params[:'text-length-unit']
