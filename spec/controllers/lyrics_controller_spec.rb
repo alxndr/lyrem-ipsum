@@ -5,7 +5,7 @@ describe LyricsController do
   describe '#by_artist' do
 
     before do
-      Artist.stub(:new) { mock_model(Artist, save: true, lyrem: true) }
+      Artist.stub(:new) { mock_model(Artist, get_data: true, save: true, load_data: true, lyrem: true) }
     end
 
     describe 'missing artist' do
@@ -45,10 +45,6 @@ describe LyricsController do
           describe 'when not "local" artist' do
             before do
               Artist.stub(find_by_slug: nil)
-            end
-
-            before do
-              Artist.stub(:new) { mock_model(Artist, get_data: true, save: true, lyrem: true) }
             end
 
             it 'assigns @artist' do # behaves_like

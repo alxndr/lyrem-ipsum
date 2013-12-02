@@ -28,6 +28,7 @@ class LyricsController < ApplicationController
       artist = Artist.new
       artist.get_data(name)
       artist.save
+      artist.send(:load_data) # TODO shouldn't need to do this
     end
     artist
   end

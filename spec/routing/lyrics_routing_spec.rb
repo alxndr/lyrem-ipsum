@@ -3,7 +3,6 @@ require 'spec_helper'
 describe LyricsController do
   describe 'routing' do
 
-
     describe '/text-from-lyrics-by/queen' do
       it 'should route to LyricsController#for_artist' do
         expect(get: '/text-from-lyrics-by/queen').to route_to(controller: 'lyrics', action: 'for_artist', artist: 'queen')
