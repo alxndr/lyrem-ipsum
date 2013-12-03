@@ -1,5 +1,5 @@
 [Lyrem Ipsum](http://lyrem-ipsum.com)
-===========
+=====================================
 
 [![Build Status](https://travis-ci.org/alxndr/lyrem-ipsum.png?branch=master)](https://travis-ci.org/alxndr/lyrem-ipsum)
 [![Code Climate](https://codeclimate.com/github/alxndr/lyrem-ipsum.png)](https://codeclimate.com/github/alxndr/lyrem-ipsum)
