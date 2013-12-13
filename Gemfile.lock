@@ -290,7 +290,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   neat
-  newrelic_rpm
+  newrelic_rpm (>= 3.5.3.25)
   nokogiri
   pg
   rails (~> 4.0)
