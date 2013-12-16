@@ -14,8 +14,8 @@ class LyricsController < ApplicationController
 
     @artist = find_or_create_artist(artist_name)
 
-    what = interpret_what params[:what]
-    how_many = interpret_how_many params[:length]
+    what = interpret_what(params[:what])
+    how_many = interpret_how_many(params[:length])
 
     render 'by_artist', locals: { artist: @artist, lyrem: @artist.lyrem(what: what, how_many: how_many) }
   end
@@ -37,10 +37,10 @@ class LyricsController < ApplicationController
     case input
     when 'phrase', 'phrases'
       :phrases
-    when 'sentence', 'sentences'
-      :sentences
-    else
+    when 'paragraph', 'paragraphs'
       :paragraphs
+    else
+      :sentences
     end
   end
 
@@ -48,7 +48,7 @@ class LyricsController < ApplicationController
     if params[:length].to_i > 0
       params[:length].to_i
     else
-      5
+      10
     end
   end
 
