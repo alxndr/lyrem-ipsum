@@ -8,11 +8,8 @@ class LyricsController < ApplicationController
 
     raise ArgumentError unless params[:artist]
 
-    begin # TODO this doesn't feel right
-      artist_name = MusicianNameFinder.look_up(params[:artist])
-    rescue MusicianNameFinder::UnknownArtistError
-      render('static/unknown_artist', locals: { name: params[:artist] }) and return
-    end
+    artist_name = determine_artist_name(params[:artist])
+    return unless artist_name
 
     @artist = find_or_create_artist(artist_name)
 
@@ -54,12 +51,17 @@ class LyricsController < ApplicationController
     end
   end
 
+  def determine_artist_name(input)
+    MusicianNameFinder.look_up(params[:artist])
+  rescue MusicianNameFinder::UnknownArtistError
+    # TODO this doesn't feel quite right
+    render('static/unknown_artist', locals: { name: params[:artist] })
+    nil
+  end
+
   def redirect_query_parameters
-    begin
-      artist_name = MusicianNameFinder.look_up(params[:artist])
-    rescue MusicianNameFinder::UnknownArtistError
-      render('static/unknown_artist', locals: { name: params[:artist] }) and return
-    end
+    artist_name = determine_artist_name(params[:artist])
+    return unless artist_name
 
     @artist = find_or_create_artist(artist_name) or raise ArtistNotFoundError.new('artist not found')
 
