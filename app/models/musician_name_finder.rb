@@ -11,7 +11,10 @@ class MusicianNameFinder
 
     raise UnknownArtistError unless result && result.title
 
-    HTMLEntities.new.decode result.title.chomp(' - Wikipedia, the free encyclopedia')
+    title = result.title.chomp(' - Wikipedia, the free encyclopedia')
+    title.gsub!(%r( \(.+\)$), '')
+
+    HTMLEntities.new.decode title
   end
 
 end

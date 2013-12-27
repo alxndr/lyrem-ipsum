@@ -6,12 +6,19 @@ describe MusicianNameFinder do
 
     describe 'when passed a name' do
 
-      let(:result) { OpenStruct.new title: 'A Musician &#39;n stuff - Wikipedia, the free encyclopedia' }
+      let(:result) { OpenStruct.new title: 'A Musician &#39;n stuff (band) - Wikipedia, the free encyclopedia' }
       let(:results) { [result] }
 
-      it 'should ask google and trim title' do
-        Google::Search::Web.should_receive(:new).and_return(results)
-        MusicianNameFinder.look_up('name').should == "A Musician 'n stuff"
+      describe 'with a title' do
+        it 'should ask google' do
+          Google::Search::Web.should_receive(:new).and_return(results)
+          MusicianNameFinder.look_up('name')
+        end
+
+        it 'should trim title' do
+          Google::Search::Web.stub(:new).and_return(results)
+          MusicianNameFinder.look_up('name').should == "A Musician 'n stuff"
+        end
       end
 
       describe 'without a title' do
