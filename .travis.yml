@@ -7,4 +7,4 @@ services:
 before_script:
   - psql -c 'create database lyrem_ipsum_test;' -U postgres
 script:
-  - rake travis
+  - bundle exec rake travis
