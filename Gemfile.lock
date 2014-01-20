@@ -112,6 +112,10 @@ GEM
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0.0)
+    gemsurance (0.1.4)
+      bundler (~> 1.2)
+      git (~> 1.2)
+    git (1.2.6)
     google-search (1.0.3)
       json
     guard (2.2.3)
@@ -152,6 +156,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
@@ -159,7 +164,8 @@ GEM
       bourbon (>= 2.1)
       sass (>= 3.2)
     newrelic_rpm (3.6.3.111)
-    nokogiri (1.5.9)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.3)
@@ -281,6 +287,7 @@ DEPENDENCIES
   factory_girl
   factory_girl_rails
   fuubar
+  gemsurance
   google-search
   guard
   guard-rails
