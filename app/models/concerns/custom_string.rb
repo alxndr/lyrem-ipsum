@@ -11,7 +11,7 @@ module CustomString
   end
 
   def valid_lyric?
-    present? && index(/[a-z]/i) && !index(/(not found|instrumental|transcribed|copyright|chorus)/i)
+    present? && length < 100 && index(/[a-z]/i) && !index(/\b(not found|instrumental|transcribed|copyright|chorus)\b/i)
   end
 
   def capitalize_first_letter

@@ -61,6 +61,12 @@ describe CustomString do
       end
     end
 
+    describe 'when really long' do
+      it 'returns false' do
+        TestCustomString.new('hey ' * 100).valid_lyric?.should be_false
+      end
+    end
+
     describe 'otherwise' do
       it 'returns true' do
         TestCustomString.new(' ...this is probably a valid lyric...').valid_lyric?.should be_true
