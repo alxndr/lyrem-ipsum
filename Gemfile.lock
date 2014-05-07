@@ -302,7 +302,7 @@ DEPENDENCIES
   guard-rails
   guard-rspec
   htmlentities
-  jbuilder (~> 1.0.1)
+  jbuilder
   jquery-rails
   launchy
   neat
@@ -317,7 +317,7 @@ DEPENDENCIES
   sass-rails
   shoulda-matchers
   turbolinks
-  uglifier (>= 1.3.0)
+  uglifier
   unicorn
   vcr
   webmock

@@ -8,7 +8,7 @@ gem 'bitters'
 gem 'bugsnag'
 gem 'google-search'
 gem 'htmlentities'
-gem 'jbuilder', '~> 1.0.1'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'neat'
 gem 'newrelic_rpm', '>= 3.5.3.25'
@@ -17,7 +17,7 @@ gem 'pg'
 gem 'rails', '~> 4.1.0'
 gem 'sass-rails'
 gem 'turbolinks'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 group :production, :staging do
   # for heroku
