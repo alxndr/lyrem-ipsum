@@ -15,7 +15,7 @@ gem 'newrelic_rpm', '>= 3.5.3.25'
 gem 'nokogiri'
 gem 'pg'
 gem 'rails', '~> 4.1.4'
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'turbolinks'
 gem 'uglifier'
 
