@@ -46,7 +46,6 @@ group :development do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller' # dependency of better_errors
-  gem 'gemsurance'
 end
 
 group :test do
