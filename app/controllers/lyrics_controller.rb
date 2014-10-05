@@ -54,8 +54,7 @@ class LyricsController < ApplicationController
   def determine_artist_name(input)
     MusicianNameFinder.look_up(params[:artist])
   rescue MusicianNameFinder::UnknownArtistError
-    # TODO this doesn't feel quite right
-    render('static/unknown_artist', locals: { name: params[:artist] })
+    render('static/unknown_artist', status: :not_found, locals: { name: params[:artist] })
     nil
   end
 

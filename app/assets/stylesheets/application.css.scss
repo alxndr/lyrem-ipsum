@@ -11,6 +11,13 @@ h1 {
   font-size: 2em;
 }
 
+label {
+  font-weight: normal;
+}
+label[for="artist"] {
+  font-weight: bold;
+}
+
 footer {
   position: absolute;
   top: 0.3em;

@@ -2,9 +2,9 @@
   <link rel="canonical" href="/text-from-lyrics-by/<%= artist.slug %>" />
 <% end -%>
 
-<% content_for :title, "lorem ipsum by #{@artist.name}" -%>
+<% content_for :title, "lorem ipsum generated from #{@artist.name} lyrics" -%>
 
-<h1><%= artist.name %> ipsum</h1>
+<h1>Lorem ipsum from <%= artist.name %> lyrics</h1>
 
 <% lyrem.each do |text| -%>
   <p><%= text %></p>
