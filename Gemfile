@@ -37,7 +37,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'jasmine-rails'
+  gem 'jasmine'
   gem 'launchy' # needed for capybara's save_and_open_page
   gem 'rspec-rails'
   gem 'shoulda-matchers'
