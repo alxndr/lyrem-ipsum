@@ -9,7 +9,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     ["Damon Albarn", "David Bowie", "Dead Kennedys", "Dethklok", "Doc Watson", "Dolly Parton"],
     ["Easy E", "Electric Light Orchestra", "Elliott Smith", "Eric Clapton", "Erykah Badu"],
     ["Fishbone", "Fleetwood Mac", "Foreigner", "Frank Sinatra", "Frank Zappa"],
-    ["Gilbert and Sullivan", "Grateful Dead", "Greg Brown", "Gordon Lightfot", "Groundation"],
+    ["Gilbert and Sullivan", "Grateful Dead", "Greg Brown", "Gordon Lightfoot", "Groundation"],
     ["Hall and Oates", "Hank Williams", "Harry Nilsson", "Herbie Hancock", "The Highwaymen"],
     ["Immolation", "Inspectah Deck", "Iron Butterfly", "Iron Maiden", "Israel Vibration"],
     ["Jay-Z", "Jimi Hendrix", "Joan Baez", "Joanna Newsom", "John Lennon", "Johnny Cash"],
