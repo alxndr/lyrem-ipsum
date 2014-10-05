@@ -1,7 +1,15 @@
+paths:
+  'spinner': 'spin'
+
 shim:
+
   'backbone':
     deps: ['underscore', 'jquery']
     exports: 'Backbone'
+
+  'spinner':
+    exports: 'Spinner'
+
   'underscore':
     deps: ['jquery']
     exports: '_'
