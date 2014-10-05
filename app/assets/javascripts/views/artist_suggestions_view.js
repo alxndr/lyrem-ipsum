@@ -1,4 +1,4 @@
-/* global console, define, clearTimeout, setTimeout */
+/* global define, clearTimeout, setTimeout */
 
 define(['backbone', 'underscore'], function(Backbone, _) {
 
@@ -59,7 +59,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     is_rotating_artists: true,
 
     pause_suggestions: function() {
-      console.log('pausing');
       this.is_rotating_artists = false;
       clearTimeout(this.next_suggestion_timeout_id);
       this.suggested_name = this.$artist_input.prop('placeholder');
@@ -81,7 +80,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
       if (this.is_rotating_artists) {
         return;
       }
-      console.log('starting');
       this.is_rotating_artists = true;
       this.schedule_future_new_artist({seconds: 10});
     },
@@ -89,7 +87,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     suggest_artist: function() {
       if (this.is_rotating_artists) {
         if (this.$artist_input.val() === this.suggested_name) {
-          console.log("clearing input val");
           this.$artist_input.val("");
         }
         var artist_choices = ARTISTS_BY_ALPHABET[this.suggestion_index];
@@ -97,7 +94,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
         var artist_name = _.sample(artist_choices);
         this.$artist_input.prop({placeholder: artist_name});
         this.schedule_future_new_artist();
-        //console.log("timeout:", this.next_suggestion_timeout_id);
       }
     }
 
