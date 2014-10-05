@@ -2,8 +2,7 @@
 <html>
   <head>
     <title><%= yield(:title) -%></title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
     <%= content_for :head %>
     <%= google_analytics_code.html_safe %>
@@ -16,5 +15,7 @@
       <p>Lyrics are by their authors.</p>
       <p>Site code is <a href="http://github.com/alxndr/lyrem-ipsum">open at GitHub</a>.</p>
     </footer>
+
+    <%= requirejs_include_tag 'application' %>
   </body>
 </html>

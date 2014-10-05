@@ -1,2 +1,5 @@
 ruby:
   enabled: true
+javascripts:
+  enabled: true
+  config_file: config/.jshint.json
