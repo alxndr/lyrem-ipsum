@@ -57,11 +57,9 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     },
 
     ensure_val: function() {
-      console.log("ensure_val");
       if (this.$artist_input.val().trim()) {
         this.is_rotating_artists = false;
       } else {
-        console.log('trying to set val to', this.$artist_input.prop("placeholder"));
         this.$artist_input.val(this.$artist_input.prop("placeholder"));
       }
     },
