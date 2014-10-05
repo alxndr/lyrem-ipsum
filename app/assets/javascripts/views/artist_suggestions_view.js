@@ -25,10 +25,10 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     ["Taj Mahal", "Talking Heads", "Tenacious D", "TLC", "Tom Waits", "Tower of Power"],
     ["UB40", "Umberto Tozzi", "Umphrey's McGee", "Usher"],
     ["Vampire Weekend", "Van Halen", "Vanilla Ice", "Van Morrison", "Velvet Underground"],
-    ["Ween", "Weird Al Yankovich", "Wild Beasts", "Willie Nelson", "Woody Guthrie", "Wu-Tang Clan"],
-    ["Xiu Xiu", "XTC", "Xzibit"],
+    ["Ween", "Weird Al Yankovich", "The Who", "Wild Beasts", "Willie Nelson", "Woody Guthrie", "Wu-Tang Clan"],
+    ["Xavier Rudd", "Xiu Xiu", "Xscape", "XTC", "Xzibit"],
     ["Yanni", "Yeah Yeah Yeahs", "Yes", "Yesterday Never Dies", "Yo La Tengo"],
-    ["Zach Gill", "Zero Hour", "Zombie Girl"]
+    ["Zach Gill", "Zap Mama", "Zero Hour", "Zombie Girl"]
   ];
 
   return Backbone.View.extend({
