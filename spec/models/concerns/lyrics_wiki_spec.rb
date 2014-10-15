@@ -18,7 +18,7 @@ describe LyricsWiki do
         }.to_json
       )
 
-      fetch_data_for_artist('frank zappa')['artist'].should == 'Frank Zappa'
+      expect(fetch_data_for_artist('frank zappa')['artist']).to eq 'Frank Zappa'
     end
   end
 
@@ -37,7 +37,7 @@ describe LyricsWiki do
         }.to_json
       )
 
-      fetch_song_data('frank zappa', 'lucille').keys.should == ['artist', 'song', 'lyrics']
+      expect(fetch_song_data('frank zappa', 'lucille').keys).to eq ['artist', 'song', 'lyrics']
     end
   end
 

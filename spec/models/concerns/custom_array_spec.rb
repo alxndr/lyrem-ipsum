@@ -11,21 +11,21 @@ describe CustomArray do
     let(:test_array) { TestCustomArray.new(%w(foo bar baz qux)) }
 
     it 'returns a string' do
-      test_array.join_after_regex(glue: ', ', regex: /a/).should be_a String
+      expect(test_array.join_after_regex(glue: ', ', regex: /a/)).to be_a String
     end
 
     describe 'matching regex' do
       subject { test_array.join_after_regex(glue: ', ', regex: /o/) }
       it 'inserts glue' do
-        subject.index('o,').should_not be nil
+        expect(subject.index('o,')).to_not be nil
       end
     end
 
     describe 'not matching regex' do
       subject { test_array.join_after_regex(glue: ', ', regex: /o/) }
       it 'does not insert glue' do
-        subject.index('r,').should be nil
-        subject.index('z,').should be nil
+        expect(subject.index('r,')).to be nil
+        expect(subject.index('z,')).to be nil
       end
     end
 

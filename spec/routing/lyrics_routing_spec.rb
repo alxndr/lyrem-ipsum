@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LyricsController do
+describe LyricsController, type: :routing do
   describe 'routing' do
 
     describe '/text-from-lyrics-by/queen' do

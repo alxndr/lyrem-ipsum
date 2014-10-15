@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe 'home page' do
+describe 'home page', type: :request do
 
   before do
-    visit '/'
+    get '/'
   end
 
   describe 'content' do
     it 'asks you to type in your favorite band' do
-      page.should have_content 'Jumble me up some lyrics by:'
+      page.should have_content 'Make filler text from the lyrics of'
       page.should have_selector 'input#artist[type=text]'
     end
   end
@@ -20,7 +20,7 @@ describe 'home page' do
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
         click_button 'do it'
-        page.should have_content 'Blind Faith ipsum'
+        page.should have_content 'Lorem ipsum from Blind Faith lyrics'
       end
     end
   end

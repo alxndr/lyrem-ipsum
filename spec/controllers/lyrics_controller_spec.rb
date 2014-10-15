@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LyricsController do
+describe LyricsController, type: :controller do
 
   describe '#by_artist' do
 
@@ -32,13 +32,13 @@ describe LyricsController do
             it 'assigns @artist' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              assigns(:artist).should be_true
+              expect(assigns(:artist)).to be_true
             end
 
             it 'renders' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              response.should render_template 'by_artist'
+              expect(response).to render_template 'by_artist'
             end
           end
 
@@ -50,13 +50,13 @@ describe LyricsController do
             it 'assigns @artist' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              assigns(:artist).should be_true
+              expect(assigns(:artist)).to be_true
             end
 
             it 'renders' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              response.should render_template 'by_artist'
+              expect(response).to render_template 'by_artist'
             end
           end
         end
@@ -77,8 +77,8 @@ describe LyricsController do
         it 'redirects' do
           pending 'how to set request.query_parameters and not request.parameters?'
           get :for_artist, artist: 'frank zappa'
-          response.should_not redirect_to '/text-from-lyrics-by/frank zappa'
-          response.should redirect_to '/text-from-lyrics-by/frank-zappa'
+          expect(response).to_not redirect_to '/text-from-lyrics-by/frank zappa'
+          expect(response).to redirect_to '/text-from-lyrics-by/frank-zappa'
         end
       end
 
