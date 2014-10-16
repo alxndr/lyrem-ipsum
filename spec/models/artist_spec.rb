@@ -8,7 +8,7 @@ describe Artist do
     it 'returns something from @lyrics' do
       subject.send :load_data
       subject.instance_variable_set(:@lyrics, %w(foo bar baz))
-      %w(foo bar baz).should include subject.random_lyric
+      expect(%w(foo bar baz)).to include subject.random_lyric
     end
   end
 
@@ -28,16 +28,16 @@ describe Artist do
     ] }
 
     before do
-      subject.stub(:fetch_new_song_lyrics).and_return(phrases)
+      allow(subject).to_receive(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
       it 'returns an array of n strings' do
         phrases = subject.lyrem(what: :phrases, how_many: 3)
-        phrases.length.should == 3
-        phrases.first.class.should == String # fetch_new_song_lyrics.class
+        expect(phrases.length).to eq 3
+        expect(phrases.first.class).to eq String # fetch_new_song_lyrics.class
         phrases.each do |phrase|
-          phrases.should include phrase
+          expect(phrases).to include phrase
         end
       end
 
@@ -46,8 +46,8 @@ describe Artist do
 
         it 'returns results of calling it' do
           subject.lyrem(what: :phrases, how_many: 10, phrase_maker: numbers).each do |number|
-            number.should >= 0
-            number.should <= 5
+            expect(number).to be >= 0
+            expect(number).to be <= 5
           end
         end
       end
@@ -56,18 +56,19 @@ describe Artist do
     describe ':sentences' do
       it 'returns an array of n strings' do
         sentences = subject.lyrem(what: :sentences, how_many: 5)
-        sentences.length.should == 5
+        expect(sentences.length).to eq 5
         sentences.each do |sentence|
-          sentence.class.should == String
-          sentence.split(' ').length.should >= 2
+          expect(sentence.class).to eq String
+          expect(sentence.split(' ').length).to be >= 2
           %w(,, ., !, ?, ,. !. ?.).each do |punct_combo|
-            sentence.should_not include punct_combo
+            expect(sentence).to_not include punct_combo
           end
         end
       end
 
       it 'capitalizes the first letter' do
-        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
+        something = /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0]
+        expect(something).to match(/[A-Z]/)
       end
 
       describe 'when given a phrase_maker' do
@@ -76,7 +77,7 @@ describe Artist do
 
         it 'returns sentency things made of results of calling it' do
           subject.lyrem(what: :sentences, how_many: 10, phrase_maker: phrase_maker).each do |sentence|
-            new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
+            expect(new_phrases.any? { |new_phrase| sentence.include? new_phrase }).to be == true
           end
         end
       end
@@ -85,14 +86,14 @@ describe Artist do
     describe ':paragraphs' do
       it 'returns an array of n strings' do
         paragraphs = subject.lyrem(what: :paragraphs, how_many: 10)
-        paragraphs.length.should == 10
+        expect(paragraphs.length).to eq 10
         paragraphs.each do |paragraph|
-          paragraph.class.should == String
-          paragraph.scan(/[.!?]/).count.should > 0
-          paragraph.split(' ').length.should >= 6 # 3 sentences w/ 2 words each
-          paragraph.should_not include ',. '
-          paragraph.should_not include '!. '
-          paragraph.should_not include '?. '
+          expect(paragraph.class).to eq String
+          expect(paragraph.scan(/[.!?]/).count).to be > 0
+          expect(paragraph.split(' ').length).to be >= 6 # 3 sentences w/ 2 words each
+          expect(paragraph).to_not include ',. '
+          expect(paragraph).to_not include '!. '
+          expect(paragraph).to_not include '?. '
         end
       end
 
@@ -101,9 +102,9 @@ describe Artist do
 
         it 'returns paragraphy things made of sentency things made of results of calling it' do
           subject.lyrem(what: :paragraphs, how_many: 10, phrase_maker: numbers).each do |paragraph|
-            paragraph.length.should > 10
+            expect(paragraph.length).to be > 10
             paragraph.split(' ').each do |number|
-              number.to_i.should < 5
+              expect(number.to_i).to be < 5
             end
           end
         end

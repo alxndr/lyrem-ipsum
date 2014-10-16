@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe 'lyrics' do
+describe 'lyrics', type: :request do
 
   before do
     VCR.use_cassette 'artist_api_responses', record: :once do
-      visit '/text-from-lyrics-by/blind-faith/2/sentences'
+      get '/text-from-lyrics-by/blind-faith/2/sentences'
     end
   end
 
@@ -24,7 +24,7 @@ describe 'lyrics' do
     end
 
     it 'asks you to type in your favorite band' do
-      page.should have_content 'Jumble me up some lyrics by:'
+      page.should have_content ''
       page.should have_selector 'input#artist[type=text]'
     end
   end
