@@ -1,5 +1,6 @@
 ruby:
   enabled: true
+  config_file: config/rubocop.yml
 javascripts:
   enabled: true
-  config_file: config/.jshint.json
+  config_file: config/jshint.json
