@@ -76,7 +76,8 @@ describe Artist do
 
         it 'returns sentency things made of results of calling it' do
           subject.lyrem(what: :sentences, how_many: 10, phrase_maker: phrase_maker).each do |sentence|
-            new_phrases.any? { |new_phrase| sentence.include? new_phrase }.should be_true
+            expect(new_phrases.any? { |new_phrase| sentence.include? new_phrase }).to be true
+            # could subtract each instance of new_phrases elements from sentence, result should be whitespace?
           end
         end
       end

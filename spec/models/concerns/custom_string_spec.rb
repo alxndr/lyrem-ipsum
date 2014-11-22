@@ -40,36 +40,36 @@ describe CustomString do
 
     describe 'when nil or empty' do
       it 'returns false' do
-        TestCustomString.new().valid_lyric?.should be_false
-        TestCustomString.new('').valid_lyric?.should be_false
+        expect(TestCustomString.new()).not_to be_valid_lyric
+        expect(TestCustomString.new('')).not_to be_valid_lyric
       end
     end
 
     describe 'when not containing any letters' do
       it 'returns false' do
-        TestCustomString.new('!@#$%^&*() ... 1234567890').valid_lyric?.should be_false
+        expect(TestCustomString.new('!@#$%^&*() ... 1234567890')).not_to be_valid_lyric
       end
     end
 
     describe 'when containing a suspicious word' do
       it 'retruns false' do
-        TestCustomString.new('Not Found').valid_lyric?.should be_false
-        TestCustomString.new('instrumental').valid_lyric?.should be_false
-        TestCustomString.new('transcribed').valid_lyric?.should be_false
-        TestCustomString.new('COPYRIGHT').valid_lyric?.should be_false
-        TestCustomString.new('chorus').valid_lyric?.should be_false
+        expect(TestCustomString.new('Not Found')).not_to be_valid_lyric
+        expect(TestCustomString.new('instrumental')).not_to be_valid_lyric
+        expect(TestCustomString.new('transcribed')).not_to be_valid_lyric
+        expect(TestCustomString.new('COPYRIGHT')).not_to be_valid_lyric
+        expect(TestCustomString.new('chorus')).not_to be_valid_lyric
       end
     end
 
     describe 'when really long' do
       it 'returns false' do
-        TestCustomString.new('hey ' * 100).valid_lyric?.should be_false
+        expect(TestCustomString.new('hey ' * 100)).not_to be_valid_lyric
       end
     end
 
     describe 'otherwise' do
       it 'returns true' do
-        TestCustomString.new(' ...this is probably a valid lyric...').valid_lyric?.should be_true
+        expect(TestCustomString.new(' ...this is probably a valid lyric...')).to be_valid_lyric
       end
     end
 

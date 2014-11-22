@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LyricsController do
+describe LyricsController, type: :controller do
 
   describe '#by_artist' do
 
@@ -21,53 +21,55 @@ describe LyricsController do
 
         describe 'with correct name' do
           before do
-            MusicianNameFinder.stub(look_up: 'FZ')
+            allow(MusicianNameFinder).to receive(:look_up).and_return 'FZ'
           end
 
           describe 'when "local" artist' do
             before do
-              Artist.stub(find_by_slug: Artist.new)
+              allow(Artist).to receive(:find_by_slug).and_return Artist.new
             end
 
             it 'assigns @artist' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              assigns(:artist).should be_true
+              expect(assigns(:artist)).to be_an Artist
             end
 
             it 'renders' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              response.should render_template 'by_artist'
+              expect(response).to render_template 'by_artist'
             end
           end
 
           describe 'when not "local" artist' do
             before do
-              Artist.stub(find_by_slug: nil)
+              allow(Artist).to receive(:find_by_slug).and_return nil
             end
 
             it 'assigns @artist' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              assigns(:artist).should be_true
+              expect(assigns(:artist)).to be_an Artist
             end
 
             it 'renders' do # behaves_like
               get :for_artist, artist: 'frank-zappa'
 
-              response.should render_template 'by_artist'
+              expect(response).to render_template 'by_artist'
             end
           end
         end
 
         describe 'not found artist' do
           before do
-            Artist.stub(:new).and_return(nil)
+            allow(MusicianNameFinder).to receive(:look_up).and_raise MusicianNameFinder::UnknownArtistError
           end
 
-          it 'errors' do
-            expect{ get :for_artist, artist: 'not a real person' }.to raise_error
+          it 'renders unknown artist page' do
+            get :for_artist, artist: 'not a real person'
+
+            expect(response).to render_template 'static/unknown_artist'
           end
         end
 

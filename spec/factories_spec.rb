@@ -10,7 +10,7 @@ FactoryGirl.factories.map(&:name).reject{|factory_sym| broken_factories.include?
     let(:first) { FactoryGirl.build factory_sym }
 
     it 'should be valid' do
-      first.valid?.should be_true, first.errors.full_messages.to_sentence
+      expect(first).to be_valid, first.errors.full_messages.to_sentence
     end
 
     describe "creating a second #{factory_name}" do
@@ -19,7 +19,7 @@ FactoryGirl.factories.map(&:name).reject{|factory_sym| broken_factories.include?
       end
       it 'should be valid' do
         second = FactoryGirl.build(factory_sym)
-        second.valid?.should be_true, second.errors.full_messages.to_sentence
+        expect(second).to be_valid, second.errors.full_messages.to_sentence
       end
     end unless non_idempotent_factories.include? factory_sym
   end
