@@ -48,7 +48,7 @@ GEM
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
-    bitters (0.10.0)
+    bitters (0.10.1)
       bourbon (>= 3.2)
       sass (>= 3.2)
       thor
