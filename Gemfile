@@ -50,7 +50,7 @@ group :development do
 end
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem 'codeclimate-test-reporter', require: false
   gem 'coveralls', require: false
   gem 'vcr'
   gem 'webmock'
