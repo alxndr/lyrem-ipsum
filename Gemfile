@@ -38,6 +38,7 @@ group :development, :test do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'launchy' # needed for capybara's save_and_open_page
+  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
