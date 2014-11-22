@@ -18,11 +18,9 @@ gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'uglifier'
 
 group :production, :staging do
-  # for heroku
-  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
-  gem 'rails_12factor'
-
+  gem 'rails_log_stdout', github: 'heroku/rails_log_stdout' # for heroku
+  gem 'rails_12factor' # for heroku
+  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets' # for heroku
   gem 'unicorn'
 end
 
@@ -36,7 +34,6 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'launchy' # needed for capybara's save_and_open_page
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
@@ -45,7 +42,6 @@ end
 group :development do
   gem 'awesome_print'
   gem 'better_errors'
-  gem 'binding_of_caller' # dependency of better_errors
 end
 
 group :test do
