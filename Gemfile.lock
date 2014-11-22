@@ -45,9 +45,10 @@ GEM
       multi_json
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
-    better_errors (1.1.0)
+    better_errors (2.0.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     bitters (0.10.1)
       bourbon (>= 3.2)
       sass (>= 3.2)
