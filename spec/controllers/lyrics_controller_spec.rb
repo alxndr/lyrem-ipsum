@@ -63,11 +63,13 @@ describe LyricsController, type: :controller do
 
         describe 'not found artist' do
           before do
-            allow(Artist).to receive(:new).and_return nil
+            allow(MusicianNameFinder).to receive(:look_up).and_raise MusicianNameFinder::UnknownArtistError
           end
 
-          it 'errors' do
-            expect{ get :for_artist, artist: 'not a real person' }.to raise_error ArgumentError
+          it 'renders unknown artist page' do
+            get :for_artist, artist: 'not a real person'
+
+            expect(response).to render_template 'static/unknown_artist'
           end
         end
 

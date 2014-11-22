@@ -19,9 +19,7 @@ feature 'lyrics' do
   end
 
   describe 'content' do
-    #it 'includes lyrem' do
-      #pending 'how to verify random jumble against lyrics w/o touching db'
-    #end
+    it 'includes lyrem' # how to verify random jumble against lyrics w/o touching db
 
     it 'asks you to type in your favorite band' do
       expect(page).to have_content 'Make filler text from the lyrics of:'
