@@ -14,6 +14,7 @@ gem 'nokogiri'
 gem 'pg'
 gem 'rails', '~> 4.1.8'
 gem 'requirejs-rails'
+gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'uglifier'
 
 group :production, :staging do
