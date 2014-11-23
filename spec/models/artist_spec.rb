@@ -4,11 +4,16 @@ describe Artist do
 
   subject { FactoryGirl.create :artist }
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of :slug }
+  end
+
   describe '#random_lyric' do
     it 'returns something from @lyrics' do
-      subject.send :load_data
+      pending 'how to test the randomness buried in the math'
       subject.instance_variable_set(:@lyrics, %w(foo bar baz))
-      %w(foo bar baz).should include subject.random_lyric
+      lyric = subject.random_lyric
+      expect(%w(foo bar baz)).to contain lyric
     end
   end
 
@@ -120,44 +125,49 @@ describe Artist do
     end
   end
 
-  describe '#get_data' do
+  describe '#setup' do
 
-    before do
-      allow(subject).to receive(:fetch_data_for_artist)
-    end
+    describe 'when missing data' do
 
-    it 'should set name' do
-      name = 'Frank Zappa'
-      subject.get_data name
-
-      expect(subject.name).to eq name
-    end
-
-    it 'should set slug' do
-      subject.get_data 'Frank Zappa'
-
-      expect(subject.slug).to eq 'frank-zappa'
-    end
-
-    describe 'when artist is found' do
       before do
-        allow(subject).to receive(:fetch_data_for_artist).and_return({albums: %w(foo bar baz)})
-      end
-      it 'should set data' do
-        subject.get_data 'Frank Zappa'
-        expect(subject.data).to eq({albums: %w(foo bar baz)}.to_json)
-      end
-    end
-
-    describe 'when artist is not found' do
-      before do
-        allow(subject).to receive(:fetch_data_for_artist).and_return nil
-      end
-      it 'should raise' do
-        pending 'this is broken'
-        expect{ subject.get_data 'FZ' }.to raise_error RuntimeError
+        subject.data = nil
       end
 
+      describe 'when artist is found' do
+
+        before do
+          allow(subject).to receive(:fetch_data_for_artist).and_return({
+            'artist' => 'Foo',
+            'albums' => %w(bar baz qux),
+          })
+          subject.send :setup
+        end
+
+        it 'should set name' do
+          expect(subject.name).to eq 'Foo'
+        end
+
+        it 'should set slug' do
+          expect(subject.slug).to eq 'foo'
+        end
+
+        it 'should set data' do
+          expect(subject.data).to eq({artist: 'Foo', albums: %w(bar baz qux)}.to_json)
+        end
+
+      end
+
+      describe 'when artist is not found' do
+
+        before do
+          allow(subject).to receive(:fetch_data_for_artist).and_return nil
+        end
+
+        it 'should raise' do
+          expect{ subject.send :setup }.to raise_error RuntimeError
+        end
+
+      end
     end
   end
 

@@ -3,6 +3,7 @@ class Artist < ActiveRecord::Base
   include LyricsWiki
 
   before_validation :setup
+  validates :slug, presence: true
 
   def self.find_or_create(name)
     Artist.find_or_create_by slug: name.to_slug
@@ -31,13 +32,11 @@ class Artist < ActiveRecord::Base
   private
 
   def setup
-    return false unless slug # Artists are created via .find_or_create_by :slug
     unless self.data
       raw_data = fetch_data_for_artist(slug) or raise 'artist data not found'
-      #require 'awesome_print'
-      #ap raw_data
       self.data = raw_data.to_json
       self.name = raw_data["artist"]
+      self.slug = raw_data["artist"].to_slug
       @data = JSON.parse(data) if data # nil on creation; shouldn't need to do this
     end
   end
