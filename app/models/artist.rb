@@ -28,7 +28,7 @@ class Artist < ActiveRecord::Base
     self.name = name
     self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found'
     self.slug = name.to_slug
-    save
+    save!
   end
 
   private
