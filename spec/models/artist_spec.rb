@@ -120,4 +120,57 @@ describe Artist do
     end
   end
 
+  describe '#get_data' do
+
+    before do
+      allow(subject).to receive(:fetch_data_for_artist)
+    end
+
+    it 'should set name' do
+      name = 'Frank Zappa'
+      subject.get_data name
+
+      expect(subject.name).to eq name
+    end
+
+    it 'should set slug' do
+      subject.get_data 'Frank Zappa'
+
+      expect(subject.slug).to eq 'frank-zappa'
+    end
+
+    describe 'when artist is found' do
+      before do
+        allow(subject).to receive(:fetch_data_for_artist).and_return({albums: %w(foo bar baz)})
+      end
+      it 'should set data' do
+        subject.get_data 'Frank Zappa'
+        expect(subject.data).to eq({albums: %w(foo bar baz)}.to_json)
+      end
+    end
+
+    describe 'when artist is not found' do
+      before do
+        allow(subject).to receive(:fetch_data_for_artist).and_return nil
+      end
+      it 'should raise' do
+        pending 'this is broken'
+        expect{ subject.get_data 'FZ' }.to raise_error RuntimeError
+      end
+
+    end
+  end
+
+  describe '.find_or_create' do
+
+    describe 'when artist with that name exists' do
+      it 'should return the artist'
+    end
+
+    describe 'when artist with that name does not exist' do
+      it 'should create a new artist'
+    end
+
+  end
+
 end

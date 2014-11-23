@@ -26,7 +26,7 @@ class Artist < ActiveRecord::Base
 
   def get_data(name)
     self.name = name
-    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found'
+    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found' # TODO fix this
     self.slug = name.to_slug
     save!
   end
@@ -54,7 +54,7 @@ class Artist < ActiveRecord::Base
   end
 
   def load_data
-    @data = JSON.parse(data) if data # nil on creation
+    @data = JSON.parse(data) if data # nil on creation; shouldn't need to do this
   end
 
   def fetch_new_song_lyrics
