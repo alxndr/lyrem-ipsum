@@ -1,17 +1,11 @@
 FactoryGirl.define do
 
   factory :artist do
-    data_json = {
-      'albums' => [
-        'debut',
-        'sophomore',
-        'swan song',
-        'shark jump'
-      ]
-    }.to_json
+    fake_data = { albums: %w(debut sophomore swansong sharkjump) }
 
-    name 'bob' #{ |n| "#{Faker::Name.name} #{n}" }
-    data data_json
+    name 'Frank'
+    slug 'fz'
+    data fake_data.to_json
   end
 
 end

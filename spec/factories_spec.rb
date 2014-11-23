@@ -10,6 +10,8 @@ FactoryGirl.factories.map(&:name).reject{|factory_sym| broken_factories.include?
     let(:first) { FactoryGirl.build factory_sym }
 
     it 'should be valid' do
+      require 'awesome_print'
+      ap first
       expect(first).to be_valid, first.errors.full_messages.to_sentence
     end
 

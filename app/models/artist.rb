@@ -2,7 +2,11 @@ class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  after_initialize :load_data
+  before_validation :setup
+
+  def self.find_or_create(name)
+    Artist.find_or_create_by slug: name.to_slug
+  end
 
   def random_lyric
     @lyrics ||= []
@@ -24,25 +28,19 @@ class Artist < ActiveRecord::Base
     end
   end
 
-  def get_data(name)
-    self.name = name
-    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found' # TODO fix this
-    self.slug = name.to_slug
-    save!
-  end
-
-  def self.find_or_create(name)
-    artist = Artist.find_by_slug(name.to_slug)
-    unless artist
-      artist = Artist.new
-      artist.get_data(name)
-      artist.save!
-      artist.send(:load_data) # TODO shouldn't need to do this
-    end
-    artist
-  end
-
   private
+
+  def setup
+    return false unless slug # Artists are created via .find_or_create_by :slug
+    unless self.data
+      raw_data = fetch_data_for_artist(slug) or raise 'artist data not found'
+      #require 'awesome_print'
+      #ap raw_data
+      self.data = raw_data.to_json
+      self.name = raw_data["artist"]
+      @data = JSON.parse(data) if data # nil on creation; shouldn't need to do this
+    end
+  end
 
   def content_generation_strategy(what, phrase_maker)
     case what
@@ -62,10 +60,6 @@ class Artist < ActiveRecord::Base
     else
       raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
     end
-  end
-
-  def load_data
-    @data = JSON.parse(data) if data # nil on creation; shouldn't need to do this
   end
 
   def fetch_new_song_lyrics
