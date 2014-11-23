@@ -22,14 +22,7 @@ class LyricsController < ApplicationController
   private
 
   def find_or_create_artist(name)
-    artist = Artist.find_by_slug(name.to_slug)
-    unless artist
-      artist = Artist.new
-      artist.get_data(name)
-      artist.save!
-      artist.send(:load_data) # TODO shouldn't need to do this
-    end
-    artist
+    Artist.find_or_create name
   end
 
   def interpret_what(input)

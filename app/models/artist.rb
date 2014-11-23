@@ -31,6 +31,17 @@ class Artist < ActiveRecord::Base
     save!
   end
 
+  def self.find_or_create(name)
+    artist = Artist.find_by_slug(name.to_slug)
+    unless artist
+      artist = Artist.new
+      artist.get_data(name)
+      artist.save!
+      artist.send(:load_data) # TODO shouldn't need to do this
+    end
+    artist
+  end
+
   private
 
   def content_generation_strategy(what, phrase_maker)
