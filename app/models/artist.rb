@@ -48,14 +48,14 @@ class Artist < ActiveRecord::Base
       phrase_maker.call
 
     when :sentences
-      phrases = lyrem what: :phrases, how_many: rand(2..5), phrase_maker: phrase_maker
+      phrases = lyrem(what: :phrases, how_many: rand(2..5), phrase_maker: phrase_maker)
       sentence = phrases.join_after_regex(glue: ', ', regex: /[a-z]/i).capitalize_first_letter.strip
       sentence.gsub!(/[,;:'"-]$/, '')
       sentence += '.' if /[a-z]$/i.match(sentence)
       sentence
 
     when :paragraphs
-      lyrem( what: :sentences, how_many: rand(3..7), phrase_maker: phrase_maker ).join(' ')
+      lyrem(what: :sentences, how_many: rand(3..7), phrase_maker: phrase_maker).join(' ')
 
     else
       raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
@@ -96,19 +96,12 @@ class Artist < ActiveRecord::Base
     @songs_fetched ||= []
   end
 
-  def songs_data
-    @songs_data ||= song_names.map do |song|
-      song_data = fetch_song_data(name, song)
-      if song_data && song_data['lyrics']
-        song_data
-      else
-        nil
-      end
-    end.flatten.compact
+  def song_names
+    @song_names ||= filtered_songs
   end
 
-  def song_names
-    @song_names ||= albums.map{ |a| a['songs'] }.flatten.sort.uniq
+  def filtered_songs
+    albums.map { |album| album['songs'] }.flatten.sort.uniq.reject { |song| song.match(/[a-z]:[A-Z]/) }
   end
 
   def albums

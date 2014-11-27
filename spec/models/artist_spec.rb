@@ -73,7 +73,7 @@ describe Artist do
       end
 
       it 'capitalizes the first letter' do
-        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
+        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match(/[A-Z]/)
       end
 
       describe 'when given a phrase_maker' do
@@ -168,6 +168,32 @@ describe Artist do
           expect{ subject.send :setup }.to raise_error RuntimeError
         end
 
+      end
+    end
+  end
+
+  describe '#song_names' do
+    describe 'when not already set' do
+
+      before do
+        subject.stub(:albums).and_return [
+          { 'songs' => ['foo', 'bar'] },
+          { 'songs' => ['baz', 'Qux:Quux'] }
+        ]
+      end
+
+      it 'returns a list of song names' do
+        songs = subject.send(:song_names)
+
+        expect(songs).to include 'foo'
+        expect(songs).to include 'bar'
+        expect(songs).to include 'baz'
+      end
+
+      it 'filters out the most obvious covers' do
+        songs = subject.send(:song_names)
+
+        expect(songs).not_to include 'Qux:Quux'
       end
     end
   end
