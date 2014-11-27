@@ -17,13 +17,13 @@ feature 'home page' do
 
     before do
       fake_artist = FactoryGirl.build_stubbed :artist
-      fake_artist.stub(:name).and_return "The Phish"
+      fake_artist.stub(:name).and_return 'The Phish'
       fake_artist.stub(:random_lyric).and_return "that's 119 to you and me"
       Artist.stub(:find_or_create).and_return fake_artist
     end
 
     it 'sends you to a new page' do
-      VCR.use_cassette 'artist_search_and_lyrics', record: :new_episodes do
+      VCR.use_cassette 'artist_search_and_lyrics', record: :none do
         fill_in 'artist', with: 'phish'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
