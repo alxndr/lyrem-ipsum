@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe Artist do
 
-  subject { FactoryGirl.create :artist }
+  subject { FactoryGirl.build_stubbed :artist }
 
   describe 'validations' do
     it { is_expected.to validate_presence_of :slug }
+    # TODO other validations...
   end
 
   describe '#random_lyric' do

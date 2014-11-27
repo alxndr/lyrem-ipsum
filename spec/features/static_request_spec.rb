@@ -14,8 +14,8 @@ feature 'home page' do
   end
 
   describe 'submitting band name' do
-    VCR.use_cassette 'artist_api_responses', record: :once do
-      it 'sends you to a new page' do
+    it 'sends you to a new page' do
+      VCR.use_cassette 'artist_search_and_lyrics', record: :once do
         fill_in 'artist', with: 'blind faith'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
@@ -28,7 +28,7 @@ feature 'home page' do
 
   describe 'analytics' do
     it 'is on the page' do
-      page.source.should match 'UA-xxxxx-y'
+      expect(page.source).to match 'UA-xxxxx-y'
     end
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-non_idempotent_factories = %i()
+non_idempotent_factories = %i(artist) # TODO artist isn't really idempotent
 broken_factories = %i()
 
 FactoryGirl.factories.map(&:name).reject { |factory_sym|

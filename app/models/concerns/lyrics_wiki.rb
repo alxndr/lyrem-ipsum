@@ -36,7 +36,7 @@ module LyricsWiki
   end
 
   def valid_response?(response)
-    response
+    response # TODO fix
   end
 
   def has_album_data?(response)

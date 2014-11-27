@@ -1,9 +1,12 @@
+require 'awesome_print'
 class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  before_validation :setup
   validates :slug, presence: true
+  # TODO other validations...
+
+  before_create :setup
 
   def self.find_or_create(name)
     Artist.find_or_create_by slug: name.to_slug
@@ -32,13 +35,11 @@ class Artist < ActiveRecord::Base
   private
 
   def setup
-    unless self.data
-      raw_data = fetch_data_for_artist(slug) or raise 'artist data not found'
-      self.data = raw_data.to_json
-      self.name = raw_data["artist"]
-      self.slug = raw_data["artist"].to_slug
-      @data = JSON.parse(data) if data # nil on creation; shouldn't need to do this
-    end
+    raw_data = fetch_data_for_artist(slug.gsub('-', ' ')) or raise 'artist data not found'
+    @data = raw_data
+    self.data = @data.to_json
+    self.name = @data["artist"]
+    self.slug = @data["artist"].to_slug
   end
 
   def content_generation_strategy(what, phrase_maker)
@@ -111,6 +112,7 @@ class Artist < ActiveRecord::Base
   end
 
   def albums
+    @data ||= JSON.parse(data) # ugh. instances created from db skip the @data assignment in #setup
     @albums ||= @data['albums']
   end
 
