@@ -14,16 +14,23 @@ feature 'home page' do
   end
 
   describe 'submitting band name' do
+
+    before do
+      Artist.stub(:new).and_return FactoryGirl.build_stubbed :artist
+    end
+
     it 'sends you to a new page' do
-      VCR.use_cassette 'artist_search_and_lyrics', record: :once do
-        fill_in 'artist', with: 'blind faith'
+      VCR.use_cassette 'artist_search_and_lyrics', record: :none do
+
+        fill_in 'artist', with: 'phish'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
         click_button 'do it'
 
-        expect(page).to have_content 'Lorem ipsum from Blind Faith lyrics'
+        expect(page).to have_content 'Lorem ipsum from Phish lyrics'
       end
     end
+
   end
 
   describe 'analytics' do

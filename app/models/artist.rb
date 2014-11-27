@@ -1,4 +1,3 @@
-require 'awesome_print'
 class Artist < ActiveRecord::Base
 
   include LyricsWiki
@@ -38,8 +37,8 @@ class Artist < ActiveRecord::Base
     raw_data = fetch_data_for_artist(slug.gsub('-', ' ')) or raise 'artist data not found'
     @data = raw_data
     self.data = @data.to_json
-    self.name = @data["artist"]
-    self.slug = @data["artist"].to_slug
+    self.name = @data['artist']
+    self.slug = @data['artist'].to_slug
   end
 
   def content_generation_strategy(what, phrase_maker)
