@@ -73,7 +73,7 @@ describe Artist do
       end
 
       it 'capitalizes the first letter' do
-        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match /[A-Z]/
+        /[a-z]/i.match(subject.lyrem(what: :sentences, how_many: 1).first)[0].should match(/[A-Z]/)
       end
 
       describe 'when given a phrase_maker' do
@@ -177,8 +177,8 @@ describe Artist do
 
       before do
         subject.stub(:albums).and_return [
-          {'songs' => ['foo', 'bar']},
-          {'songs' => ['baz', 'Qux:Quux']}
+          { 'songs' => ['foo', 'bar'] },
+          { 'songs' => ['baz', 'Qux:Quux'] }
         ]
       end
 
