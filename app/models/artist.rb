@@ -96,16 +96,16 @@ class Artist < ActiveRecord::Base
     @songs_fetched ||= []
   end
 
-  def songs_data
-    @songs_data ||= song_names.map do |song|
-      song_data = fetch_song_data(name, song)
-      if song_data && song_data['lyrics']
-        song_data
-      else
-        nil
-      end
-    end.flatten.compact
-  end
+#  def songs_data
+#    @songs_data ||= song_names..map do |song|
+#      song_data = fetch_song_data(name, song)
+#      if song_data && song_data['lyrics']
+#        song_data
+#      else
+#        nil
+#      end
+#    end.flatten.compact
+#  end
 
   def song_names
     @song_names ||= albums.map{ |a| a['songs'] }.flatten.sort.uniq
