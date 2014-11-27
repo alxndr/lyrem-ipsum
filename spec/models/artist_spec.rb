@@ -172,6 +172,32 @@ describe Artist do
     end
   end
 
+  describe '#song_names' do
+    describe 'when not already set' do
+
+      before do
+        subject.stub(:albums).and_return [
+          {'songs' => ['foo', 'bar']},
+          {'songs' => ['baz', 'Qux:Quux']}
+        ]
+      end
+
+      it 'returns a list of song names' do
+        songs = subject.send(:song_names)
+
+        expect(songs).to include 'foo'
+        expect(songs).to include 'bar'
+        expect(songs).to include 'baz'
+      end
+
+      it 'filters out the most obvious covers' do
+        songs = subject.send(:song_names)
+
+        expect(songs).not_to include 'Qux:Quux'
+      end
+    end
+  end
+
   describe '.find_or_create' do
 
     describe 'when artist with that name exists' do

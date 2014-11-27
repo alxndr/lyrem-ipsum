@@ -108,7 +108,11 @@ class Artist < ActiveRecord::Base
 #  end
 
   def song_names
-    @song_names ||= albums.map{ |a| a['songs'] }.flatten.sort.uniq
+    @song_names ||= albums.map{ |album_data|
+      album_data['songs']
+    }.flatten.sort.uniq.reject{ |song_name|
+      song_name.match /[a-z]:[A-Z]/
+    }
   end
 
   def albums
