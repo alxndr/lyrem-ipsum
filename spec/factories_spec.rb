@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-non_idempotent_factories = []
-broken_factories = []
+non_idempotent_factories = %i(artist) # TODO artist isn't really idempotent
+broken_factories = %i()
 
-FactoryGirl.factories.map(&:name).reject{|factory_sym| broken_factories.include? factory_sym}.each do |factory_sym|
+FactoryGirl.factories.map(&:name).reject { |factory_sym|
+  broken_factories.include? factory_sym
+}.each do |factory_sym|
   factory_name = factory_sym.to_s.camelize
 
   describe "The #{factory_name} factory" do
@@ -15,7 +17,7 @@ FactoryGirl.factories.map(&:name).reject{|factory_sym| broken_factories.include?
 
     describe "creating a second #{factory_name}" do
       before do
-        first.save
+        first.save # save! ?
       end
       it 'should be valid' do
         second = FactoryGirl.build(factory_sym)
