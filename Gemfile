@@ -31,9 +31,6 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'fuubar'
-  gem 'guard'
-  gem 'guard-rails'
-  gem 'guard-rspec'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
@@ -42,6 +39,9 @@ end
 group :development do
   gem 'awesome_print'
   gem 'better_errors'
+  gem 'guard'
+  gem 'guard-rails'
+  gem 'guard-rspec'
 end
 
 group :test do
