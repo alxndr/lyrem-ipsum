@@ -153,7 +153,7 @@ describe Artist do
         end
 
         it 'should set data' do
-          expect(subject.data).to eq({artist: 'Foo', albums: %w(bar baz qux)}.to_json)
+          expect(subject.data).to eq({ artist: 'Foo', albums: %w(bar baz qux) }.to_json)
         end
 
       end

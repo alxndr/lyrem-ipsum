@@ -45,4 +45,3 @@ module LyricsWiki
       response['albums'].present?
   end
 end
-

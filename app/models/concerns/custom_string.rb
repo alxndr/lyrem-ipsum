@@ -3,15 +3,18 @@ module CustomString
   def to_slug
     strip.
       downcase.
-      gsub(/['`]/,'').       # ignore apostrophes
-      gsub('&',' and ').     # expand abbreviations
-      gsub(/[^a-z0-9]/,'-'). # hyphenate
-      gsub(/-+/,'-').        # collapse duplicates
-      gsub(/^-*|-*$/,'')     # trim ends
+      gsub(/['`]/, '').       # ignore apostrophes
+      gsub('&', ' and ').     # expand abbreviations
+      gsub(/[^a-z0-9]/, '-'). # hyphenate
+      gsub(/-+/, '-').        # collapse duplicates
+      gsub(/^-*|-*$/, '')     # trim ends
   end
 
   def valid_lyric?
-    present? && length < 100 && index(/[a-z]/i) && !index(/\b(not found|instrumental|transcribed|copyright|chorus)\b/i)
+    present? &&
+      length < 100 &&
+      index(/[a-z]/i) &&
+      !index(/\b(not found|instrumental|transcribed|copyright|chorus)\b/i)
   end
 
   def capitalize_first_letter
