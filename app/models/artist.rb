@@ -2,7 +2,14 @@ class Artist < ActiveRecord::Base
 
   include LyricsWiki
 
-  after_initialize :load_data
+  validates :slug, presence: true
+  # TODO other validations...
+
+  before_create :setup
+
+  def self.find_or_create(name)
+    Artist.find_or_create_by slug: name.to_slug
+  end
 
   def random_lyric
     @lyrics ||= []
@@ -24,14 +31,16 @@ class Artist < ActiveRecord::Base
     end
   end
 
-  def get_data(name)
-    self.name = name
-    self.data = fetch_data_for_artist(name).to_json or raise 'artist data not found'
-    self.slug = name.to_slug
-    save
-  end
-
   private
+
+  def setup
+    raw_data = fetch_data_for_artist(slug.gsub('-', ' '))
+    raise 'artist data not found' unless raw_data
+    @data = raw_data
+    self.data = @data.to_json
+    self.name = @data['artist']
+    self.slug = @data['artist'].to_slug
+  end
 
   def content_generation_strategy(what, phrase_maker)
     case what
@@ -51,10 +60,6 @@ class Artist < ActiveRecord::Base
     else
       raise ArgumentError.new('Artist#lyrem called with unfamiliar keys')
     end
-  end
-
-  def load_data
-    @data = JSON.parse(data) if data # nil on creation
   end
 
   def fetch_new_song_lyrics
@@ -107,6 +112,7 @@ class Artist < ActiveRecord::Base
   end
 
   def albums
+    @data ||= JSON.parse(data) # ugh. instances created from db skip the @data assignment in #setup
     @albums ||= @data['albums']
   end
 

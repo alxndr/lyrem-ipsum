@@ -1,17 +1,15 @@
 FactoryGirl.define do
 
   factory :artist do
-    data_json = {
-      'albums' => [
-        'debut',
-        'sophomore',
-        'swan song',
-        'shark jump'
-      ]
-    }.to_json
+    #fake_data = { albums: %w(debut sophomore swansong sharkjump) }
 
-    name 'bob' #{ |n| "#{Faker::Name.name} #{n}" }
-    data data_json
+    #name 'Frank'
+    slug 'fz' # TODO should be unique
+    #data fake_data.to_json
+
+    #before(:build) do |a|
+      #a.stub(:fetch_data_for_artist).and_return fake_data
+    #end
   end
 
 end

@@ -8,27 +8,36 @@ feature 'home page' do
 
   describe 'content' do
     it 'asks you to type in your favorite band' do
-      page.should have_content 'Make filler text from the lyrics of:'
-      page.should have_selector 'input#artist[type=text]'
+      expect(page).to have_content 'Make filler text from the lyrics of:'
+      expect(page).to have_selector 'input#artist[type=text]'
     end
   end
 
   describe 'submitting band name' do
+
+    before do
+      fake_artist = FactoryGirl.build_stubbed :artist
+      fake_artist.stub(:name).and_return 'The Phish'
+      fake_artist.stub(:random_lyric).and_return "that's 119 to you and me"
+      Artist.stub(:find_or_create).and_return fake_artist
+    end
+
     it 'sends you to a new page' do
-      VCR.use_cassette 'artist_api_responses', record: :once do
-        fill_in 'artist', with: 'blind faith'
+      VCR.use_cassette 'artist_search_and_lyrics', record: :none do
+        fill_in 'artist', with: 'phish'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
         click_button 'do it'
 
-        page.should have_content 'Lorem ipsum from Blind Faith lyrics'
+        expect(page).to have_content 'Lorem ipsum from The Phish lyrics'
       end
     end
+
   end
 
   describe 'analytics' do
-    it 'tracks your every movement' do
-      page.source.should match 'UA-xxxxx-y'
+    it 'is on the page' do
+      expect(page.source).to match 'UA-xxxxx-y'
     end
   end
 

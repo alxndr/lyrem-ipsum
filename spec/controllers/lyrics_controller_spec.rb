@@ -45,6 +45,9 @@ describe LyricsController, type: :controller do
           describe 'when not "local" artist' do
             before do
               allow(Artist).to receive(:find_by_slug).and_return nil
+              a = Artist.new
+              allow(a).to receive(:save!)
+              allow(Artist).to receive(:new).and_return a
             end
 
             it 'assigns @artist' do # behaves_like

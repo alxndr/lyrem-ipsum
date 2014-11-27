@@ -2,13 +2,19 @@ require 'spec_helper'
 
 describe Artist do
 
-  subject { FactoryGirl.create :artist }
+  subject { FactoryGirl.build_stubbed :artist }
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of :slug }
+    # TODO other validations...
+  end
 
   describe '#random_lyric' do
     it 'returns something from @lyrics' do
-      subject.send :load_data
+      pending 'how to test the randomness buried in the math'
       subject.instance_variable_set(:@lyrics, %w(foo bar baz))
-      %w(foo bar baz).should include subject.random_lyric
+      lyric = subject.random_lyric
+      expect(%w(foo bar baz)).to contain lyric
     end
   end
 
@@ -118,6 +124,64 @@ describe Artist do
         expect { subject.lyrem how_many: 13 }.to raise_error ArgumentError
       end
     end
+  end
+
+  describe '#setup' do
+
+    describe 'when missing data' do
+
+      before do
+        subject.data = nil
+      end
+
+      describe 'when artist is found' do
+
+        before do
+          allow(subject).to receive(:fetch_data_for_artist).and_return({
+            'artist' => 'Foo',
+            'albums' => %w(bar baz qux),
+          })
+          subject.send :setup
+        end
+
+        it 'should set name' do
+          expect(subject.name).to eq 'Foo'
+        end
+
+        it 'should set slug' do
+          expect(subject.slug).to eq 'foo'
+        end
+
+        it 'should set data' do
+          expect(subject.data).to eq({artist: 'Foo', albums: %w(bar baz qux)}.to_json)
+        end
+
+      end
+
+      describe 'when artist is not found' do
+
+        before do
+          allow(subject).to receive(:fetch_data_for_artist).and_return nil
+        end
+
+        it 'should raise' do
+          expect{ subject.send :setup }.to raise_error RuntimeError
+        end
+
+      end
+    end
+  end
+
+  describe '.find_or_create' do
+
+    describe 'when artist with that name exists' do
+      it 'should return the artist'
+    end
+
+    describe 'when artist with that name does not exist' do
+      it 'should create a new artist'
+    end
+
   end
 
 end
