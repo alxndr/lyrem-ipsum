@@ -16,18 +16,20 @@ feature 'home page' do
   describe 'submitting band name' do
 
     before do
-      Artist.stub(:new).and_return FactoryGirl.build_stubbed :artist
+      fake_artist = FactoryGirl.build_stubbed :artist
+      fake_artist.stub(:name).and_return "The Phish"
+      fake_artist.stub(:random_lyric).and_return "that's 119 to you and me"
+      Artist.stub(:find_or_create).and_return fake_artist
     end
 
     it 'sends you to a new page' do
-      VCR.use_cassette 'artist_search_and_lyrics', record: :none do
-
+      VCR.use_cassette 'artist_search_and_lyrics', record: :new_episodes do
         fill_in 'artist', with: 'phish'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
         click_button 'do it'
 
-        expect(page).to have_content 'Lorem ipsum from Phish lyrics'
+        expect(page).to have_content 'Lorem ipsum from The Phish lyrics'
       end
     end
 

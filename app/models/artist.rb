@@ -34,7 +34,8 @@ class Artist < ActiveRecord::Base
   private
 
   def setup
-    raw_data = fetch_data_for_artist(slug.gsub('-', ' ')) or raise 'artist data not found'
+    raw_data = fetch_data_for_artist(slug.gsub('-', ' '))
+    raise 'artist data not found' unless raw_data
     @data = raw_data
     self.data = @data.to_json
     self.name = @data['artist']
