@@ -18,7 +18,7 @@ describe LyricsWiki do
         }.to_json
       )
 
-      fetch_data_for_artist('frank zappa')['artist'].should == 'Frank Zappa'
+      expect(fetch_data_for_artist('frank zappa')['artist']).to eq 'Frank Zappa'
     end
   end
 
@@ -37,19 +37,31 @@ describe LyricsWiki do
         }.to_json
       )
 
-      fetch_song_data('frank zappa', 'lucille').keys.should == ['artist', 'song', 'lyrics']
+      expect(fetch_song_data('frank zappa', 'lucille').keys).to eq ['artist', 'song', 'lyrics']
     end
   end
 
   describe '#fetch_lyrics' do
-    it 'pulls lyrics out of get_song_data' do
-      self.class.any_instance.stub(fetch_song_data: {
-        artist: 'Frank Zappa',
-        song: 'Im the Slime',
-        lyrics: 'Im the slime oozin out of your tv set'
+    it 'pulls lyrics out of fetch_song_data' do
+      self.stub(fetch_song_data: {
+        'artist' => 'Frank Zappa',
+        'song' => 'Im the Slime',
+        'lyrics' => 'Im the slime oozin out of your tv set',
+        'url' => 'bar',
       })
-      pending 'figure out how this stub needs to work'
-      fetch_lyrics('frank zappa', 'slime') == 'Im the slime oozin out of your tv set'
+      self.stub(valid_response?: true)
+      pending 'reassess #fetch_lyrics'
+
+      expect(fetch_lyrics('frank zappa', 'slime')).to eq 'Im the slime oozin out of your tv set'
+    end
+  end
+
+  describe '#has_album_data?' do
+    let(:something_with_lyrics_wiki) { Class.new{ include LyricsWiki }.new }
+    describe 'when albums are there' do
+      it 'is true' do
+        expect(something_with_lyrics_wiki.has_album_data?({'albums' => %w(foo bar)})).to be true
+      end
     end
   end
 
