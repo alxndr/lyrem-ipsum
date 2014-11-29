@@ -49,6 +49,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bitters (0.10.1)
       bourbon (>= 3.2)
       sass (>= 3.2)
@@ -91,6 +93,7 @@ GEM
       thor
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
+    debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -281,6 +284,7 @@ DEPENDENCIES
   arel
   awesome_print
   better_errors
+  binding_of_caller
   bitters
   brakeman
   bugsnag
