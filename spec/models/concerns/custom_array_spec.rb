@@ -31,8 +31,8 @@ describe CustomArray do
 
     describe 'missing some pieces' do
       it 'raises' do
-        expect{ test_array.join_after_regex(glue: 'foo') }.to raise_error ArgumentError
-        expect{ test_array.join_after_regex(regex: /foo/) }.to raise_error ArgumentError
+        expect { test_array.join_after_regex(glue: 'foo') }.to raise_error ArgumentError
+        expect { test_array.join_after_regex(regex: /foo/) }.to raise_error ArgumentError
       end
     end
 
