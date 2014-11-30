@@ -20,7 +20,7 @@ describe Artist do
 
   describe '#lyrem' do
 
-    let(:phrases) { [
+    LYRICS = [
       'fringe. I mean that, man.',
       'the way no other lover can.',
       'even if I invaded Nicaragua',
@@ -31,7 +31,9 @@ describe Artist do
       'or are you seeking entry to engage in criminal or immoral activities?',
       "how'd he get in the show?",
       'replaced by a rash. What?'
-    ] }
+    ]
+
+    let(:phrases) { LYRICS }
 
     before do
       subject.stub(:fetch_new_song_lyrics).and_return(phrases)
@@ -39,11 +41,11 @@ describe Artist do
 
     describe ':phrases' do
       it 'returns an array of n strings' do
-        phrases = subject.lyrem(what: :phrases, how_many: 3)
-        phrases.length.should == 3
-        phrases.first.class.should == String # fetch_new_song_lyrics.class
-        phrases.each do |phrase|
-          phrases.should include phrase
+        l = subject.lyrem(what: :phrases, how_many: 3)
+        l.length.should == 3
+        l.first.class.should == String # fetch_new_song_lyrics.class
+        l.each do |phrase|
+          l.should include phrase
         end
       end
 
