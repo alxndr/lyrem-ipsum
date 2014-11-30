@@ -1,8 +1,13 @@
 module CustomString
 
   REGEX_BRACKETS_AND_CONTENTS = %r{\[.*\]}
+  REGEX_FIRST_LETTER          = %r{([^\s\d[:punct:]])}i
   REGEX_HTML_TAG_AND_CONTENTS = %r{<[^>]*>.*?</[^>]*>}
   REGEX_HTML_SELF_CLOSING_TAG = %r{<[^>]*>}
+
+  def capitalize_first_letter
+    sub(REGEX_FIRST_LETTER) { $1.mb_chars.capitalize.to_s }
+  end
 
   def sanitize_lyric
     gsub(REGEX_BRACKETS_AND_CONTENTS, '').
@@ -26,10 +31,6 @@ module CustomString
       length < 100 &&
       index(/[a-z]/i) &&
       !index(/\b(not found|instrumental|transcribed|copyright|chorus)\b/i)
-  end
-
-  def capitalize_first_letter
-    sub(/([^\s\d[:punct:]])/i) { $1.mb_chars.capitalize.to_s }
   end
 
 end

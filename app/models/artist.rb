@@ -78,8 +78,10 @@ class Artist < ActiveRecord::Base
   end
 
   def process_lyrics(lyrics_arr)
-    processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
-    processed_lyrics.presence
+    sanitize_lyrics(lyrics_arr).
+      keep_if(&:valid_lyric?).
+      uniq.
+      presence
   end
 
   def sanitize_lyrics(lyrics_arr)
