@@ -1,12 +1,6 @@
 module LyricsWiki
   extend ActiveSupport::Concern
 
-  def fetch_data_for_artist(name)
-    raise 'no name given' unless name.present?
-    Rails.logger.info "Using Lyriki version: #{Lyriki::VERSION}"
-    Lyriki::Legacy::ArtistData.new(name).response_data
-  end
-
   def fetch_song_data(artist, song_name)
     raise 'need artist and song name' unless artist.present? && song_name.present?
     Rails.logger.info "Using Lyriki version: #{Lyriki::VERSION}"
@@ -16,7 +10,7 @@ module LyricsWiki
   def fetch_lyrics(artist, song_name) # returns array of strings, or nil
     # no quality checking
     Rails.logger.info "Using Lyriki version: #{Lyriki::VERSION}"
-    Lyriki::Legacy::SongLyrics.new(artist: artist, song: song_name).response_data.presence
+    Lyriki::Legacy::SongLyrics.new(artist: artist, song: song_name).response_data
   end
 
 end

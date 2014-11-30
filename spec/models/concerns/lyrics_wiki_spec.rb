@@ -4,24 +4,6 @@ describe LyricsWiki do
 
   include LyricsWiki
 
-  describe '#fetch_data_for_artist' do
-    it 'gets artist info from lyrics.wikia.com' do
-      stub_request(
-        :get,
-        'http://lyrics.wikia.com/api.php?artist=frank%20zappa&fmt=realjson&func=getArtist'
-      ).to_return(
-        status: 200,
-        headers: {},
-        body: {
-          artist: 'Frank Zappa',
-          albums: ['Hot Rats']
-        }.to_json
-      )
-
-      expect(fetch_data_for_artist('frank zappa')['artist']).to eq 'Frank Zappa'
-    end
-  end
-
   describe '#get_song_data' do
     it 'gets data from lyrics.wikia.com' do
       stub_request(

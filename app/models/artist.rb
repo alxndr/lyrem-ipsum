@@ -34,9 +34,10 @@ class Artist < ActiveRecord::Base
   private
 
   def setup
-    raw_data = fetch_data_for_artist(slug.gsub('-', ' '))
-    raise 'artist data not found' unless raw_data
-    @data = raw_data
+    name = slug.gsub('-', ' ').strip
+    raise 'no name given' unless name.present?
+    @data = Lyriki::Legacy::ArtistData.new(name).response_data
+    raise 'artist data not found' unless @data
     self.data = @data.to_json
     self.name = @data['artist']
     self.slug = @data['artist'].to_slug
