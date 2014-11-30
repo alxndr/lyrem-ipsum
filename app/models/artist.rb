@@ -1,7 +1,5 @@
 class Artist < ActiveRecord::Base
 
-  include LyricsWiki
-
   validates :slug, presence: true
   # TODO other validations...
 

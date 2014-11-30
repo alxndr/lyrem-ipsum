@@ -137,7 +137,7 @@ describe Artist do
       describe 'when artist is found' do
 
         before do
-          fake_artist_data = double("ArtistData", response_data: {
+          fake_artist_data = double('ArtistData', response_data: {
             'artist' => 'Foo',
             'albums' => %w(bar baz qux),
           })
@@ -162,7 +162,7 @@ describe Artist do
       describe 'when artist is not found' do
 
         before do
-          fake_thing = double("ArtistData", response_data: nil)
+          fake_thing = double('ArtistData', response_data: nil)
           allow(Lyriki::Legacy::ArtistData).to receive(:new).and_return(fake_thing)
         end
 
