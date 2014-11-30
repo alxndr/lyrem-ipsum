@@ -1,6 +1,7 @@
 [Lyrem Ipsum](http://lyrem-ipsum.com)
 =====================================
 
+[![staging site status](https://codeship.com/projects/139410e0-5a68-0132-efa6-46545b4ba6c4/status)](https://codeship.com/projects/50372)
 [![Build Status](https://travis-ci.org/alxndr/lyrem-ipsum.png?branch=master)](https://travis-ci.org/alxndr/lyrem-ipsum)
 [![Code Climate](https://codeclimate.com/github/alxndr/lyrem-ipsum.png)](https://codeclimate.com/github/alxndr/lyrem-ipsum)
 [![Coverage Status](https://coveralls.io/repos/alxndr/lyrem-ipsum/badge.png)](https://coveralls.io/r/alxndr/lyrem-ipsum)
