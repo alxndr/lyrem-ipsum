@@ -137,10 +137,11 @@ describe Artist do
       describe 'when artist is found' do
 
         before do
-          allow(subject).to receive(:fetch_data_for_artist).and_return({
+          fake_artist_data = double('ArtistData', response_data: {
             'artist' => 'Foo',
             'albums' => %w(bar baz qux),
           })
+          allow(Lyriki::Legacy::ArtistData).to receive(:new).and_return(fake_artist_data)
           subject.send :setup
         end
 
@@ -161,11 +162,12 @@ describe Artist do
       describe 'when artist is not found' do
 
         before do
-          allow(subject).to receive(:fetch_data_for_artist).and_return nil
+          fake_thing = double('ArtistData', response_data: nil)
+          allow(Lyriki::Legacy::ArtistData).to receive(:new).and_return(fake_thing)
         end
 
         it 'should raise' do
-          expect{ subject.send :setup }.to raise_error RuntimeError
+          expect { subject.send :setup }.to raise_error RuntimeError
         end
 
       end
