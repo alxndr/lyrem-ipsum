@@ -9,6 +9,10 @@ module CustomString
     sub(REGEX_FIRST_LETTER) { $1.mb_chars.capitalize.to_s }
   end
 
+  def looks_like_cover_song?
+    match %r{[a-z]:[A-Z]}
+  end
+
   def sanitize_lyric
     gsub(REGEX_BRACKETS_AND_CONTENTS, '').
       gsub(REGEX_HTML_TAG_AND_CONTENTS, '').
