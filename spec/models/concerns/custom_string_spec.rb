@@ -6,6 +6,49 @@ describe CustomString do
     include CustomString
   end
 
+  describe '#capitalize_first_letter' do
+    it 'capitalizes the first letter' do
+      TestCustomString.new('þrettán').capitalize_first_letter.should == 'Þrettán'
+      TestCustomString.new('!!!1 bar').capitalize_first_letter.should == '!!!1 Bar'
+      TestCustomString.new('qux QUUX').capitalize_first_letter.should == 'Qux QUUX'
+      TestCustomString.new('QUX Quux').capitalize_first_letter.should == 'QUX Quux'
+    end
+
+    it 'does not double-capitalize' do
+      TestCustomString.new('Baz').capitalize_first_letter.should == 'Baz'
+    end
+  end
+
+  describe '#is_suspected_cover?' do
+    describe 'when Name:Song' do
+      subject { TestCustomString.new('Foo:Bar') }
+      it 'should be true' do
+        expect(subject.looks_like_cover_song?).to be_truthy
+      end
+    end
+    describe 'when not Name:Song' do
+      subject { TestCustomString.new("Foo's Bar") }
+      it 'should be false' do
+        expect(subject.looks_like_cover_song?).to be_falsey
+      end
+    end
+  end
+
+  describe '#sanitize_lyric' do
+    it 'strips whitespace' do
+      expect(TestCustomString.new(' foo ').sanitize_lyric).to eq 'foo'
+    end
+    it 'removes things in brackets' do
+      expect(TestCustomString.new('foo [bar]').sanitize_lyric).to eq 'foo'
+    end
+    it 'removes html tags' do
+      expect(TestCustomString.new('<foo> bar').sanitize_lyric).to eq 'bar'
+    end
+    it 'removes html tag contents' do
+      expect(TestCustomString.new('<foo>bar</foo> baz').sanitize_lyric).to eq 'baz'
+    end
+  end
+
   describe '#to_slug' do
     let(:test_string) { TestCustomString.new " It's  a  String  & Whatnot! " }
 
@@ -73,19 +116,6 @@ describe CustomString do
       end
     end
 
-  end
-
-  describe '#capitalize_first_letter' do
-    it 'capitalizes the first letter' do
-      TestCustomString.new('þrettán').capitalize_first_letter.should == 'Þrettán'
-      TestCustomString.new('!!!1 bar').capitalize_first_letter.should == '!!!1 Bar'
-      TestCustomString.new('qux QUUX').capitalize_first_letter.should == 'Qux QUUX'
-      TestCustomString.new('QUX Quux').capitalize_first_letter.should == 'QUX Quux'
-    end
-
-    it 'does not double-capitalize' do
-      TestCustomString.new('Baz').capitalize_first_letter.should == 'Baz'
-    end
   end
 
 end

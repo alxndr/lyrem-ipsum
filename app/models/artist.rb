@@ -78,25 +78,27 @@ class Artist < ActiveRecord::Base
   end
 
   def process_lyrics(lyrics_arr)
-    processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
-    processed_lyrics.presence
+    sanitize_lyrics(lyrics_arr).
+      keep_if(&:valid_lyric?).
+      uniq.
+      presence
   end
 
   def sanitize_lyrics(lyrics_arr)
-    lyrics_arr.map{ |lyric|
-      lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?</[^>]*>}, '').gsub(/<[^>]*>/, '').strip
-    }
+    lyrics_arr.map &:sanitize_lyric
   end
 
   def pick_new_song
-    remaining_songs.sample # nil when no remaining songs
+    # nil when no remaining songs
+    remaining_songs.sample
   end
 
   def remaining_songs
     song_names - songs_fetched
   end
 
-  def songs_fetched # this is a getter and a 'setter'
+  def songs_fetched
+    # this is a getter and a 'setter'
     @songs_fetched ||= []
   end
 
@@ -105,7 +107,12 @@ class Artist < ActiveRecord::Base
   end
 
   def filtered_songs
-    albums.map { |album| album['songs'] }.flatten.sort.uniq.reject { |song| song.match(/[a-z]:[A-Z]/) }
+    albums.
+      map { |album_data| album_data['songs'] }.
+      flatten.
+      sort.
+      uniq.
+      reject &:looks_like_cover_song?
   end
 
   def albums
@@ -114,15 +121,21 @@ class Artist < ActiveRecord::Base
   end
 
   def album_names
-    @album_names ||= albums.map{ |a| a['album'] }
+    @album_names ||= albums.map { |a| a['album'] }
   end
 
   String.instance_eval do
     include CustomString
+    # capitalize_first_letter
+    # looks_like_cover_song?
+    # sanitize_lyric
+    # to_slog
+    # valid_lyric?
   end
 
   Array.instance_eval do
     include CustomArray
+    # join_after_regex
   end
 
 end
