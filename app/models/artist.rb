@@ -74,6 +74,11 @@ class Artist < ActiveRecord::Base
     lyrics
   end
 
+  def fetch_lyrics(artist, song)
+    # returns array of strings, or nil
+    Lyriki::Legacy::SongLyrics.new(artist: artist, song: song).response_data
+  end
+
   def process_lyrics(lyrics_arr)
     processed_lyrics = sanitize_lyrics(lyrics_arr).keep_if(&:valid_lyric?).uniq
     processed_lyrics.presence

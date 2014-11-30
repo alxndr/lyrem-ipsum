@@ -7,10 +7,4 @@ module LyricsWiki
     Lyriki::Legacy::SongData.new(artist: artist, song: song_name).response_data
   end
 
-  def fetch_lyrics(artist, song_name) # returns array of strings, or nil
-    # no quality checking
-    Rails.logger.info "Using Lyriki version: #{Lyriki::VERSION}"
-    Lyriki::Legacy::SongLyrics.new(artist: artist, song: song_name).response_data
-  end
-
 end

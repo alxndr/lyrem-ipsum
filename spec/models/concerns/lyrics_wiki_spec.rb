@@ -4,7 +4,7 @@ describe LyricsWiki do
 
   include LyricsWiki
 
-  describe '#get_song_data' do
+  describe '#fetch_song_data' do
     it 'gets data from lyrics.wikia.com' do
       stub_request(
         :get,
@@ -20,21 +20,6 @@ describe LyricsWiki do
       )
 
       expect(fetch_song_data('frank zappa', 'lucille').keys).to eq ['artist', 'song', 'lyrics']
-    end
-  end
-
-  describe '#fetch_lyrics' do
-    it 'pulls lyrics out of fetch_song_data' do
-      self.stub(fetch_song_data: {
-        'artist' => 'Frank Zappa',
-        'song' => 'Im the Slime',
-        'lyrics' => 'Im the slime oozin out of your tv set',
-        'url' => 'bar',
-      })
-      self.stub(valid_response?: true)
-      pending 'reassess #fetch_lyrics'
-
-      expect(fetch_lyrics('frank zappa', 'slime')).to eq 'Im the slime oozin out of your tv set'
     end
   end
 
