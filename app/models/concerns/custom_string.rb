@@ -1,5 +1,16 @@
 module CustomString
 
+  REGEX_BRACKETS_AND_CONTENTS = %r{\[.*\]}
+  REGEX_HTML_TAG_AND_CONTENTS = %r{<[^>]*>.*?</[^>]*>}
+  REGEX_HTML_SELF_CLOSING_TAG = %r{<[^>]*>}
+
+  def sanitize_lyric
+    gsub(REGEX_BRACKETS_AND_CONTENTS, '').
+      gsub(REGEX_HTML_TAG_AND_CONTENTS, '').
+      gsub(REGEX_HTML_SELF_CLOSING_TAG, '').
+      strip
+  end
+
   def to_slug
     strip.
       downcase.

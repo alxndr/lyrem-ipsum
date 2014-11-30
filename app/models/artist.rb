@@ -83,9 +83,7 @@ class Artist < ActiveRecord::Base
   end
 
   def sanitize_lyrics(lyrics_arr)
-    lyrics_arr.map{ |lyric|
-      lyric.gsub(/\[.*\]/, '').gsub(%r{<[^>]*>.*?</[^>]*>}, '').gsub(/<[^>]*>/, '').strip
-    }
+    lyrics_arr.map &:sanitize_lyric
   end
 
   def pick_new_song
@@ -118,11 +116,11 @@ class Artist < ActiveRecord::Base
   end
 
   String.instance_eval do
-    include CustomString
+    include CustomString # capitalize_first_letter, sanitize_lyric, to_slog, valid_lyric?
   end
 
   Array.instance_eval do
-    include CustomArray
+    include CustomArray # join_after_regex
   end
 
 end

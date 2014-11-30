@@ -6,6 +6,21 @@ describe CustomString do
     include CustomString
   end
 
+  describe '#sanitize_lyric' do
+    it 'strips whitespace' do
+      expect(TestCustomString.new(' foo ').sanitize_lyric).to eq 'foo'
+    end
+    it 'removes things in brackets' do
+      expect(TestCustomString.new('foo [bar]').sanitize_lyric).to eq 'foo'
+    end
+    it 'removes html tags' do
+      expect(TestCustomString.new('<foo> bar').sanitize_lyric).to eq 'bar'
+    end
+    it 'removes html tag contents' do
+      expect(TestCustomString.new('<foo>bar</foo> baz').sanitize_lyric).to eq 'baz'
+    end
+  end
+
   describe '#to_slug' do
     let(:test_string) { TestCustomString.new " It's  a  String  & Whatnot! " }
 
