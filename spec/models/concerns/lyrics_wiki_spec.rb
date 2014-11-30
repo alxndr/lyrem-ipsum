@@ -56,13 +56,4 @@ describe LyricsWiki do
     end
   end
 
-  describe '#has_album_data?' do
-    let(:something_with_lyrics_wiki) { Class.new{ include LyricsWiki }.new }
-    describe 'when albums are there' do
-      it 'is true' do
-        expect(something_with_lyrics_wiki.has_album_data?({'albums' => %w(foo bar)})).to be true
-      end
-    end
-  end
-
 end

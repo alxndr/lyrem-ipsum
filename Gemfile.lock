@@ -139,6 +139,9 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.9)
+    lyriki (0.0.1)
+      json
+      nokogiri
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -300,6 +303,7 @@ DEPENDENCIES
   guard-rails
   guard-rspec
   htmlentities
+  lyriki
   neat
   newrelic_rpm (>= 3.5.3.25)
   nokogiri
