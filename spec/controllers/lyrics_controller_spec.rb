@@ -10,8 +10,8 @@ describe LyricsController, type: :controller do
 
     describe 'missing artist' do
       it 'raises' do
-        expect{ get :for_artist }.to raise_error ArgumentError
-        expect{ get :for_artist, foo: 'bar' }.to raise_error ArgumentError
+        expect { get :for_artist }.to raise_error ArgumentError
+        expect { get :for_artist, foo: 'bar' }.to raise_error ArgumentError
       end
     end
 
