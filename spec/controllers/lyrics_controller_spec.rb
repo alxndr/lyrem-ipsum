@@ -27,17 +27,15 @@ describe LyricsController, type: :controller do
           describe 'when "local" artist' do
             before do
               allow(Artist).to receive(:find_by_slug).and_return Artist.new
+
+              get :for_artist, artist: 'frank-zappa'
             end
 
             it 'assigns @artist' do # behaves_like
-              get :for_artist, artist: 'frank-zappa'
-
               expect(assigns(:artist)).to be_an Artist
             end
 
             it 'renders' do # behaves_like
-              get :for_artist, artist: 'frank-zappa'
-
               expect(response).to render_template 'by_artist'
             end
           end
@@ -48,17 +46,15 @@ describe LyricsController, type: :controller do
               a = Artist.new
               allow(a).to receive(:save!)
               allow(Artist).to receive(:new).and_return a
+
+              get :for_artist, artist: 'frank-zappa'
             end
 
             it 'assigns @artist' do # behaves_like
-              get :for_artist, artist: 'frank-zappa'
-
               expect(assigns(:artist)).to be_an Artist
             end
 
             it 'renders' do # behaves_like
-              get :for_artist, artist: 'frank-zappa'
-
               expect(response).to render_template 'by_artist'
             end
           end
