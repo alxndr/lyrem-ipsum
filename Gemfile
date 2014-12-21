@@ -33,7 +33,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'fuubar'
   gem 'rspec-activemodel-mocks'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.1'
   gem 'shoulda-matchers'
 end
 
