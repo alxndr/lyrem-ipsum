@@ -11,19 +11,19 @@ describe MusicianNameFinder do
 
       describe 'with a title' do
         it 'should ask google' do
-          Google::Search::Web.should_receive(:new).and_return(results)
+          expect(Google::Search::Web).to receive(:new).and_return(results)
           MusicianNameFinder.look_up('name')
         end
 
         it 'should trim title' do
-          Google::Search::Web.stub(:new).and_return(results)
-          MusicianNameFinder.look_up('name').should == "A Musician 'n stuff"
+          allow(Google::Search::Web).to receive(:new).and_return(results)
+          expect(MusicianNameFinder.look_up('name')).to eq "A Musician 'n stuff"
         end
       end
 
       describe 'without a title' do
         it 'should raise' do
-          Google::Search::Web.should_receive(:new).and_return([])
+          expect(Google::Search::Web).to receive(:new).and_return([])
           expect { MusicianNameFinder.look_up('name') }.to raise_error
         end
       end

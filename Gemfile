@@ -13,7 +13,7 @@ gem 'neat'
 gem 'newrelic_rpm', '>= 3.5.3.25'
 gem 'nokogiri'
 gem 'pg'
-gem 'rails', '~> 4.1.8'
+gem 'rails', '~> 4.2.0'
 gem 'requirejs-rails'
 gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'uglifier'
@@ -33,7 +33,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'fuubar'
   gem 'rspec-activemodel-mocks'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.1'
   gem 'shoulda-matchers'
 end
 
