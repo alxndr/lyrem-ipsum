@@ -5,7 +5,9 @@ describe LyricsController, type: :controller do
   describe '#by_artist' do
 
     before do
-      allow(Artist).to receive(:new) { mock_model(Artist, get_data: true, save: true, load_data: true, lyrem: true) }
+      allow(Artist).to receive(:new) do
+        mock_model Artist, get_data: true, save: true, load_data: true, lyrem: true
+      end
     end
 
     describe 'missing artist' do
