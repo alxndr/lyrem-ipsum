@@ -36,7 +36,7 @@ describe Artist do
     let(:phrases) { LYRICS }
 
     before do
-      subject.stub(:fetch_new_song_lyrics).and_return(phrases)
+      allow(subject).to receive(:fetch_new_song_lyrics).and_return(phrases)
     end
 
     describe ':phrases' do
@@ -69,7 +69,7 @@ describe Artist do
           expect(sentence.class).to eq String
           expect(sentence.split(' ').length).to be >= 2
           %w(,, ., !, ?, ,. !. ?.).each do |punct_combo|
-            sentence.should_not include punct_combo
+            expect(sentence).not_to include punct_combo
           end
         end
       end
@@ -180,7 +180,7 @@ describe Artist do
     describe 'when not already set' do
 
       before do
-        subject.stub(:albums).and_return [
+        allow(subject).to receive(:albums).and_return [
           { 'songs' => ['foo', 'bar'] },
           { 'songs' => ['baz', 'Qux:Quux'] }
         ]

@@ -9,7 +9,7 @@ feature 'lyrics' do
   end
 
   it 'has a rel=canonical link' do
-    page.source.should match '<link rel="canonical" href="/text-from-lyrics-by/blind-faith" />'
+    expect(page.source).to match '<link rel="canonical" href="/text-from-lyrics-by/blind-faith" />'
   end
 
   describe 'analytics' do
