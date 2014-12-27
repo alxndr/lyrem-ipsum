@@ -27696,4 +27696,66 @@ http_interactions:
         aXB0Pgo8L2JvZHk+CgoKCjwvaHRtbD4K
     http_version: 
   recorded_at: Thu, 27 Nov 2014 03:43:30 GMT
-recorded_with: VCR 2.9.2
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?artist=Blind%20Faith&fmt=realjson&song=Can%27t%20Find%20My%20Way%20Home
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Content-Length:
+      - '234'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 27 Dec 2014 14:42:22 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WKSJC, cache-atl6222-ATL
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1419691342.778865,VS0,VE115
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22city%22:%22FIXME%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=ulR1cW4uGs; domain=.wikia.com; path=/; expires=Thu, 25 Jun
+        2015 14:42:22 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Can''t Find My Way Home","lyrics":"Come
+        down off your throne and leave your body alone\nSomebody must change\nYou
+        are the[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Can%27t_Find_My_Way_Home","page_namespace":0,"page_id":500220,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sat, 27 Dec 2014 14:42:25 GMT
+recorded_with: VCR 2.9.3
