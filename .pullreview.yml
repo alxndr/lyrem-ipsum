@@ -38,7 +38,7 @@ rules:
     #- prefer_reduce_over_inject
     #- prefer_ruby_19_new_hash_syntax
     #- prefer_ruby_19_new_lambda_syntax
-    #- prefer_single_quoted_strings
+    - prefer_single_quoted_strings
     #- reduce_number_of_params
     #- refactor_complex_class
     #- refactor_complex_method
