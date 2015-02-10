@@ -10,3 +10,6 @@ script:
   - bundle exec rake dev:generate_token
   - RAILS_ENV=test bundle exec rake db:migrate db:test:prepare
   - bundle exec rake travis
+notifications:
+  webhooks:
+    - http://buildtimetrend.herokuapp.com/travis # trigger Buildtime Trend Service to parse Travis CI log
