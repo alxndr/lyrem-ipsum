@@ -11,13 +11,13 @@ gem 'htmlentities'
 gem 'lyriki'
 gem 'neat'
 gem 'newrelic_rpm', '>= 3.5.3.25'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.6.7.1'
 gem 'pg'
-gem 'rails', '~> 4.2.1'
+gem 'rails', '>= 4.2.2'
 gem 'requirejs-rails'
 gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'skylight'
-gem 'uglifier'
+gem 'uglifier', '>= 2.7.2'
 
 group :production, :staging do
   gem 'rails_log_stdout', github: 'heroku/rails_log_stdout' # for heroku
@@ -53,3 +53,6 @@ group :test do
   gem 'vcr'
   gem 'webmock'
 end
+
+gem 'rack', '>= 1.6.2'
+gem 'rest-client', '>= 1.8.0'
