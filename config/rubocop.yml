@@ -1,7 +1,10 @@
-ShowCopNames: true
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'spec/support/recordings'
 
-LineLength:
-  Max: 110
+Metrics/LineLength:
+  Max: 120
 
-StringLiterals:
+Style/StringLiterals:
   EnforcedStyle: single_quotes
