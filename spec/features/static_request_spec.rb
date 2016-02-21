@@ -23,7 +23,7 @@ feature 'home page' do
     end
 
     it 'sends you to a new page' do
-      VCR.use_cassette 'artist_search_and_lyrics', record: :none do
+      VCR.use_cassette 'artist_search_and_lyrics' do
         fill_in 'artist', with: 'phish'
         fill_in 'How much text are you looking for?', with: '2'
         choose 'sentences'
