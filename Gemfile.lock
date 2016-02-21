@@ -155,7 +155,7 @@ GEM
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
-    lyriki (0.0.1)
+    lyriki (1.0.1)
       json
       nokogiri
     mail (2.6.3)
@@ -331,7 +331,7 @@ DEPENDENCIES
   guard-rails
   guard-rspec
   htmlentities
-  lyriki
+  lyriki (~> 1.0.1)
   neat
   newrelic_rpm (>= 3.5.3.25)
   nokogiri
@@ -348,5 +348,5 @@ DEPENDENCIES
   skylight
   uglifier
   unicorn
-  vcr
+  vcr (~> 2.9.3)
   webmock

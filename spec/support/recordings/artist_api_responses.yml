@@ -27758,4 +27758,884 @@ http_interactions:
         are the[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Can%27t_Find_My_Way_Home","page_namespace":0,"page_id":500220,"isOnTakedownList":"0"}'
     http_version: 
   recorded_at: Sat, 27 Dec 2014 14:42:25 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Jam%20No.%203:%20%22Change%20Of%20Address%20Jam%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 4b621289d78aca87784c4b1d5be0ce6d611886fb52ca5bc3e69a8d1ea68a202d
+      Content-Length:
+      - '197'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WIKIA, cache-sjc3634-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.029522,VS0,VE55
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=GrAPjbyr3L; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Jam No. 3: \"Change Of Address Jam\"","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Jam_No._3:_%22Change_Of_Address_Jam%22","page_namespace":0,"page_id":697472,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Well%20All%20Right
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 2eb4d123d071a08b478e479dbacf557532f43493ad9225893001ffdeff208946
+      Content-Length:
+      - '249'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3135-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.139629,VS0,VE68
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=wsXWPD4V49; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Well All Right","lyrics":"Well, alright,
+        so I''ve been foolish\nWell, alright, let people know\n''Bout the dreams and
+        wishes that you dream\nIn the night when lights are lo[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Well_All_Right","page_namespace":0,"page_id":565050,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Sleeping%20In%20The%20Ground
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - d9c1df150d6cf2bf5d76b99f71f48f69b01efb2aa2712399606e9bc66787a10b
+      Content-Length:
+      - '210'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WIKIA, cache-sjc3623-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.267476,VS0,VE53
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=wp1999ttRR; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Sleeping In The Ground","lyrics":"I
+        would rather see you sleeping in the ground,\nI would rather see you sleeping
+        in the ground\nTha[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Sleeping_In_The_Ground","page_namespace":0,"page_id":600883,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Can%27t%20Find%20My%20Way%20Home
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 7f1f2e0f52475596d50a41e951069983e01a9b09e0ba142866756b50872c94d9
+      Content-Length:
+      - '234'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3622-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.373812,VS0,VE62
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=RI2SCuMUzb; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Can''t Find My Way Home","lyrics":"Come
+        down off your throne and leave your body alone\nSomebody must change\nYou
+        are the[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Can%27t_Find_My_Way_Home","page_namespace":0,"page_id":500220,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Jam%20No.%201:%20%22Very%20Long%20%26%20Good%20Jam%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 165712afc18af4fb587d29418f5fb82c3df9d411a4c1190fdad8ce01a399ddd7
+      Content-Length:
+      - '202'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3632-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.492850,VS0,VE48
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=8kyfvNi_vx; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Jam No. 1: \"Very Long & Good Jam\"","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Jam_No._1:_%22Very_Long_%26_Good_Jam%22","page_namespace":0,"page_id":2584009,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Time%20Winds
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 86e2d990ffe9fb0612e431d3052fa3339e920a6c2d83036075a62f1a8fbb5ecc
+      Content-Length:
+      - '163'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3642-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.596762,VS0,VE50
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=VU-PSkyDxl; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Time Winds","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Time_Winds","page_namespace":0,"page_id":2584014,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Sea%20Of%20Joy
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 9cb90a2259f89ced63629867fbe5bc7cc9466e33b753d589bff9f23415a24def
+      Content-Length:
+      - '208'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:52 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3629-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082812.697904,VS0,VE105
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=6J6-J58_kG; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:52 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Sea Of Joy","lyrics":"Following the
+        shadows of the skies or are they only figments of my eyes?[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Sea_Of_Joy","page_namespace":0,"page_id":565049,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:52 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Jam%20No.%202:%20%22Slow%20Jam%20Number%201%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - ca3889c3af599535370aac5e9c585764d63c32090e3399492e0ddffd7d0a7a50
+      Content-Length:
+      - '193'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:53 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3623-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.032048,VS0,VE58
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=cWjmvs3R-a; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:53 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Jam No. 2: \"Slow Jam Number 1\"","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Jam_No._2:_%22Slow_Jam_Number_1%22","page_namespace":0,"page_id":2584004,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:53 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Had%20To%20Cry%20Today
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 9297069b02a8238a96e7d0227bcfd10e3d5f72392a3b34cb1692266fddb02f6f
+      Content-Length:
+      - '211'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:53 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3125-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.150164,VS0,VE59
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=g8ubH3IAed; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:53 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Had To Cry Today","lyrics":"It''s already
+        written that today will be one to remember\nTh[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Had_To_Cry_Today","page_namespace":0,"page_id":551823,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:53 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Exchange%20And%20Mart
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 2afcbfcdfeadf7870f1a6b1866d8e2f1a25abb3cf69fe6b79e4c4eecbf40713b
+      Content-Length:
+      - '169'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:53 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WIKIA, cache-sjc3121-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.267965,VS0,VE62
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=cZ9seWxf0j; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:53 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Exchange And Mart","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Exchange_And_Mart","page_namespace":0,"page_id":2339250,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:53 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Acoustic%20Jam
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 79348c7c0a38dc9496feef26547b658a0777c629d036bc90635461600f7569b2
+      Content-Length:
+      - '165'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:53 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3130-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.711130,VS0,VE71
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=EmWmDNw0zr; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:53 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Acoustic Jam","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Acoustic_Jam","page_namespace":0,"page_id":2584003,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:53 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Do%20What%20You%20Like
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - d857be2723b40387edb62a819afcf11df8b2e523a305b3f9cee2a39aa8da1f25
+      Content-Length:
+      - '228'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:53 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WIKIA, cache-sjc3647-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.835939,VS0,VE68
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=2LjArjdfhS; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:53 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Do What You Like","lyrics":"Do right,
+        use your head, everybody must be fed\nGet together, break your bread, yes,
+        together, t[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Do_What_You_Like","page_namespace":0,"page_id":565047,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:53 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Presence%20Of%20The%20Lord
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 02e9826bd98ae389fe215cef3d24bd36609d3351845f5c66ad5209df5ef58ed4
+      Content-Length:
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:54 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3160-WIKIA, cache-sjc3128-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082813.988616,VS0,VE80
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=0r41_8sL0y; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:54 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Presence Of The Lord","lyrics":"I have
+        finally found a way to live just like I never could before\nI know that I
+        don''t have much to give, but I can open[...]","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Presence_Of_The_Lord","page_namespace":0,"page_id":565048,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:54 GMT
+- request:
+    method: get
+    uri: http://lyrics.wikia.com/api.php?action=lyrics&artist=Blind%20Faith&fmt=realjson&song=Jam%20No.%204:%20%22Slow%20Jam%20Number%202%22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - lyrics.wikia.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      Cache-Control:
+      - max-age=86400, s-maxage=86400, public
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      X-Cacheable:
+      - 'YES'
+      Fastly-Debug-Digest:
+      - 9a9259425214231f49256e9395b5d49979a59d58db2605e53900cc67b8101196
+      Content-Length:
+      - '193'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 Feb 2016 19:26:54 GMT
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-wk-sjc3161-WIKIA, cache-sjc3126-SJC
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1456082814.127912,VS0,VE88
+      Vary:
+      - Accept-Encoding
+      Set-Cookie:
+      - Geo={%22region%22:%22CA%22%2C%22country%22:%22US%22%2C%22continent%22:%22NA%22};
+        path=/
+      - wikia_beacon_id=ZzjcoltsxR; domain=.wikia.com; path=/; expires=Fri, 19 Aug
+        2016 19:26:54 GMT;
+    body:
+      encoding: ASCII-8BIT
+      string: '{"artist":"Blind Faith","song":"Jam No. 4: \"Slow Jam Number 2\"","lyrics":"Instrumental","url":"http:\/\/lyrics.wikia.com\/Blind_Faith:Jam_No._4:_%22Slow_Jam_Number_2%22","page_namespace":0,"page_id":2584006,"isOnTakedownList":"0"}'
+    http_version: 
+  recorded_at: Sun, 21 Feb 2016 19:26:54 GMT
 recorded_with: VCR 2.9.3

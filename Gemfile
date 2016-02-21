@@ -8,7 +8,7 @@ gem 'bitters'
 gem 'bugsnag'
 gem 'google-search'
 gem 'htmlentities'
-gem 'lyriki'
+gem 'lyriki', '~> 1.0.1'
 gem 'neat'
 gem 'newrelic_rpm', '>= 3.5.3.25'
 gem 'nokogiri'
@@ -50,6 +50,6 @@ end
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'coveralls', require: false
-  gem 'vcr'
+  gem 'vcr', '~> 2.9.3'
   gem 'webmock'
 end
