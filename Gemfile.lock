@@ -348,5 +348,5 @@ DEPENDENCIES
   skylight
   uglifier
   unicorn
-  vcr
+  vcr (~> 2.9.3)
   webmock

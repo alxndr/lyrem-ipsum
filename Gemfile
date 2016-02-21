@@ -50,6 +50,6 @@ end
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'coveralls', require: false
-  gem 'vcr'
+  gem 'vcr', '~> 2.9.3'
   gem 'webmock'
 end
