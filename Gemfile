@@ -11,9 +11,9 @@ gem 'htmlentities'
 gem 'lyriki', '~> 1.0.1'
 gem 'neat'
 gem 'newrelic_rpm', '>= 3.5.3.25'
-gem 'nokogiri', '>= 1.6.7.1'
+gem 'nokogiri', '>= 1.6.7.2'
 gem 'pg'
-gem 'rails', '>= 4.2.2'
+gem 'rails', '~> 4.2.5.1'
 gem 'requirejs-rails'
 gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'skylight'
@@ -56,3 +56,4 @@ end
 
 gem 'rack', '>= 1.6.2'
 gem 'rest-client', '>= 1.8.0'
+gem 'rails-html-sanitizer', '~> 1.0.3'
