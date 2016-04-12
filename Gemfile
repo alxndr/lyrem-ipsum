@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'arel', '~> 6.0'
 gem 'bitters', '~> 0.10'
-gem 'google-search'
+gem 'google-search', '~> 1.0'
 gem 'htmlentities'
 gem 'lyriki', '~> 1.0.1'
 gem 'neat'
