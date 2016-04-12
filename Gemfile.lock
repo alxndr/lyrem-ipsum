@@ -340,7 +340,7 @@ DEPENDENCIES
   guard-rspec
   htmlentities (~> 4.3)
   lyriki (~> 1.0.1)
-  neat
+  neat (~> 1.5)
   newrelic_rpm (>= 3.5.3.25)
   nokogiri (>= 1.6.7.2)
   pg
