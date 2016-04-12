@@ -20,7 +20,7 @@ gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303
 gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
 group :production, :staging do
-  gem 'airbrake', '~> 4.1.0'
+  gem 'airbrake', '~> 4.3'
   gem 'bugsnag', '~> 2.5'
   gem 'rails_12factor', '~> 0.0' # for running on heroku
   gem 'skylight', '~> 0.7'
