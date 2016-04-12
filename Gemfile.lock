@@ -319,7 +319,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  airbrake
+  airbrake (~> 4.1.0)
   arel
   awesome_print
   better_errors
