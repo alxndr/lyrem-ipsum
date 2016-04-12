@@ -2,8 +2,10 @@ ruby '2.2.1'
 
 source 'https://rubygems.org'
 
+gem 'airbrake', '~> 4.3'
 gem 'arel', '~> 6.0'
 gem 'bitters', '~> 0.10'
+gem 'bugsnag', '~> 2.5'
 gem 'google-search', '~> 1.0'
 gem 'htmlentities', '~> 4.3'
 gem 'lyriki', '~> 1.0', '>= 1.0.1'
@@ -20,8 +22,6 @@ gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303
 gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
 group :production, :staging do
-  gem 'airbrake', '~> 4.3'
-  gem 'bugsnag', '~> 2.5'
   gem 'rails_12factor', '~> 0.0' # for running on heroku
   gem 'skylight', '~> 0.7'
   gem 'unicorn', '~> 4.8'
