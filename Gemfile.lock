@@ -324,7 +324,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bitters
+  bitters (~> 0.10)
   brakeman
   bugsnag
   capybara

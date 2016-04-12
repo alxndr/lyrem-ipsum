@@ -3,7 +3,7 @@ ruby '2.2.1'
 source 'https://rubygems.org'
 
 gem 'arel', '~> 6.0'
-gem 'bitters'
+gem 'bitters', '~> 0.10'
 gem 'google-search'
 gem 'htmlentities'
 gem 'lyriki', '~> 1.0.1'
