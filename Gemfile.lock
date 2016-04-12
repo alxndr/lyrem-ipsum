@@ -326,7 +326,7 @@ DEPENDENCIES
   binding_of_caller
   bitters (~> 0.10)
   brakeman
-  bugsnag
+  bugsnag (~> 2.5)
   capybara
   codeclimate-test-reporter
   colorize

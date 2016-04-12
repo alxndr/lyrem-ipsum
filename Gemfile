@@ -21,7 +21,7 @@ gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
 group :production, :staging do
   gem 'airbrake', '~> 4.1.0'
-  gem 'bugsnag'
+  gem 'bugsnag', '~> 2.5'
   gem 'rails_log_stdout', github: 'heroku/rails_log_stdout' # for heroku
   gem 'rails_12factor' # for heroku
   gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets' # for heroku
