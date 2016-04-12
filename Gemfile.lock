@@ -309,23 +309,23 @@ PLATFORMS
 DEPENDENCIES
   airbrake (~> 4.3)
   arel (~> 6.0)
-  awesome_print
-  better_errors
-  binding_of_caller
+  awesome_print (~> 1.2)
+  better_errors (~> 2.0)
+  binding_of_caller (~> 0.7)
   bitters (~> 0.10)
-  brakeman
+  brakeman (~> 2.6)
   bugsnag (~> 2.5)
-  capybara
-  codeclimate-test-reporter
-  colorize
-  coveralls
-  factory_girl
-  factory_girl_rails
-  fuubar
+  capybara (~> 2.4)
+  codeclimate-test-reporter (~> 0.4)
+  colorize (~> 0.7)
+  coveralls (~> 0.7)
+  factory_girl (~> 4.5)
+  factory_girl_rails (~> 4.5)
+  fuubar (~> 2.0)
   google-search (~> 1.0)
-  guard
-  guard-rails
-  guard-rspec
+  guard (~> 2.10)
+  guard-rails (~> 0.7)
+  guard-rspec (~> 4.5)
   htmlentities (~> 4.3)
   lyriki (~> 1.0, >= 1.0.1)
   neat (~> 1.5)
@@ -338,12 +338,12 @@ DEPENDENCIES
   rails_12factor (~> 0.0)
   requirejs-rails (~> 0.9)
   rest-client (~> 1.8, >= 1.8.0)
-  rspec-activemodel-mocks
+  rspec-activemodel-mocks (~> 1.0)
   rspec-rails (~> 3.1)
   sass-rails (~> 4.0, >= 4.0.3)
-  shoulda-matchers
+  shoulda-matchers (~> 2.7)
   skylight (~> 0.7)
   uglifier (~> 2.7, >= 2.7.2)
   unicorn (~> 4.8)
   vcr (~> 2.9.3)
-  webmock
+  webmock (~> 1.20)

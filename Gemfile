@@ -28,29 +28,29 @@ group :production, :staging do
 end
 
 group :development, :test do
-  gem 'brakeman', require: false
-  gem 'capybara'
-  gem 'colorize'
-  gem 'factory_girl'
-  gem 'factory_girl_rails'
-  gem 'fuubar'
-  gem 'rspec-activemodel-mocks'
+  gem 'brakeman', '~> 2.6', require: false
+  gem 'capybara', '~> 2.4'
+  gem 'colorize', '~> 0.7'
+  gem 'factory_girl', '~> 4.5'
+  gem 'factory_girl_rails', '~> 4.5'
+  gem 'fuubar', '~> 2.0'
+  gem 'rspec-activemodel-mocks', '~> 1.0'
   gem 'rspec-rails', '~> 3.1'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 2.7'
 end
 
 group :development do
-  gem 'awesome_print'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'guard'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  gem 'awesome_print', '~> 1.2'
+  gem 'better_errors', '~> 2.0'
+  gem 'binding_of_caller', '~> 0.7'
+  gem 'guard', '~> 2.10'
+  gem 'guard-rails', '~> 0.7'
+  gem 'guard-rspec', '~> 4.5'
 end
 
 group :test do
-  gem 'codeclimate-test-reporter', require: false
-  gem 'coveralls', require: false
+  gem 'codeclimate-test-reporter', '~> 0.4', require: false
+  gem 'coveralls', '~> 0.7', require: false
   gem 'vcr', '~> 2.9.3'
-  gem 'webmock'
+  gem 'webmock', '~> 1.20'
 end
