@@ -338,7 +338,7 @@ DEPENDENCIES
   guard
   guard-rails
   guard-rspec
-  htmlentities
+  htmlentities (~> 4.3)
   lyriki (~> 1.0.1)
   neat
   newrelic_rpm (>= 3.5.3.25)
