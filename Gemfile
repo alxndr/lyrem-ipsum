@@ -16,7 +16,7 @@ gem 'pg'
 gem 'rails', '~> 4.2.5.1'
 gem 'requirejs-rails'
 gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
-gem 'skylight'
+gem 'skylight', '~> 0.7.0'
 gem 'uglifier', '>= 2.7.2'
 
 group :production, :staging do
