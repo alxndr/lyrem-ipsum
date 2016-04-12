@@ -22,9 +22,7 @@ gem 'uglifier', '~> 2.7', '>= 2.7.2'
 group :production, :staging do
   gem 'airbrake', '~> 4.1.0'
   gem 'bugsnag', '~> 2.5'
-  gem 'rails_log_stdout', github: 'heroku/rails_log_stdout' # for heroku
-  gem 'rails_12factor' # for heroku
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets' # for heroku
+  gem 'rails_12factor', '~> 0.0' # for running on heroku
   gem 'skylight', '~> 0.7.0'
   gem 'unicorn'
 end
