@@ -343,7 +343,7 @@ DEPENDENCIES
   neat (~> 1.5)
   newrelic_rpm (~> 3.9, >= 3.5.3.25)
   nokogiri (~> 1.6, >= 1.6.7.2)
-  pg
+  pg (~> 0.17)
   rack (>= 1.6.2)
   rails (~> 4.2.5.1)
   rails-html-sanitizer (~> 1.0.3)
