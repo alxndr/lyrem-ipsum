@@ -80,3 +80,15 @@ LyremIpsum::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+require 'airbrake'
+
+Airbrake.configure do |config|
+  config.api_key = 'ced5e44463e6a48c075b76aa3f8f2c0a'
+end
+
+require 'bugsnag/rake'
+
+Bugsnag.configure do |config|
+  config.api_key = "95f09a6d132e9570c8b6e78a682013b8"
+end
