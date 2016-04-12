@@ -6,14 +6,14 @@ gem 'arel', '~> 6.0'
 gem 'bitters', '~> 0.10'
 gem 'google-search', '~> 1.0'
 gem 'htmlentities', '~> 4.3'
-gem 'lyriki', '~> 1.0.1'
+gem 'lyriki', '~> 1.0', '>= 1.0.1'
 gem 'neat', '~> 1.5'
 gem 'newrelic_rpm', '~> 3.9', '>= 3.5.3.25'
 gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 gem 'pg', '~> 0.17'
 gem 'rack', '~> 1.6', '>= 1.6.2'
 gem 'rails', '~> 4.2', '>= 4.2.5.1'
-gem 'rails-html-sanitizer', '~> 1.0.3'
+gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.3'
 gem 'requirejs-rails', '~> 0.9'
 gem 'rest-client', '~> 1.8', '>= 1.8.0'
 gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303896
@@ -23,7 +23,7 @@ group :production, :staging do
   gem 'airbrake', '~> 4.1.0'
   gem 'bugsnag', '~> 2.5'
   gem 'rails_12factor', '~> 0.0' # for running on heroku
-  gem 'skylight', '~> 0.7.0'
+  gem 'skylight', '~> 0.7'
   gem 'unicorn', '~> 4.8'
 end
 
