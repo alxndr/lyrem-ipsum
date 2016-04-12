@@ -345,5 +345,5 @@ DEPENDENCIES
   skylight (~> 0.7)
   uglifier (~> 2.7, >= 2.7.2)
   unicorn (~> 4.8)
-  vcr (~> 2.9.3)
+  vcr (~> 2.9)
   webmock (~> 1.20)
