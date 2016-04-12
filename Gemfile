@@ -24,7 +24,7 @@ group :production, :staging do
   gem 'bugsnag', '~> 2.5'
   gem 'rails_12factor', '~> 0.0' # for running on heroku
   gem 'skylight', '~> 0.7.0'
-  gem 'unicorn'
+  gem 'unicorn', '~> 4.8'
 end
 
 group :development, :test do

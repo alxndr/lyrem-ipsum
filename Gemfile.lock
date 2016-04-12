@@ -344,6 +344,6 @@ DEPENDENCIES
   shoulda-matchers
   skylight (~> 0.7.0)
   uglifier (~> 2.7, >= 2.7.2)
-  unicorn
+  unicorn (~> 4.8)
   vcr (~> 2.9.3)
   webmock
