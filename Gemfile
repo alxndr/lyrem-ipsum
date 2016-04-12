@@ -13,8 +13,8 @@ gem 'nokogiri', '~> 1.6', '>= 1.6.7.2'
 gem 'pg', '~> 0.17'
 gem 'rails', '~> 4.2', '>= 4.2.5.1'
 gem 'requirejs-rails', '~> 0.9'
-gem 'sass-rails', '~> 4.0.3' # http://stackoverflow.com/a/22395250/303896
-gem 'uglifier', '>= 2.7.2'
+gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303896
+gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
 group :production, :staging do
   gem 'airbrake', '~> 4.1.0'
