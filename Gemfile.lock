@@ -320,7 +320,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 4.1.0)
-  arel
+  arel (~> 6.0)
   awesome_print
   better_errors
   binding_of_caller
