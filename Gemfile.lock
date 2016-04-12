@@ -350,7 +350,7 @@ DEPENDENCIES
   rails3_serve_static_assets!
   rails_12factor
   rails_log_stdout!
-  requirejs-rails
+  requirejs-rails (~> 0.9)
   rest-client (>= 1.8.0)
   rspec-activemodel-mocks
   rspec-rails (~> 3.1)
