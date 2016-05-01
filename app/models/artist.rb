@@ -67,14 +67,21 @@ class Artist < ActiveRecord::Base
     until lyrics.present?
       new_song = pick_new_song or return nil
       songs_fetched << new_song
-      lyrics = process_lyrics(fetch_lyrics(name, new_song))
+      raw_lyrics = fetch_lyrics(name, new_song)
+      next unless raw_lyrics
+      lyrics = process_lyrics(raw_lyrics)
     end
     lyrics
   end
 
   def fetch_lyrics(artist, song)
     # returns array of strings, or nil
-    Lyriki::Legacy::SongLyrics.new(artist: artist, song: song).response_data
+    begin
+      Lyriki::Legacy::SongLyrics.new(artist: artist, song: song).response_data
+    rescue NoLyricsError
+      Rails.logger.info "No lyrics found for #{artist}, '#{song}'"
+      nil
+    end
   end
 
   def process_lyrics(lyrics_arr)

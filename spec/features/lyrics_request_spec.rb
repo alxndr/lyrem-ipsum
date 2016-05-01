@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'lyrics' do
 
   before do
-    VCR.use_cassette 'artist_api_responses', record: :none do
+    VCR.use_cassette 'artist_api_responses' do
       visit '/text-from-lyrics-by/blind-faith/2/sentences'
     end
   end
