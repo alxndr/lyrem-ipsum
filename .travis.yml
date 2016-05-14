@@ -1,15 +1,3 @@
-language: ruby
-bundler_args: --without development
-rvm:
-  2.2.1
-services:
-  - postgres
-before_script:
-  - psql -c 'create database lyrem_ipsum_test;' -U postgres
-script:
-  - bundle exec rake dev:generate_token
-  - RAILS_ENV=test bundle exec rake db:migrate db:test:prepare
-  - bundle exec rake travis
-notifications:
-  webhooks:
-    - http://buildtimetrend.herokuapp.com/travis # trigger Buildtime Trend Service to parse Travis CI log
+language: elixir
+elixir:
+  1.2.5
