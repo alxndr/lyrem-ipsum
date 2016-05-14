@@ -7,7 +7,7 @@ class MusicianNameFinder
   def self.look_up(input)
     raise UnknownArtistError unless input && input.present?
 
-    result = Google::Search::Web.new(query: "#{input} musician site:en.wikipedia.org").first
+    result = Google::Search::Web.new(query: "#{input} (musician OR band OR musical group OR lyricist) site:en.wikipedia.org").first
 
     raise UnknownArtistError unless result && result.title
 
