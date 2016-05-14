@@ -16,7 +16,7 @@ gem 'pg', '~> 0.17'
 gem 'rack', '~> 1.6', '>= 1.6.2'
 gem 'rails', '~> 4.2', '>= 4.2.5.1'
 gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.3'
-gem 'requirejs-rails', '~> 0.9'
+gem 'requirejs-rails', '~> 1.0'
 gem 'rest-client', '~> 1.8', '>= 1.8.0'
 gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'uglifier', '~> 2.7', '>= 2.7.2'
