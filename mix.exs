@@ -31,10 +31,14 @@ defmodule LyremIpsum.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.0"},
+      {:dialyze, "~> 0.2.0"},   # type checker
+      {:floki, "~> 0.8"},       # html parser
       {:gettext, "~> 0.9"},
+      {:httpotion, "~> 2.2.0"}, # http tool
       {:phoenix, "~> 1.1.4"},
       {:phoenix_html, "~> 2.4"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:poison, "~> 2.0"},      # json decoder
     ]
   end
 end
