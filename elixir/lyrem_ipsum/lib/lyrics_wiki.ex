@@ -1,10 +1,5 @@
 defmodule LyricsWiki do
 
-  alias LyricsWiki.{
-    Api,
-    Sanitizer
-  }
-
   @moduledoc """
   Interface with the Lyrics Wiki at lyrics.wikia.com.
 
@@ -13,6 +8,11 @@ defmodule LyricsWiki do
   """
 
   use GenServer
+
+  alias LyricsWiki.{
+    Api,
+    Sanitizer
+  }
 
   def start_link do
     GenServer.start_link(__MODULE__, :ok, [])
@@ -36,6 +36,8 @@ defmodule LyricsWiki do
       {:reply, lyric, Map.put(state, artist, artist_info)}
     end
   end
+
+
 
   @spec random_lyric_by_artist(String.t) :: String.t | nil
   def random_lyric_by_artist(artist) do
