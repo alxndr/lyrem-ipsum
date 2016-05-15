@@ -1,6 +1,9 @@
 defmodule LyricsWiki do
 
-  alias LyricsWiki.Api
+  alias LyricsWiki.{
+    Api,
+    Sanitizer
+  }
 
   @moduledoc """
   Interface with the Lyrics Wiki at lyrics.wikia.com.
@@ -9,17 +12,8 @@ defmodule LyricsWiki do
   * monitor & space out requests
   """
 
-  @regex_author ~r/^by [A-Z][a-z]/
-  @regex_brackets ~r/^\[.+\]$/
-  @regex_chorus ~r/^\[?(Bridge|Chorus):?\]?$/
   @regex_colon_then_uppercase_letter ~r/\w:[A-Z]/
-  @regex_copyright ~r/(©|\(c\)|copyright)/i
   @regex_hash_then_uppercase_letter ~r/\w#[A-Z]/
-  @regex_junk_around_match ~r/[\s]*(?<content>.+?)[\s;,.]*$/
-  @regex_name_of_speaker_followed_by_colon ~r/^[A-Z][a-zA-Z'?-]+( #\d)?: /
-  @regex_name_with_instrument_in_parens ~r/^([a-zA-Z'\-"]+ ){2,4}\([a-z, ]+\)$/
-  @regex_number_of_times_in_parens ~r/^\(\d+ times\)$/
-  @regex_repetition_indicator ~r/\s?[\(\[](x\d+|\d+x|\d+ times?)[\)\]]/
   @regex_surrounded_by_quotes ~r/^"[^"]+"$/
 
   use GenServer
@@ -69,7 +63,7 @@ defmodule LyricsWiki do
     %{artist: artist, song: song}
     |> song_info
     |> Api.fetch_lyrics
-    |> sanitize_lyrics
+    |> Sanitizer.sanitize_lyrics
   end
 
 
@@ -113,45 +107,6 @@ defmodule LyricsWiki do
   defp song_has_lyrics?(artist_name, song_title) do
     lyrics = find_lyrics(artist_name, song_title)
     Enum.count(lyrics) > 0
-  end
-
-  @spec sanitize_lyrics([String.t]) :: [String.t]
-  defp sanitize_lyrics(lyrics) do
-    lyrics
-    |> Enum.reduce([], &sanitize_lyrics/2)
-    |> Enum.reverse
-  end
-
-  @docp """
-  n.b. this reverses the order of the reduce input
-  """
-  @spec sanitize_lyrics(String.t, [String.t]) :: [String.t]
-  defp sanitize_lyrics("", sanitized_lyrics), do: sanitized_lyrics
-  defp sanitize_lyrics(lyric, sanitized_lyrics) do
-    lyric = String.strip(lyric)
-    cond do
-      Regex.match?(@regex_number_of_times_in_parens, lyric) ->
-        sanitized_lyrics
-      Regex.match?(@regex_author, lyric) ->
-        sanitized_lyrics
-      Regex.match?(@regex_chorus, lyric) ->
-        sanitized_lyrics
-      Regex.match?(@regex_copyright, lyric) ->
-        sanitized_lyrics
-      Regex.match?(@regex_name_with_instrument_in_parens, lyric) ->
-        sanitized_lyrics
-      Regex.match?(@regex_brackets, lyric) ->
-        sanitized_lyrics
-      true ->
-        [strip_junk(lyric) | sanitized_lyrics]
-    end
-  end
-
-  @spec strip_junk(String.t) :: String.t
-  defp strip_junk(raw_lyric) do
-    Regex.replace(@regex_junk_around_match, raw_lyric, "\\1")
-    |> String.replace(@regex_name_of_speaker_followed_by_colon, "")
-    |> String.replace(@regex_repetition_indicator, "")
   end
 
   @spec extract_songs(%{}) :: [String.t]
