@@ -78,13 +78,14 @@ defmodule LyricsWiki do
     |> Enum.shuffle
     |> Stream.filter(&Sanitizer.song_title_looks_good?/1)
     |> Stream.map(&find_lyrics(artist_name, &1))
-    |> Stream.filter(fn ([]) -> false
-                        (lyrics) when length(lyrics) > 0 -> true
-    end)
+    |> Stream.filter(&has_lyrics?/1)
     |> Enum.take(1)
     |> hd
     |> Enum.random
   end
+
+  defp has_lyrics?([]), do: false
+  defp has_lyrics?(list) when length(list) > 0 -> true
 
   @spec song_info(%{}) :: %{}
   defp song_info(%{artist: artist, song: song}) do
