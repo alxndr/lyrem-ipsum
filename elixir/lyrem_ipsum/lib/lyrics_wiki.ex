@@ -1,13 +1,13 @@
 defmodule LyricsWiki do
 
+  alias LyricsWiki.Api
+
   @moduledoc """
   Interface with the Lyrics Wiki at lyrics.wikia.com.
 
   TODO:
   * monitor & space out requests
   """
-
-  @api_url "http://lyrics.wikia.com/api.php"
 
   @regex_author ~r/^by [A-Z][a-z]/
   @regex_brackets ~r/^\[.+\]$/
@@ -41,7 +41,7 @@ defmodule LyricsWiki do
       lyric = random_lyric_from_artist_info(state[artist])
       {:reply, lyric, state}
     else
-      artist_info = fetch_artist_info(artist)
+      artist_info = Api.fetch_artist_info(artist)
       lyric = random_lyric_from_artist_info(artist_info)
       {:reply, lyric, Map.put(state, artist, artist_info)}
     end
@@ -50,13 +50,12 @@ defmodule LyricsWiki do
   @spec random_lyric_by_artist(String.t) :: String.t | nil
   def random_lyric_by_artist(artist) do
     artist
-    |> fetch_artist_info
+    |> Api.fetch_artist_info
     |> random_lyric_from_artist_info
   end
 
   @spec random_lyric_from_song(String.t, String.t) :: String.t | nil
   def random_lyric_from_song(artist, song) do
-    IO.puts "Random lyric from #{song}"
     artist
     |> find_lyrics(song)
     |> random_or_nil
@@ -69,7 +68,8 @@ defmodule LyricsWiki do
   def find_lyrics(artist, song) do
     %{artist: artist, song: song}
     |> song_info
-    |> fetch_lyrics
+    |> Api.fetch_lyrics
+    |> sanitize_lyrics
   end
 
 
@@ -97,34 +97,9 @@ defmodule LyricsWiki do
     |> hd
   end
 
-  @spec fetch_artist_info(String.t) :: %{}
-  defp fetch_artist_info(name) do
-    HTTPotion.get(@api_url, query: query_params(func: "getArtist", artist: name), timeout: 10_000)
-    |> decode_json
-  end
-
   @spec song_info(%{}) :: %{}
   defp song_info(%{artist: artist, song: song}) do
-    fetch_song_info(artist, song)
-    |> decode_json
-  end
-
-  @spec fetch_lyrics(%{}) :: [] | [String.t]
-  defp fetch_lyrics(%{"lyrics" => "(Laughter)"}), do: []
-  defp fetch_lyrics(%{"lyrics" => "(Instrumental)"}), do: []
-  defp fetch_lyrics(%{"lyrics" => "(Solo)"}), do: []
-  defp fetch_lyrics(%{"lyrics" => "(solo)"}), do: []
-  defp fetch_lyrics(%{"lyrics" => "Instrumental"}), do: []
-  defp fetch_lyrics(%{"lyrics" => "Not found"}), do: []
-  defp fetch_lyrics(%{"url" => song_url}) do
-    with %HTTPotion.Response{body: html} <- HTTPotion.get(song_url, follow_redirects: true, timeout: 10_000)
-    do
-      html
-      |> Floki.find(".lyricbox")
-      |> Floki.text
-      |> String.split("\n")
-      |> sanitize_lyrics
-    end
+    Api.fetch_song_info(artist, song)
   end
 
   @spec song_title_looks_good?(String.t) :: boolean
@@ -136,7 +111,6 @@ defmodule LyricsWiki do
 
   @spec song_has_lyrics?(String.t, String.t) :: boolean
   defp song_has_lyrics?(artist_name, song_title) do
-    IO.puts "song has lyrics? #{song_title}"
     lyrics = find_lyrics(artist_name, song_title)
     Enum.count(lyrics) > 0
   end
@@ -180,11 +154,6 @@ defmodule LyricsWiki do
     |> String.replace(@regex_repetition_indicator, "")
   end
 
-  @spec fetch_song_info(String.t, String.t) :: %HTTPotion.Response{}
-  defp fetch_song_info(artist, song) do
-    HTTPotion.get(@api_url, query: query_params(artist: artist, song: song, action: "lyrics"))
-  end
-
   @spec extract_songs(%{}) :: [String.t]
   defp extract_songs(artist_info) do
     artist_info["albums"]
@@ -198,28 +167,10 @@ defmodule LyricsWiki do
     album_data["year"] != nil
   end
 
-  @spec decode_json(%HTTPotion.Response{}) :: %{}
-  defp decode_json(httpotion_response) do
-    with %HTTPotion.Response{status_code: 200, body: json} <- httpotion_response,
-         {:ok, data} <- Poison.decode(json)
-    do
-      data
-    end
-  end
-
-
-
-
   @spec random_or_nil([any]) :: any | nil
   defp random_or_nil([]), do: nil
   defp random_or_nil(list) do
     Enum.random(list)
-  end
-
-  @spec query_params([{atom, any}]) :: %{}
-  defp query_params(params) do
-    params
-    |> Enum.into(%{fmt: "realjson"})
   end
 
 end
