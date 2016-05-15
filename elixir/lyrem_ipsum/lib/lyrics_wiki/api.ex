@@ -2,9 +2,12 @@ defmodule LyricsWiki.Api do
 
   @api_url "http://lyrics.wikia.com/api.php"
 
+  @httpotion_options [follow_redirects: true, timeout: 12_000]
+
   @spec fetch_artist_info(String.t) :: %{}
   def fetch_artist_info(name) do
-    HTTPotion.get(@api_url, query: query_params(func: "getArtist", artist: name), timeout: 10_000)
+    query = query_params(func: "getArtist", artist: name)
+    HTTPotion.get(@api_url, httpotion_options(query: query))
     |> decode_json
   end
 
@@ -15,7 +18,7 @@ defmodule LyricsWiki.Api do
   def fetch_lyrics(%{"lyrics" => "Instrumental"}), do: []
   def fetch_lyrics(%{"lyrics" => "Not found"}), do: []
   def fetch_lyrics(%{"url" => song_url}) do
-    with %HTTPotion.Response{body: html} <- HTTPotion.get(song_url, follow_redirects: true, timeout: 10_000)
+    with %HTTPotion.Response{body: html} <- HTTPotion.get(song_url, httpotion_options)
       do
       html
       |> Floki.find(".lyricbox")
@@ -26,7 +29,8 @@ defmodule LyricsWiki.Api do
 
   @spec fetch_song_info(String.t, String.t) :: %HTTPotion.Response{}
   def fetch_song_info(artist, song) do
-    HTTPotion.get(@api_url, query: query_params(artist: artist, song: song, action: "lyrics"))
+    query = query_params(artist: artist, song: song, action: "lyrics")
+    HTTPotion.get(@api_url, httpotion_options(query: query))
     |> decode_json
   end
 
@@ -46,6 +50,10 @@ defmodule LyricsWiki.Api do
   defp query_params(params) do
     params
     |> Enum.into(%{fmt: "realjson"})
+  end
+
+  defp httpotion_options(options_list \\ []) do
+    options_list ++ @httpotion_options
   end
 
 end
