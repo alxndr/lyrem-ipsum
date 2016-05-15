@@ -18,6 +18,7 @@ defmodule LyremIpsum.Mixfile do
      applications: [
        :cowboy,
        :gettext,
+       :httpotion,
        :logger,
        :phoenix,
        :phoenix_html,
