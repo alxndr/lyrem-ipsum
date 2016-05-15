@@ -12,10 +12,6 @@ defmodule LyricsWiki do
   * monitor & space out requests
   """
 
-  @regex_colon_then_uppercase_letter ~r/\w:[A-Z]/
-  @regex_hash_then_uppercase_letter ~r/\w#[A-Z]/
-  @regex_surrounded_by_quotes ~r/^"[^"]+"$/
-
   use GenServer
 
   def start_link do
@@ -48,13 +44,6 @@ defmodule LyricsWiki do
     |> random_lyric_from_artist_info
   end
 
-  @spec random_lyric_from_song(String.t, String.t) :: String.t | nil
-  def random_lyric_from_song(artist, song) do
-    artist
-    |> find_lyrics(song)
-    |> random_or_nil
-  end
-
   @doc """
   TODO: cache results
   """
@@ -72,41 +61,32 @@ defmodule LyricsWiki do
 
   @spec random_lyric_from_artist_info(%{}) :: String.t
   defp random_lyric_from_artist_info(artist_info) do
-    song_title = random_song_from_artist_data(artist_info)
-    random_lyric_from_song(artist_info["artist"], song_title)
+    artist_info
+    |> random_song_lyrics_from_artist_data
   end
 
   @docp """
   n.b. this skips songs which don't have lyrics
   """
-  @spec random_song_from_artist_data(%{}) :: String.t
-  defp random_song_from_artist_data(artist_info) do
+  @spec random_song_lyrics_from_artist_data(%{}) :: String.t
+  defp random_song_lyrics_from_artist_data(artist_info) do
     artist_name = artist_info["artist"]
     artist_info
     |> extract_songs
     |> Enum.shuffle
-    |> Stream.filter(&song_title_looks_good?/1)
-    |> Stream.filter(&song_has_lyrics?(artist_name, &1))
+    |> Stream.filter(&Sanitizer.song_title_looks_good?/1)
+    |> Stream.map(&find_lyrics(artist_name, &1))
+    |> Stream.filter(fn ([]) -> false
+                        (lyrics) when length(lyrics) > 0 -> true
+    end)
     |> Enum.take(1)
     |> hd
+    |> Enum.random
   end
 
   @spec song_info(%{}) :: %{}
   defp song_info(%{artist: artist, song: song}) do
     Api.fetch_song_info(artist, song)
-  end
-
-  @spec song_title_looks_good?(String.t) :: boolean
-  defp song_title_looks_good?(song_title) do
-    !Regex.match?(@regex_colon_then_uppercase_letter, song_title)
-    && !Regex.match?(@regex_hash_then_uppercase_letter, song_title)
-    && !Regex.match?(@regex_surrounded_by_quotes, song_title)
-  end
-
-  @spec song_has_lyrics?(String.t, String.t) :: boolean
-  defp song_has_lyrics?(artist_name, song_title) do
-    lyrics = find_lyrics(artist_name, song_title)
-    Enum.count(lyrics) > 0
   end
 
   @spec extract_songs(%{}) :: [String.t]
@@ -120,12 +100,6 @@ defmodule LyricsWiki do
   @spec album_title_looks_good?(%{}) :: boolean
   defp album_title_looks_good?(album_data) do
     album_data["year"] != nil
-  end
-
-  @spec random_or_nil([any]) :: any | nil
-  defp random_or_nil([]), do: nil
-  defp random_or_nil(list) do
-    Enum.random(list)
   end
 
 end
