@@ -1,5 +1,11 @@
 {
+  "name": "lyrem-ipsum-frontend",
+  "version": "1.0.0-dev",
+  "author": "Alexander <alxndr+npm@gmail.com>",
   "repository": {
+    "type": "git",
+    "url": "https://github.com/alxndr/lyrem-ipsum.git"
+  },
   "scripts": {
     "lint": "eslint --config .eslintrc --max-warnings 10 web/",
     "posttest": "npm run lint"
