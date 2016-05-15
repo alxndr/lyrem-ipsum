@@ -17,6 +17,8 @@ defmodule LyremIpsum.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    get "/random-lyric-by/:artist", LyricsController, :random_lyric
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,2 @@
+<p><%= LyremIpsum.Cli.random_lyric_by(@artist) %></p>
+<p>—<%= @artist %></p>
