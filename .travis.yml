@@ -4,6 +4,8 @@ elixir:
   1.2.5
 
 before_install:
+  - yes | mix local.hex
+  - mix deps.get
   - npm install -g npm
   - npm install
 
