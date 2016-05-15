@@ -18,15 +18,14 @@ defmodule LyremIpsum do
     |> supervise(strategy: :one_for_one)
   end
 
-  @spec find_lyrics_for_song(String.t, String.t) :: [String.t]
-  def find_lyrics_for_song(artist, song) do
+  @spec lyrics_of_song(String.t, String.t) :: [String.t]
+  def lyrics_of_song(artist, song) do
     LyricsWiki.find_lyrics(artist, song)
   end
 
   @spec random_lyric_by(String.t) :: String.t | nil
   def random_lyric_by(artist) do
     LyricsWiki.random_lyric_by_artist(artist)
-    # TODO launch something to do this, and retry if it throws Enum.EmptyError.
   end
 
 end
