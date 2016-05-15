@@ -16,7 +16,10 @@ defmodule LyremIpsum.Mixfile do
 
   defp deps do
     [
-      {:dialyze, "~> 0.2.0"},
+      {:dialyze, "~> 0.2.0"},   # type checker
+      {:floki, "~> 0.8"},       # html parser
+      {:httpotion, "~> 2.2.0"}, # http tool
+      {:poison, "~> 2.0"},      # json decoder
     ]
   end
 end
