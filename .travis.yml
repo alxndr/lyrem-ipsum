@@ -1,6 +1,16 @@
 language: elixir
+
 elixir:
   1.2.5
+
+before_install:
+  - npm install -g npm
+  - npm install
+
+script:
+  - mix test
+  - npm test
+
 notifications:
   webhooks:
     - http://buildtimetrend.herokuapp.com/travis # trigger Buildtime Trend Service to parse Travis CI log
