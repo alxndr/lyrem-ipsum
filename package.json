@@ -1,0 +1,27 @@
+{
+  "name": "lyrem-ipsum-frontend",
+  "version": "1.0.0-dev",
+  "author": "Alexander <alxndr+npm@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alxndr/lyrem-ipsum.git"
+  },
+  "scripts": {
+    "lint": "eslint --config .eslintrc --max-warnings 10 web/",
+    "posttest": "npm run lint"
+  },
+  "dependencies": {
+    "babel-brunch": "~6.0.0",
+    "brunch": "~2.1.3",
+    "clean-css-brunch": "~1.8.0",
+    "css-brunch": "~1.7.0",
+    "javascript-brunch": "~1.8.0",
+    "uglify-js-brunch": "~1.7.0",
+    "phoenix": "file:deps/phoenix",
+    "phoenix_html": "file:deps/phoenix_html"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.10.1"
+  }
+}

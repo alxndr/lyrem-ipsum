@@ -1,6 +1,5 @@
-ruby:
+javascript:
+  enabled: false
+eslint:
   enabled: true
-  config_file: config/rubocop.yml
-javascripts:
-  enabled: true
-  config_file: config/jshint.json
+  ignore_file: .eslintignore
