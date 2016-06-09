@@ -1,0 +1,4 @@
+<h1>some jumbled lyrics by <%= @artist %>...</h1>
+<%= for _n <- 0..10 do %>
+  <p><%= LyremIpsum.Cli.random_lyric_by(@artist) %></p>
+<% end %>

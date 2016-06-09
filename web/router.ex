@@ -18,6 +18,7 @@ defmodule LyremIpsum.Router do
 
     get "/", PageController, :index
 
+    get "/by/:artist", ArtistController, :by_artist
     get "/random-lyric-by/:artist", LyricsController, :random_lyric
   end
 
