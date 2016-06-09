@@ -1,8 +1,8 @@
 defmodule LyremIpsum.LayoutView do
   use LyremIpsum.Web, :view
 
-  def title(assigns) do
-    artist = assigns.conn.assigns.artist
+  def title, do: "Lyrem Ipsum"
+  def title(artist) do
     "lyrics by #{artist}"
   end
 
