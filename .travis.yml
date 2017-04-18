@@ -1,7 +1,15 @@
 language: ruby
 bundler_args: --without development
 rvm:
-  2.2.1
+  - 2.2
+  - 2.1
+  - 2.1.10
+  - ruby-head
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: 2.1.10
+    - rvm: ruby-head
 services:
   - postgres
 before_script:
