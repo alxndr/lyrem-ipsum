@@ -1,12 +1,11 @@
-ruby '2.2.1'
+ruby '2.2.5'
 
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'airbrake', '~> 4.3'
 gem 'arel', '~> 6.0'
 gem 'bitters', '~> 0.10'
 gem 'bugsnag', '~> 2.5'
-gem 'google-search', '~> 1.0'
 gem 'htmlentities', '~> 4.3'
 gem 'lyriki', '~> 1.1', '>= 1.1.1'
 gem 'neat', '~> 1.5'
@@ -17,7 +16,7 @@ gem 'rack', '~> 1.6', '>= 1.6.2'
 gem 'rails', '~> 4.2', '>= 4.2.5.1'
 gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.3'
 gem 'requirejs-rails', '~> 0.9'
-gem 'rest-client', '~> 1.8', '>= 1.8.0'
+gem 'rest-client', '~> 2.0'
 gem 'sass-rails', '~> 4.0', '>= 4.0.3' # http://stackoverflow.com/a/22395250/303896
 gem 'uglifier', '~> 2.7', '>= 2.7.2'
 
